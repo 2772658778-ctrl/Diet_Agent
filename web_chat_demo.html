@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diet Agent 本地 Web Chat Demo</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --bg-elevated: rgba(15, 23, 42, 0.88);
+      --panel: rgba(15, 23, 42, 0.72);
+      --panel-strong: rgba(20, 30, 56, 0.94);
+      --border: rgba(148, 163, 184, 0.18);
+      --text: #e5eefc;
+      --muted: #9fb0cf;
+      --accent: #6ea8fe;
+      --accent-strong: #8b5cf6;
+      --success: #34d399;
+      --warning: #fbbf24;
+      --danger: #fb7185;
+      --shadow: 0 24px 80px rgba(2, 6, 23, 0.45);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+      --font: Inter, "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font);
+      background:
+        radial-gradient(circle at top left, rgba(110, 168, 254, 0.28), transparent 26%),
+        radial-gradient(circle at top right, rgba(139, 92, 246, 0.24), transparent 24%),
+        linear-gradient(180deg, #0b1020 0%, #060915 100%);
+      color: var(--text);
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    .app-shell {
+      width: min(1440px, calc(100vw - 32px));
+      margin: 20px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 24px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(28, 41, 72, 0.86));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+    }
+
+    .hero-title {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .hero-title h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-title p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
+      gap: 16px;
+      min-height: calc(100vh - 170px);
+    }
+
+    .sidebar,
+    .chat-panel {
+      min-height: 0;
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      padding: 18px;
+    }
+
+    .panel h2 {
+      margin: 0 0 14px 0;
+      font-size: 15px;
+      letter-spacing: 0.02em;
+      color: #f4f8ff;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .field-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .field label,
+    .toggle-row label,
+    .advanced-grid label {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+    }
+
+    .field input,
+    .field textarea,
+    .field select,
+    .advanced-grid input,
+    .advanced-grid select,
+    .composer textarea {
+      width: 100%;
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: var(--radius-md);
+      padding: 12px 13px;
+      background: rgba(8, 14, 28, 0.82);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus,
+    .advanced-grid input:focus,
+    .advanced-grid select:focus,
+    .composer textarea:focus {
+      border-color: rgba(110, 168, 254, 0.72);
+      box-shadow: 0 0 0 4px rgba(110, 168, 254, 0.12);
+    }
+
+    .inline-group {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .button,
+    .quick-prompt,
+    .session-item {
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: var(--radius-md);
+      background: rgba(21, 31, 56, 0.82);
+      color: var(--text);
+      cursor: pointer;
+      transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease, opacity 0.16s ease;
+    }
+
+    .button {
+      min-height: 42px;
+      padding: 0 14px;
+      font-weight: 600;
+    }
+
+    .button:hover,
+    .quick-prompt:hover,
+    .session-item:hover {
+      transform: translateY(-1px);
+      border-color: rgba(110, 168, 254, 0.55);
+      background: rgba(29, 43, 74, 0.94);
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, rgba(110, 168, 254, 0.95), rgba(99, 102, 241, 0.95));
+      border-color: transparent;
+      color: white;
+    }
+
+    .button.ghost {
+      background: rgba(11, 18, 34, 0.7);
+    }
+
+    .button:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+      transform: none;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .toggle-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      background: rgba(8, 14, 28, 0.78);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .toggle-pill input {
+      accent-color: var(--accent);
+      width: 16px;
+      height: 16px;
+    }
+
+    .stream-notice {
+      margin-top: 10px;
+      padding: 12px 13px;
+      border-radius: var(--radius-md);
+      background: rgba(251, 191, 36, 0.09);
+      border: 1px solid rgba(251, 191, 36, 0.18);
+      color: #fde68a;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    details.panel-details {
+      margin-top: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      border-radius: var(--radius-lg);
+      background: rgba(8, 14, 28, 0.56);
+      overflow: hidden;
+    }
+
+    details.panel-details summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 13px 14px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    details.panel-details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .advanced-grid {
+      display: grid;
+      gap: 12px;
+      padding: 0 14px 14px 14px;
+    }
+
+    .advanced-inline {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .quick-list,
+    .session-list,
+    .node-list,
+    .health-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .quick-prompt {
+      padding: 12px 14px;
+      text-align: left;
+      font-size: 13px;
+      line-height: 1.45;
+      flex: 1 1 140px;
+    }
+
+    .session-list {
+      display: grid;
+      gap: 10px;
+      max-height: 280px;
+      overflow: auto;
+    }
+
+    .session-item {
+      padding: 12px 13px;
+      display: grid;
+      gap: 6px;
+      text-align: left;
+    }
+
+    .session-item strong {
+      font-size: 13px;
+      color: #f8fbff;
+      word-break: break-all;
+    }
+
+    .session-item span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .session-item em {
+      color: rgba(191, 219, 254, 0.9);
+      font-size: 11px;
+      font-style: normal;
+      letter-spacing: 0.02em;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .section-title span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .health-pill,
+    .status-pill,
+    .badge,
+    .node-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      background: rgba(21, 31, 56, 0.8);
+      color: #dbeafe;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .status-pill[data-tone="neutral"],
+    .health-pill[data-tone="neutral"] {
+      color: #dbeafe;
+    }
+
+    .status-pill[data-tone="running"],
+    .health-pill[data-tone="running"] {
+      color: #fef08a;
+      border-color: rgba(251, 191, 36, 0.25);
+      background: rgba(251, 191, 36, 0.12);
+    }
+
+    .status-pill[data-tone="success"],
+    .health-pill[data-tone="success"] {
+      color: #bbf7d0;
+      border-color: rgba(52, 211, 153, 0.25);
+      background: rgba(52, 211, 153, 0.12);
+    }
+
+    .status-pill[data-tone="error"],
+    .health-pill[data-tone="error"] {
+      color: #fecdd3;
+      border-color: rgba(251, 113, 133, 0.25);
+      background: rgba(251, 113, 133, 0.14);
+    }
+
+    .badge {
+      padding: 7px 10px;
+      font-weight: 500;
+      color: #dbeafe;
+      background: rgba(15, 23, 42, 0.88);
+    }
+
+    .badge[data-tone="blue"] { border-color: rgba(110, 168, 254, 0.28); color: #bfdbfe; }
+    .badge[data-tone="green"] { border-color: rgba(52, 211, 153, 0.24); color: #bbf7d0; }
+    .badge[data-tone="amber"] { border-color: rgba(251, 191, 36, 0.24); color: #fde68a; }
+    .badge[data-tone="rose"] { border-color: rgba(251, 113, 133, 0.24); color: #fecdd3; }
+    .badge[data-tone="purple"] { border-color: rgba(168, 85, 247, 0.24); color: #e9d5ff; }
+    .badge[data-tone="slate"] { border-color: rgba(148, 163, 184, 0.18); color: #cbd5e1; }
+    .badge[data-tone="indigo"] { border-color: rgba(129, 140, 248, 0.24); color: #c7d2fe; }
+
+    .node-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .node-pill {
+      justify-content: center;
+      min-height: 40px;
+      color: #cbd5e1;
+    }
+
+    .node-pill[data-state="idle"] {
+      opacity: 0.72;
+    }
+
+    .node-pill[data-state="running"] {
+      border-color: rgba(251, 191, 36, 0.25);
+      background: rgba(251, 191, 36, 0.12);
+      color: #fde68a;
+    }
+
+    .node-pill[data-state="done"] {
+      border-color: rgba(52, 211, 153, 0.24);
+      background: rgba(52, 211, 153, 0.12);
+      color: #bbf7d0;
+    }
+
+    .chat-panel {
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) auto;
+      gap: 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background: var(--panel-strong);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      padding: 18px;
+      min-height: 0;
+    }
+
+    .chat-thread {
+      min-height: 0;
+      overflow: auto;
+      padding-right: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .empty-state {
+      min-height: 100%;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      border: 1px dashed rgba(148, 163, 184, 0.18);
+      border-radius: var(--radius-xl);
+      background: rgba(8, 14, 28, 0.42);
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .empty-state strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #f8fbff;
+    }
+
+    .message {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .message.user {
+      align-items: flex-end;
+    }
+
+    .message.assistant,
+    .message.system {
+      align-items: flex-start;
+    }
+
+    .bubble {
+      width: min(88%, 900px);
+      border-radius: 22px;
+      padding: 16px 18px;
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      box-shadow: 0 20px 50px rgba(2, 6, 23, 0.18);
+    }
+
+    .message.user .bubble {
+      background: linear-gradient(135deg, rgba(110, 168, 254, 0.22), rgba(99, 102, 241, 0.28));
+      border-top-right-radius: 8px;
+    }
+
+    .message.assistant .bubble {
+      background: rgba(11, 18, 34, 0.82);
+      border-top-left-radius: 8px;
+    }
+
+    .message.system .bubble {
+      background: rgba(251, 113, 133, 0.1);
+      border-color: rgba(251, 113, 133, 0.18);
+      border-top-left-radius: 8px;
+    }
+
+    .bubble-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .bubble-header strong {
+      color: #f8fbff;
+      font-size: 13px;
+    }
+
+    .message-content {
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 15px;
+      word-break: break-word;
+    }
+
+    .message-content p,
+    .message-content ul,
+    .message-content ol,
+    .message-content h1,
+    .message-content h2,
+    .message-content h3 {
+      margin: 0 0 12px 0;
+    }
+
+    .message-content p:last-child,
+    .message-content ul:last-child,
+    .message-content ol:last-child,
+    .message-content h1:last-child,
+    .message-content h2:last-child,
+    .message-content h3:last-child {
+      margin-bottom: 0;
+    }
+
+    .message-content ul,
+    .message-content ol {
+      padding-left: 22px;
+    }
+
+    .message-content li + li {
+      margin-top: 6px;
+    }
+
+    .message-content code {
+      padding: 2px 6px;
+      border-radius: 7px;
+      background: rgba(148, 163, 184, 0.14);
+      color: #dbeafe;
+      font-size: 0.94em;
+    }
+
+    .message-content.plain {
+      white-space: pre-wrap;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    details.message-details {
+      margin-top: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      border-radius: var(--radius-md);
+      background: rgba(4, 10, 22, 0.64);
+      overflow: hidden;
+    }
+
+    details.message-details summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 11px 13px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    details.message-details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .details-body {
+      margin: 0;
+      padding: 0 13px 13px 13px;
+      max-height: 280px;
+      overflow: auto;
+      font-size: 12px;
+      color: #dbeafe;
+      white-space: pre-wrap;
+    }
+
+    .composer {
+      display: grid;
+      gap: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: var(--radius-xl);
+      background: rgba(8, 14, 28, 0.82);
+      padding: 16px;
+    }
+
+    .composer textarea {
+      min-height: 108px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .composer-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    @media (max-width: 1100px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-actions {
+        justify-content: space-between;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .app-shell {
+        width: min(100vw, calc(100vw - 20px));
+        margin: 10px auto 18px auto;
+      }
+
+      .hero,
+      .panel,
+      .chat-panel,
+      .composer {
+        border-radius: 18px;
+      }
+
+      .advanced-inline,
+      .node-list {
+        grid-template-columns: 1fr;
+      }
+
+      .bubble {
+        width: 100%;
+      }
+
+      .composer-footer {
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div class="hero-title">
+        <h1>Diet Agent 本地 Web Chat Demo</h1>
+        <p>面试展示版：单文件 HTML/JS，对接现有 FastAPI `/chat` 主链路，可直接演示 tutorial 检索、fallback、多轮承接和最近会话加载。</p>
+      </div>
+      <div class="hero-actions">
+        <span class="health-pill" id="healthPill" data-tone="neutral">等待检查连接</span>
+        <button class="button ghost" id="healthButton" type="button">检查连接</button>
+        <button class="button ghost" id="loadSessionsButton" type="button">加载会话</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <section class="panel">
+          <h2>连接与身份</h2>
+          <div class="field-grid">
+            <div class="field">
+              <label for="apiBaseInput">API Base URL</label>
+              <input id="apiBaseInput" type="text" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="userIdInput">User ID</label>
+              <input id="userIdInput" type="text" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="sessionIdInput">Session ID</label>
+              <div class="inline-group">
+                <input id="sessionIdInput" type="text" autocomplete="off">
+                <button class="button ghost" id="newSessionButton" type="button">新会话</button>
+              </div>
+            </div>
+          </div>
+          <div class="toggle-row" style="margin-top: 14px;">
+            <label class="toggle-pill">
+              <input id="streamToggle" type="checkbox">
+              <span>流式模式</span>
+            </label>
+            <span class="status-pill" id="statusPill" data-tone="neutral">准备就绪</span>
+          </div>
+          <div class="stream-notice hidden" id="streamNotice">流式模式更适合演示实时输出与节点进度。当前 `/chat/stream` 不负责写回会话历史；如果你要稳定演示多轮追问与 session 连续性，建议关闭流式模式。</div>
+          <details class="panel-details">
+            <summary>高级约束（可选）</summary>
+            <div class="advanced-grid">
+              <div class="field">
+                <label for="ingredientsInput">可用食材（逗号分隔）</label>
+                <input id="ingredientsInput" type="text" placeholder="鸡蛋, 番茄">
+              </div>
+              <div class="advanced-inline">
+                <div class="field">
+                  <label for="maxTimeInput">最大烹饪时间（分钟）</label>
+                  <input id="maxTimeInput" type="number" min="0" step="1" placeholder="20">
+                </div>
+                <div class="field">
+                  <label for="mealTypeInput">餐次</label>
+                  <select id="mealTypeInput">
+                    <option value="">不限</option>
+                    <option value="早餐">早餐</option>
+                    <option value="午餐">午餐</option>
+                    <option value="晚餐">晚餐</option>
+                    <option value="加餐">加餐</option>
+                  </select>
+                </div>
+              </div>
+              <div class="advanced-inline">
+                <div class="field">
+                  <label for="healthGoalInput">健康目标</label>
+                  <input id="healthGoalInput" type="text" placeholder="减脂 / 高蛋白 / 控糖">
+                </div>
+                <div class="field">
+                  <label for="dislikedInput">不喜欢食材（逗号分隔）</label>
+                  <input id="dislikedInput" type="text" placeholder="香菜, 芹菜">
+                </div>
+              </div>
+              <div class="advanced-inline">
+                <div class="field">
+                  <label for="allergiesInput">过敏原（逗号分隔）</label>
+                  <input id="allergiesInput" type="text" placeholder="花生, 虾">
+                </div>
+                <div class="field" style="justify-content: end;">
+                  <label class="toggle-pill" style="margin-top: 22px; width: 100%; justify-content: center;">
+                    <input id="inventoryFirstInput" type="checkbox">
+                    <span>优先使用现有食材</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <section class="panel">
+          <h2>快捷演示</h2>
+          <div class="quick-list" id="quickPrompts"></div>
+        </section>
+
+        <section class="panel">
+          <div class="section-title">
+            <h2>最近会话</h2>
+            <span id="sessionSummary">尚未加载</span>
+          </div>
+          <div class="session-list" id="sessionList"></div>
+        </section>
+
+        <section class="panel">
+          <h2>节点进度</h2>
+          <div class="node-list" id="nodeList"></div>
+        </section>
+
+        <section class="panel">
+          <h2>健康状态</h2>
+          <div class="health-list" id="healthList"></div>
+        </section>
+      </aside>
+
+      <main class="chat-panel">
+        <div class="chat-thread" id="chatThread">
+          <div class="empty-state" id="emptyState">
+            <div>
+              <strong>先试试右侧的 3 组经典问题</strong>
+              <div>推荐演示顺序：<br>1. `番茄炒蛋怎么做`<br>2. `宫保虾球怎么做`<br>3. `惠灵顿牛排怎么做`<br><br>同步模式更适合演示 metadata、fallback 与多轮追问；流式模式更适合展示实时生成和 LangGraph 节点进度。</div>
+            </div>
+          </div>
+        </div>
+
+        <form class="composer" id="composerForm">
+          <div class="field">
+            <label for="promptInput">输入你的问题</label>
+            <textarea id="promptInput" placeholder="比如：番茄炒蛋怎么做？&#10;Shift + Enter 换行，Enter 发送"></textarea>
+          </div>
+          <div class="composer-footer">
+            <div class="footer-left">
+              <span class="hint">当前建议：面试正式演示时先关闭流式模式，优先展示 skill、fallback、tutorial source 和 session 连续性。</span>
+            </div>
+            <div class="button-row">
+              <button class="button ghost" id="clearChatButton" type="button">清空当前窗口</button>
+              <button class="button primary" id="sendButton" type="submit">发送</button>
+            </div>
+          </div>
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const storageKey = "diet-agent-web-chat-demo";
+    const quickPromptTexts = [
+      "番茄炒蛋怎么做",
+      "再详细一点",
+      "宫保虾球怎么做",
+      "这个怎么做",
+      "惠灵顿牛排怎么做",
+      "我有鸡蛋和番茄，20分钟内能做什么",
+    ];
+    const nodeOrder = ["router", "planner", "retriever", "generator", "evaluator"];
+    const nodeLabels = {
+      router: "Router",
+      planner: "Planner",
+      retriever: "Retriever",
+      generator: "Generator",
+      evaluator: "Evaluator",
+    };
+    const messageRefs = new Map();
+    const appState = {
+      pending: false,
+      nodeStates: new Map(),
+    };
+
+    const dom = {
+      apiBaseInput: document.getElementById("apiBaseInput"),
+      userIdInput: document.getElementById("userIdInput"),
+      sessionIdInput: document.getElementById("sessionIdInput"),
+      streamToggle: document.getElementById("streamToggle"),
+      streamNotice: document.getElementById("streamNotice"),
+      ingredientsInput: document.getElementById("ingredientsInput"),
+      maxTimeInput: document.getElementById("maxTimeInput"),
+      mealTypeInput: document.getElementById("mealTypeInput"),
+      healthGoalInput: document.getElementById("healthGoalInput"),
+      dislikedInput: document.getElementById("dislikedInput"),
+      allergiesInput: document.getElementById("allergiesInput"),
+      inventoryFirstInput: document.getElementById("inventoryFirstInput"),
+      healthButton: document.getElementById("healthButton"),
+      loadSessionsButton: document.getElementById("loadSessionsButton"),
+      newSessionButton: document.getElementById("newSessionButton"),
+      clearChatButton: document.getElementById("clearChatButton"),
+      sendButton: document.getElementById("sendButton"),
+      healthPill: document.getElementById("healthPill"),
+      statusPill: document.getElementById("statusPill"),
+      chatThread: document.getElementById("chatThread"),
+      emptyState: document.getElementById("emptyState"),
+      sessionList: document.getElementById("sessionList"),
+      sessionSummary: document.getElementById("sessionSummary"),
+      nodeList: document.getElementById("nodeList"),
+      healthList: document.getElementById("healthList"),
+      promptInput: document.getElementById("promptInput"),
+      composerForm: document.getElementById("composerForm"),
+      quickPrompts: document.getElementById("quickPrompts"),
+    };
+
+    function inferApiBase() {
+      if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+        return window.location.origin;
+      }
+      return "http://127.0.0.1:8000";
+    }
+
+    function normalizeApiBase(value) {
+      return String(value || "").trim().replace(/\/+$/, "");
+    }
+
+    function createId(prefix) {
+      if (window.crypto && typeof window.crypto.randomUUID === "function") {
+        return `${prefix}-${window.crypto.randomUUID().slice(0, 8)}`;
+      }
+      return `${prefix}-${Math.random().toString(36).slice(2, 10)}`;
+    }
+
+    function defaultUserId() {
+      return "interview-demo-user";
+    }
+
+    function defaultSessionId() {
+      return createId("sess");
+    }
+
+    function loadPersistedConfig() {
+      try {
+        return JSON.parse(window.localStorage.getItem(storageKey) || "{}");
+      } catch {
+        return {};
+      }
+    }
+
+    function savePersistedConfig() {
+      const config = {
+        apiBase: normalizeApiBase(dom.apiBaseInput.value),
+        userId: dom.userIdInput.value.trim(),
+        sessionId: dom.sessionIdInput.value.trim(),
+        stream: dom.streamToggle.checked,
+        ingredients: dom.ingredientsInput.value,
+        maxTime: dom.maxTimeInput.value,
+        mealType: dom.mealTypeInput.value,
+        healthGoal: dom.healthGoalInput.value,
+        disliked: dom.dislikedInput.value,
+        allergies: dom.allergiesInput.value,
+        inventoryFirst: dom.inventoryFirstInput.checked,
+      };
+      window.localStorage.setItem(storageKey, JSON.stringify(config));
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function formatInlineMarkdown(text) {
+      let html = escapeHtml(text);
+      html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
+      html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+      return html;
+    }
+
+    function renderMarkdownLite(markdown) {
+      const source = String(markdown || "").trim();
+      if (!source) {
+        return "<p class=\"muted\">暂无内容</p>";
+      }
+      const blocks = source.split(/\n{2,}/).map((block) => block.trim()).filter(Boolean);
+      return blocks.map((block) => {
+        const lines = block.split(/\n/).map((line) => line.trimEnd());
+        if (lines.every((line) => /^[-*]\s+/.test(line))) {
+          return `<ul>${lines.map((line) => `<li>${formatInlineMarkdown(line.replace(/^[-*]\s+/, ""))}</li>`).join("")}</ul>`;
+        }
+        if (lines.every((line) => /^\d+\.\s+/.test(line))) {
+          return `<ol>${lines.map((line) => `<li>${formatInlineMarkdown(line.replace(/^\d+\.\s+/, ""))}</li>`).join("")}</ol>`;
+        }
+        if (lines.length === 1 && /^###\s+/.test(lines[0])) {
+          return `<h3>${formatInlineMarkdown(lines[0].replace(/^###\s+/, ""))}</h3>`;
+        }
+        if (lines.length === 1 && /^##\s+/.test(lines[0])) {
+          return `<h2>${formatInlineMarkdown(lines[0].replace(/^##\s+/, ""))}</h2>`;
+        }
+        if (lines.length === 1 && /^#\s+/.test(lines[0])) {
+          return `<h1>${formatInlineMarkdown(lines[0].replace(/^#\s+/, ""))}</h1>`;
+        }
+        return `<p>${lines.map((line) => formatInlineMarkdown(line)).join("<br>")}</p>`;
+      }).join("");
+    }
+
+    function parseCsvList(value) {
+      return String(value || "")
+        .split(/[，,]/)
+        .map((item) => item.trim())
+        .filter(Boolean);
+    }
+
+    function parseNullableNumber(value) {
+      const trimmed = String(value || "").trim();
+      if (!trimmed) {
+        return null;
+      }
+      const number = Number(trimmed);
+      return Number.isFinite(number) ? number : null;
+    }
+
+    function setStatus(text, tone) {
+      dom.statusPill.textContent = text;
+      dom.statusPill.dataset.tone = tone;
+    }
+
+    function setHealth(text, tone) {
+      dom.healthPill.textContent = text;
+      dom.healthPill.dataset.tone = tone;
+    }
+
+    function setPending(pending) {
+      appState.pending = pending;
+      dom.sendButton.disabled = pending;
+      dom.clearChatButton.disabled = pending;
+      dom.healthButton.disabled = pending;
+      dom.loadSessionsButton.disabled = pending;
+      dom.newSessionButton.disabled = pending;
+    }
+
+    function ensureEmptyState() {
+      dom.emptyState.classList.toggle("hidden", dom.chatThread.querySelector(".message") !== null);
+    }
+
+    function scrollThreadToBottom() {
+      dom.chatThread.scrollTop = dom.chatThread.scrollHeight;
+    }
+
+    function createBadge(text, tone) {
+      const badge = document.createElement("span");
+      badge.className = "badge";
+      badge.dataset.tone = tone || "slate";
+      badge.textContent = text;
+      return badge;
+    }
+
+    function messageTitle(role) {
+      if (role === "user") return "你";
+      if (role === "assistant") return "Diet Agent";
+      return "系统";
+    }
+
+    function currentTimeLabel() {
+      return new Date().toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit" });
+    }
+
+    function appendMessage({ role, content, badges, meta, plain }) {
+      const id = createId("msg");
+      const article = document.createElement("article");
+      article.className = `message ${role}`;
+
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+
+      const header = document.createElement("div");
+      header.className = "bubble-header";
+
+      const title = document.createElement("strong");
+      title.textContent = messageTitle(role);
+
+      const time = document.createElement("span");
+      time.textContent = currentTimeLabel();
+
+      header.append(title, time);
+
+      const contentEl = document.createElement("div");
+      contentEl.className = `message-content ${plain ? "plain" : "rich"}`;
+      if (plain) {
+        contentEl.textContent = content || "";
+      } else {
+        contentEl.innerHTML = renderMarkdownLite(content || "");
+      }
+
+      const badgeRow = document.createElement("div");
+      badgeRow.className = "meta-row";
+      badgeRow.hidden = true;
+
+      const details = document.createElement("details");
+      details.className = "message-details";
+      details.hidden = true;
+
+      const summary = document.createElement("summary");
+      summary.textContent = "查看技术详情";
+
+      const detailBody = document.createElement("pre");
+      detailBody.className = "details-body";
+
+      details.append(summary, detailBody);
+      bubble.append(header, contentEl, badgeRow, details);
+      article.appendChild(bubble);
+      dom.chatThread.appendChild(article);
+
+      messageRefs.set(id, {
+        role,
+        article,
+        contentEl,
+        badgeRow,
+        details,
+        detailBody,
+        plain: Boolean(plain),
+        rawContent: content || "",
+      });
+
+      if (Array.isArray(badges) && badges.length) {
+        setMessageBadges(id, badges);
+      }
+      if (meta) {
+        setMessageMeta(id, meta);
+      }
+
+      ensureEmptyState();
+      scrollThreadToBottom();
+      return id;
+    }
+
+    function setMessageContent(id, content, plain) {
+      const ref = messageRefs.get(id);
+      if (!ref) return;
+      ref.rawContent = content || "";
+      ref.plain = Boolean(plain);
+      ref.contentEl.className = `message-content ${plain ? "plain" : "rich"}`;
+      if (plain) {
+        ref.contentEl.textContent = ref.rawContent;
+      } else {
+        ref.contentEl.innerHTML = renderMarkdownLite(ref.rawContent);
+      }
+      scrollThreadToBottom();
+    }
+
+    function appendMessageChunk(id, chunk) {
+      const ref = messageRefs.get(id);
+      if (!ref) return;
+      ref.rawContent += chunk || "";
+      ref.contentEl.textContent = ref.rawContent;
+      scrollThreadToBottom();
+    }
+
+    function setMessageBadges(id, badges) {
+      const ref = messageRefs.get(id);
+      if (!ref) return;
+      ref.badgeRow.innerHTML = "";
+      if (!Array.isArray(badges) || !badges.length) {
+        ref.badgeRow.hidden = true;
+        return;
+      }
+      badges.forEach((badge) => {
+        ref.badgeRow.appendChild(createBadge(badge.text, badge.tone));
+      });
+      ref.badgeRow.hidden = false;
+    }
+
+    function setMessageMeta(id, meta) {
+      const ref = messageRefs.get(id);
+      if (!ref) return;
+      if (!meta) {
+        ref.details.hidden = true;
+        ref.detailBody.textContent = "";
+        return;
+      }
+      ref.detailBody.textContent = JSON.stringify(meta, null, 2);
+      ref.details.hidden = false;
+    }
+
+    function buildResponseBadges(data) {
+      const badges = [];
+      const metadata = data.metadata || {};
+      const retrieval = metadata.retrieval || {};
+      const stats = metadata.retrieval_stats || {};
+      const matchedCollections = Array.isArray(stats.matched_tutorial_collection_names)
+        ? stats.matched_tutorial_collection_names
+        : [];
+      if (data.intent) badges.push({ text: `intent: ${data.intent}`, tone: "purple" });
+      if (metadata.active_skill) badges.push({ text: `skill: ${metadata.active_skill}`, tone: "blue" });
+      if (metadata.response_type) badges.push({ text: `type: ${metadata.response_type}`, tone: "green" });
+      if (typeof data.latency_ms === "number") badges.push({ text: `${Math.round(data.latency_ms)} ms`, tone: "slate" });
+      if (matchedCollections.length) badges.push({ text: `source: ${matchedCollections.join(" + ")}`, tone: "amber" });
+      if (metadata.fallback_triggered || retrieval.fallback_triggered) badges.push({ text: "fallback", tone: "rose" });
+      if (stats.native_llm_fallback_used) badges.push({ text: "native llm", tone: "rose" });
+      if (stats.tutorial_topic_anchor) badges.push({ text: `topic: ${stats.tutorial_topic_anchor}`, tone: "indigo" });
+      return badges;
+    }
+
+    function buildStreamBadges() {
+      return [
+        { text: "streaming", tone: "blue" },
+        { text: "实时节点进度", tone: "green" },
+      ];
+    }
+
+    function renderQuickPrompts() {
+      dom.quickPrompts.innerHTML = "";
+      quickPromptTexts.forEach((text) => {
+        const button = document.createElement("button");
+        button.className = "quick-prompt";
+        button.type = "button";
+        button.textContent = text;
+        button.addEventListener("click", () => {
+          dom.promptInput.value = text;
+          handleSubmit();
+        });
+        dom.quickPrompts.appendChild(button);
+      });
+    }
+
+    function renderNodeProgress() {
+      dom.nodeList.innerHTML = "";
+      nodeOrder.forEach((node) => {
+        const item = document.createElement("div");
+        item.className = "node-pill";
+        item.dataset.state = appState.nodeStates.get(node) || "idle";
+        item.textContent = nodeLabels[node];
+        dom.nodeList.appendChild(item);
+      });
+    }
+
+    function resetNodeProgress() {
+      appState.nodeStates = new Map(nodeOrder.map((node) => [node, "idle"]));
+      renderNodeProgress();
+    }
+
+    function markNode(node, state) {
+      if (!appState.nodeStates.has(node)) return;
+      appState.nodeStates.set(node, state);
+      renderNodeProgress();
+    }
+
+    function renderHealthList(components) {
+      dom.healthList.innerHTML = "";
+      const entries = Object.entries(components || {});
+      if (!entries.length) {
+        dom.healthList.appendChild(createBadge("尚未获取健康检查结果", "slate"));
+        return;
+      }
+      entries.forEach(([key, value]) => {
+        const tone = value === "connected" || value === "compiled" || value === "enabled"
+          ? "green"
+          : value === "disabled"
+            ? "slate"
+            : "rose";
+        dom.healthList.appendChild(createBadge(`${key}: ${value}`, tone));
+      });
+    }
+
+    function renderSessions(sessions) {
+      dom.sessionList.innerHTML = "";
+      const list = Array.isArray(sessions) ? sessions : [];
+      dom.sessionSummary.textContent = list.length ? `共 ${list.length} 个` : "暂无会话";
+      if (!list.length) {
+        const empty = document.createElement("p");
+        empty.className = "muted";
+        empty.textContent = "当前用户还没有可加载的最近会话。";
+        dom.sessionList.appendChild(empty);
+        return;
+      }
+      list.forEach((session) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "session-item";
+        button.innerHTML = `
+          <strong>${escapeHtml(session.session_id || "未命名会话")}</strong>
+          <span>${escapeHtml(session.preview || "暂无预览")}</span>
+          <em>${escapeHtml(session.updated_at || session.last_interaction_at || session.source || "")}</em>
+        `;
+        button.addEventListener("click", () => loadSessionHistory(session.session_id));
+        dom.sessionList.appendChild(button);
+      });
+    }
+
+    function ensureIdentity() {
+      if (!dom.userIdInput.value.trim()) {
+        dom.userIdInput.value = defaultUserId();
+      }
+      if (!dom.sessionIdInput.value.trim()) {
+        dom.sessionIdInput.value = defaultSessionId();
+      }
+    }
+
+    function buildPayload(query) {
+      ensureIdentity();
+      savePersistedConfig();
+      return {
+        query,
+        user_id: dom.userIdInput.value.trim(),
+        session_id: dom.sessionIdInput.value.trim(),
+        stream: Boolean(dom.streamToggle.checked),
+        available_ingredients: parseCsvList(dom.ingredientsInput.value),
+        allergies: parseCsvList(dom.allergiesInput.value),
+        disliked_ingredients: parseCsvList(dom.dislikedInput.value),
+        max_cooking_time: parseNullableNumber(dom.maxTimeInput.value),
+        health_goal: dom.healthGoalInput.value.trim() || null,
+        meal_type: dom.mealTypeInput.value || null,
+        prefer_inventory_first: dom.inventoryFirstInput.checked,
+      };
+    }
+
+    async function parseErrorMessage(response) {
+      try {
+        const data = await response.json();
+        return data.detail || data.error || JSON.stringify(data);
+      } catch {
+        try {
+          return await response.text();
+        } catch {
+          return `HTTP ${response.status}`;
+        }
+      }
+    }
+
+    async function checkHealth() {
+      const apiBase = normalizeApiBase(dom.apiBaseInput.value) || inferApiBase();
+      dom.apiBaseInput.value = apiBase;
+      savePersistedConfig();
+      setHealth("正在检查连接", "running");
+      try {
+        const response = await fetch(`${apiBase}/health`);
+        if (!response.ok) {
+          throw new Error(await parseErrorMessage(response));
+        }
+        const data = await response.json();
+        const tone = data.status === "ok" ? "success" : "running";
+        setHealth(`服务状态：${data.status}`, tone);
+        renderHealthList(data.components || {});
+        setStatus("已连接到本地 Diet Agent", "success");
+      } catch (error) {
+        setHealth("连接失败", "error");
+        renderHealthList({ error: error.message || String(error) });
+        setStatus("无法连接到 API，请先启动 FastAPI", "error");
+      }
+    }
+
+    async function loadSessions() {
+      const apiBase = normalizeApiBase(dom.apiBaseInput.value) || inferApiBase();
+      ensureIdentity();
+      savePersistedConfig();
+      setStatus("正在加载最近会话…", "running");
+      try {
+        const response = await fetch(`${apiBase}/users/${encodeURIComponent(dom.userIdInput.value.trim())}/sessions`);
+        if (!response.ok) {
+          throw new Error(await parseErrorMessage(response));
+        }
+        const data = await response.json();
+        renderSessions(data.sessions || []);
+        setStatus(`已加载 ${Array.isArray(data.sessions) ? data.sessions.length : 0} 个会话`, "success");
+      } catch (error) {
+        renderSessions([]);
+        setStatus(`加载会话失败：${error.message || String(error)}`, "error");
+      }
+    }
+
+    async function loadSessionHistory(sessionId) {
+      const apiBase = normalizeApiBase(dom.apiBaseInput.value) || inferApiBase();
+      ensureIdentity();
+      if (!sessionId) return;
+      try {
+        setStatus("正在加载会话历史…", "running");
+        const response = await fetch(`${apiBase}/users/${encodeURIComponent(dom.userIdInput.value.trim())}/sessions/${encodeURIComponent(sessionId)}/history`);
+        if (!response.ok) {
+          throw new Error(await parseErrorMessage(response));
+        }
+        const data = await response.json();
+        dom.sessionIdInput.value = sessionId;
+        savePersistedConfig();
+        clearChatWindow(false);
+        (data.messages || []).forEach((message) => {
+          appendMessage({
+            role: message.role === "user" ? "user" : "assistant",
+            content: message.content || "",
+            plain: false,
+          });
+        });
+        setStatus(`已加载会话历史：${data.history_source || "unknown"}`, "success");
+      } catch (error) {
+        setStatus(`加载会话历史失败：${error.message || String(error)}`, "error");
+      }
+    }
+
+    function clearChatWindow(preserveStatus) {
+      dom.chatThread.querySelectorAll(".message").forEach((message) => message.remove());
+      messageRefs.clear();
+      ensureEmptyState();
+      scrollThreadToBottom();
+      if (!preserveStatus) {
+        setStatus("聊天窗口已清空", "neutral");
+      }
+    }
+
+    async function sendSync(payload) {
+      const apiBase = normalizeApiBase(dom.apiBaseInput.value) || inferApiBase();
+      const response = await fetch(`${apiBase}/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        throw new Error(await parseErrorMessage(response));
+      }
+      const data = await response.json();
+      appendMessage({
+        role: "assistant",
+        content: data.response || "",
+        badges: buildResponseBadges(data),
+        meta: data,
+        plain: false,
+      });
+      setStatus("回复完成，可展开查看 metadata", "success");
+      await loadSessions();
+    }
+
+    function handleSsePacket(packet, assistantMessageId) {
+      const dataLine = packet
+        .split("\n")
+        .filter((line) => line.startsWith("data:"))
+        .map((line) => line.slice(5).trim())
+        .join("");
+      if (!dataLine) {
+        return;
+      }
+      let payload;
+      try {
+        payload = JSON.parse(dataLine);
+      } catch {
+        return;
+      }
+      if (payload.event === "chunk") {
+        appendMessageChunk(assistantMessageId, payload.content || "");
+        return;
+      }
+      if (payload.event === "node_start") {
+        markNode(payload.node, "running");
+        return;
+      }
+      if (payload.event === "node_end") {
+        markNode(payload.node, "done");
+        return;
+      }
+      if (payload.event === "error") {
+        setMessageContent(assistantMessageId, payload.content || "流式响应出错", true);
+        setMessageBadges(assistantMessageId, [{ text: "streaming error", tone: "rose" }]);
+        setStatus("流式输出失败", "error");
+      }
+    }
+
+    async function sendStream(payload) {
+      const apiBase = normalizeApiBase(dom.apiBaseInput.value) || inferApiBase();
+      const assistantMessageId = appendMessage({
+        role: "assistant",
+        content: "",
+        badges: buildStreamBadges(),
+        plain: true,
+      });
+      const response = await fetch(`${apiBase}/chat/stream`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        throw new Error(await parseErrorMessage(response));
+      }
+      if (!response.body) {
+        throw new Error("浏览器当前环境不支持读取流式响应");
+      }
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let buffer = "";
+      setStatus("流式输出中…", "running");
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const packets = buffer.split("\n\n");
+        buffer = packets.pop() || "";
+        packets.forEach((packet) => handleSsePacket(packet, assistantMessageId));
+      }
+      if (buffer.trim()) {
+        handleSsePacket(buffer, assistantMessageId);
+      }
+      const ref = messageRefs.get(assistantMessageId);
+      if (ref && ref.rawContent.trim()) {
+        setMessageContent(assistantMessageId, ref.rawContent, false);
+      }
+      setMessageBadges(assistantMessageId, [
+        { text: "streaming", tone: "blue" },
+        { text: "实验展示模式", tone: "amber" },
+      ]);
+      setStatus("流式展示完成；如要演示多轮承接，建议切回同步模式", "success");
+    }
+
+    async function handleSubmit() {
+      if (appState.pending) return;
+      const query = dom.promptInput.value.trim();
+      if (!query) {
+        setStatus("请输入问题后再发送", "error");
+        dom.promptInput.focus();
+        return;
+      }
+      ensureIdentity();
+      savePersistedConfig();
+      resetNodeProgress();
+      appendMessage({ role: "user", content: query, plain: true });
+      dom.promptInput.value = "";
+      setPending(true);
+      try {
+        const payload = buildPayload(query);
+        if (dom.streamToggle.checked) {
+          await sendStream(payload);
+        } else {
+          await sendSync(payload);
+        }
+      } catch (error) {
+        appendMessage({
+          role: "system",
+          content: error.message || String(error),
+          badges: [{ text: "request error", tone: "rose" }],
+          plain: true,
+        });
+        setStatus(`请求失败：${error.message || String(error)}`, "error");
+      } finally {
+        setPending(false);
+      }
+    }
+
+    function applyPersistedConfig() {
+      const persisted = loadPersistedConfig();
+      dom.apiBaseInput.value = normalizeApiBase(persisted.apiBase) || inferApiBase();
+      dom.userIdInput.value = persisted.userId || defaultUserId();
+      dom.sessionIdInput.value = persisted.sessionId || defaultSessionId();
+      dom.streamToggle.checked = Boolean(persisted.stream);
+      dom.ingredientsInput.value = persisted.ingredients || "";
+      dom.maxTimeInput.value = persisted.maxTime || "";
+      dom.mealTypeInput.value = persisted.mealType || "";
+      dom.healthGoalInput.value = persisted.healthGoal || "";
+      dom.dislikedInput.value = persisted.disliked || "";
+      dom.allergiesInput.value = persisted.allergies || "";
+      dom.inventoryFirstInput.checked = Boolean(persisted.inventoryFirst);
+      dom.streamNotice.classList.toggle("hidden", !dom.streamToggle.checked);
+    }
+
+    function bindEvents() {
+      dom.healthButton.addEventListener("click", checkHealth);
+      dom.loadSessionsButton.addEventListener("click", loadSessions);
+      dom.newSessionButton.addEventListener("click", () => {
+        dom.sessionIdInput.value = defaultSessionId();
+        savePersistedConfig();
+        clearChatWindow(false);
+        setStatus(`已切换到新会话：${dom.sessionIdInput.value}`, "success");
+      });
+      dom.clearChatButton.addEventListener("click", () => clearChatWindow(false));
+      dom.streamToggle.addEventListener("change", () => {
+        dom.streamNotice.classList.toggle("hidden", !dom.streamToggle.checked);
+        savePersistedConfig();
+      });
+      [
+        dom.apiBaseInput,
+        dom.userIdInput,
+        dom.sessionIdInput,
+        dom.ingredientsInput,
+        dom.maxTimeInput,
+        dom.mealTypeInput,
+        dom.healthGoalInput,
+        dom.dislikedInput,
+        dom.allergiesInput,
+        dom.inventoryFirstInput,
+      ].forEach((element) => {
+        element.addEventListener("change", savePersistedConfig);
+      });
+      dom.composerForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        handleSubmit();
+      });
+      dom.promptInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" && !event.shiftKey) {
+          event.preventDefault();
+          handleSubmit();
+        }
+      });
+    }
+
+    function boot() {
+      applyPersistedConfig();
+      renderQuickPrompts();
+      resetNodeProgress();
+      renderHealthList({ note: "点击“检查连接”查看 FastAPI 状态" });
+      renderSessions([]);
+      bindEvents();
+      checkHealth();
+    }
+
+    boot();
+  </script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+[
+  {
+    "query": "我有鸡蛋、番茄和米饭，想做个快手晚餐",
+    "scenario_type": "inventory_based",
+    "expected_constraints": {
+      "available_ingredients": ["鸡蛋", "番茄", "米饭"],
+      "meal_type": "晚餐"
+    },
+    "expected_recipe_features": ["inventory_match", "quick_meal", "dinner"],
+    "should_clarify": false,
+    "notes": "明确给出库存食材，优先推荐可直接利用现有食材的晚餐。"
+  },
+  {
+    "query": "冰箱里有鸡胸肉和西兰花，推荐一道减脂菜",
+    "scenario_type": "inventory_based",
+    "expected_constraints": {
+      "available_ingredients": ["鸡胸肉", "西兰花"],
+      "health_goal": "减脂"
+    },
+    "expected_recipe_features": ["inventory_match", "low_fat", "high_protein"],
+    "should_clarify": false,
+    "notes": "库存与健康目标同时明确。"
+  },
+  {
+    "query": "家里有土豆、牛肉、洋葱，可以做什么家常菜？",
+    "scenario_type": "inventory_based",
+    "expected_constraints": {
+      "available_ingredients": ["土豆", "牛肉", "洋葱"]
+    },
+    "expected_recipe_features": ["inventory_match", "home_style"],
+    "should_clarify": false,
+    "notes": "适合测试库存匹配与关系检索。"
+  },
+  {
+    "query": "我现在只有虾仁和生菜，想做个清淡点的午餐",
+    "scenario_type": "inventory_based",
+    "expected_constraints": {
+      "available_ingredients": ["虾仁", "生菜"],
+      "meal_type": "午餐"
+    },
+    "expected_recipe_features": ["inventory_match", "light_flavor", "lunch"],
+    "should_clarify": false,
+    "notes": "库存信号强，风格偏清淡。"
+  },
+  {
+    "query": "手头有豆腐、香菇、青菜，帮我想一道素菜",
+    "scenario_type": "inventory_based",
+    "expected_constraints": {
+      "available_ingredients": ["豆腐", "香菇", "青菜"]
+    },
+    "expected_recipe_features": ["inventory_match", "vegetarian"],
+    "should_clarify": false,
+    "notes": "测试素菜场景的库存优先推荐。"
+  },
+  {
+    "query": "冰箱里剩排骨和冬瓜，今晚做什么比较省事？",
+    "scenario_type": "inventory_based",
+    "expected_constraints": {
+      "available_ingredients": ["排骨", "冬瓜"],
+      "meal_type": "晚餐"
+    },
+    "expected_recipe_features": ["inventory_match", "dinner", "easy_to_execute"],
+    "should_clarify": false,
+    "notes": "测试典型库存做饭决策。"
+  },
+  {
+    "query": "推荐一道15分钟内能做好的早餐",
+    "scenario_type": "time_constrained",
+    "expected_constraints": {
+      "max_cooking_time": 15,
+      "meal_type": "早餐"
+    },
+    "expected_recipe_features": ["quick_meal", "breakfast"],
+    "should_clarify": false,
+    "notes": "明确时长与餐次。"
+  },
+  {
+    "query": "下班后太累了，有没有10分钟快手菜？",
+    "scenario_type": "time_constrained",
+    "expected_constraints": {
+      "max_cooking_time": 10
+    },
+    "expected_recipe_features": ["quick_meal", "easy_to_execute"],
+    "should_clarify": false,
+    "notes": "强时间约束。"
+  },
+  {
+    "query": "我只想做30分钟以内的家常晚饭，别太复杂",
+    "scenario_type": "time_constrained",
+    "expected_constraints": {
+      "max_cooking_time": 30,
+      "meal_type": "晚餐"
+    },
+    "expected_recipe_features": ["dinner", "home_style", "low_difficulty"],
+    "should_clarify": false,
+    "notes": "测试时长 + 难度偏好理解。"
+  },
+  {
+    "query": "有没有20分钟内能做完的鱼类料理？",
+    "scenario_type": "time_constrained",
+    "expected_constraints": {
+      "max_cooking_time": 20
+    },
+    "expected_recipe_features": ["quick_meal", "fish"],
+    "should_clarify": false,
+    "notes": "测试时间与品类组合。"
+  },
+  {
+    "query": "午休只有25分钟，给我推荐点能快速搞定的午餐",
+    "scenario_type": "time_constrained",
+    "expected_constraints": {
+      "max_cooking_time": 25,
+      "meal_type": "午餐"
+    },
+    "expected_recipe_features": ["quick_meal", "lunch"],
+    "should_clarify": false,
+    "notes": "午餐场景。"
+  },
+  {
+    "query": "能不能给我几个一小时内做完、适合聚餐的菜？",
+    "scenario_type": "time_constrained",
+    "expected_constraints": {
+      "max_cooking_time": 60
+    },
+    "expected_recipe_features": ["party_friendly", "multi_person"],
+    "should_clarify": false,
+    "notes": "较宽松时长约束，测试上界过滤。"
+  },
+  {
+    "query": "推荐适合减脂的低热量晚餐",
+    "scenario_type": "health_goal_based",
+    "expected_constraints": {
+      "health_goal": "减脂",
+      "meal_type": "晚餐"
+    },
+    "expected_recipe_features": ["low_fat", "low_calorie", "dinner"],
+    "should_clarify": false,
+    "notes": "标准减脂场景。"
+  },
+  {
+    "query": "健身后想吃点高蛋白的，给我推荐一下",
+    "scenario_type": "health_goal_based",
+    "expected_constraints": {
+      "health_goal": "高蛋白"
+    },
+    "expected_recipe_features": ["high_protein", "post_workout"],
+    "should_clarify": false,
+    "notes": "偏目标导向，不一定需要澄清。"
+  },
+  {
+    "query": "我最近控糖，早餐应该吃什么比较合适？",
+    "scenario_type": "health_goal_based",
+    "expected_constraints": {
+      "health_goal": "控糖",
+      "meal_type": "早餐"
+    },
+    "expected_recipe_features": ["low_sugar", "breakfast"],
+    "should_clarify": false,
+    "notes": "健康目标 + 餐次组合。"
+  },
+  {
+    "query": "想吃点对增肌友好的家常菜，有什么推荐？",
+    "scenario_type": "health_goal_based",
+    "expected_constraints": {
+      "health_goal": "增肌"
+    },
+    "expected_recipe_features": ["high_protein", "muscle_gain", "home_style"],
+    "should_clarify": false,
+    "notes": "增肌目标。"
+  },
+  {
+    "query": "给我来点清淡、养胃一点的汤",
+    "scenario_type": "health_goal_based",
+    "expected_constraints": {
+      "health_goal": "养胃"
+    },
+    "expected_recipe_features": ["light_flavor", "soup", "stomach_friendly"],
+    "should_clarify": false,
+    "notes": "偏抽象健康目标。"
+  },
+  {
+    "query": "最近血脂有点高，晚餐想吃得健康一点",
+    "scenario_type": "health_goal_based",
+    "expected_constraints": {
+      "health_goal": "控脂",
+      "meal_type": "晚餐"
+    },
+    "expected_recipe_features": ["low_fat", "healthy", "dinner"],
+    "should_clarify": false,
+    "notes": "适合测试目标标签命中。"
+  },
+  {
+    "query": "今晚想吃点清淡的",
+    "scenario_type": "ambiguous_need_clarification",
+    "expected_constraints": {},
+    "expected_recipe_features": ["light_flavor"],
+    "should_clarify": true,
+    "notes": "缺少食材、时间、目标，应该优先澄清。"
+  },
+  {
+    "query": "给我推荐个晚饭",
+    "scenario_type": "ambiguous_need_clarification",
+    "expected_constraints": {
+      "meal_type": "晚饭"
+    },
+    "expected_recipe_features": ["dinner"],
+    "should_clarify": true,
+    "notes": "仅有餐次，不足以直接推荐高可执行方案。"
+  },
+  {
+    "query": "想吃得健康点，有什么好做的？",
+    "scenario_type": "health_goal_based",
+    "expected_constraints": {
+      "health_goal": "健康"
+    },
+    "expected_recipe_features": ["healthy"],
+    "should_clarify": false,
+    "notes": "虽然目标较宽泛，但仍属于可直接给出健康向候选的偏好锚点。"
+  },
+  {
+    "query": "推荐一道适合现在这个天气吃的菜",
+    "scenario_type": "ambiguous_need_clarification",
+    "expected_constraints": {},
+    "expected_recipe_features": ["seasonal_fit"],
+    "should_clarify": true,
+    "notes": "缺少做饭约束。"
+  },
+  {
+    "query": "有没有不那么油腻的家常菜",
+    "scenario_type": "health_goal_based",
+    "expected_constraints": {
+      "health_goal": "低油"
+    },
+    "expected_recipe_features": ["light_flavor", "home_style"],
+    "should_clarify": false,
+    "notes": "低油家常菜已具备明确偏好锚点，系统可先直接给候选，再视需要补问。"
+  },
+  {
+    "query": "我想自己做饭，但不知道做什么",
+    "scenario_type": "ambiguous_need_clarification",
+    "expected_constraints": {},
+    "expected_recipe_features": ["easy_to_execute"],
+    "should_clarify": true,
+    "notes": "典型澄清入口问题。"
+  },
+  {
+    "query": "今晚做什么比较合适？",
+    "scenario_type": "ambiguous_need_clarification",
+    "expected_constraints": {
+      "meal_type": "晚餐"
+    },
+    "expected_recipe_features": ["dinner", "easy_to_execute"],
+    "should_clarify": true,
+    "notes": "只有模糊餐次线索，仍应优先澄清库存或时间约束。"
+  },
+  {
+    "query": "帮我想一道适合全家一起吃的菜",
+    "scenario_type": "ambiguous_need_clarification",
+    "expected_constraints": {},
+    "expected_recipe_features": ["multi_person", "home_style"],
+    "should_clarify": true,
+    "notes": "缺少食材、时间和健康目标，应先补关键约束。"
+  }
+]

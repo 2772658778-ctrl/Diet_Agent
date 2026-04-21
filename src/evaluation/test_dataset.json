@@ -1,0 +1,552 @@
+[
+    {
+        "id": "eval_001",
+        "query": "番茄炒蛋怎么做",
+        "expected_intent": "recipe_search",
+        "expected_params": {"ingredients": ["番茄", "鸡蛋"]},
+        "ground_truth_doc_ids": ["recipe_001", "recipe_002"],
+        "ground_truth_answer_keywords": ["番茄", "鸡蛋", "分钟", "简单"],
+        "ground_truth_answer": "番茄炒蛋是经典家常菜，用番茄和鸡蛋翻炒，约15分钟即可完成，做法简单。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_002",
+        "query": "我有鸡蛋和番茄，想做个快手菜",
+        "expected_intent": "recipe_search",
+        "expected_params": {"ingredients": ["鸡蛋", "番茄"], "time_limit": 30},
+        "ground_truth_doc_ids": ["recipe_001", "recipe_002", "recipe_014"],
+        "ground_truth_answer_keywords": ["番茄", "鸡蛋", "分钟", "简单"],
+        "ground_truth_answer": "推荐番茄炒蛋，用时约15分钟，做法简单。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_003",
+        "query": "西红柿蛋汤怎么做",
+        "expected_intent": "recipe_search",
+        "expected_params": {"ingredients": ["西红柿", "鸡蛋"]},
+        "ground_truth_doc_ids": ["recipe_002"],
+        "ground_truth_answer_keywords": ["西红柿", "蛋汤", "清淡", "营养"],
+        "ground_truth_answer": "西红柿蛋汤是清淡营养的汤品，开胃解腻，适合各个年龄段，约10分钟完成。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_004",
+        "query": "青椒炒蛋怎么做",
+        "expected_intent": "recipe_search",
+        "expected_params": {"ingredients": ["青椒", "鸡蛋"]},
+        "ground_truth_doc_ids": ["recipe_003"],
+        "ground_truth_answer_keywords": ["青椒", "鸡蛋", "分钟"],
+        "ground_truth_answer": "青椒炒蛋是家常菜，青椒与鸡蛋搭配，快手简单。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_005",
+        "query": "有什么简单的早餐食谱",
+        "expected_intent": "recipe_search",
+        "expected_params": {"time_limit": 30},
+        "ground_truth_doc_ids": ["recipe_006", "recipe_007", "recipe_017", "recipe_020"],
+        "ground_truth_answer_keywords": ["早餐", "简单", "分钟"],
+        "ground_truth_answer": "推荐燕麦粥、全麦面包配牛奶、紫薯粥或蒸蛋羹，都是简单快手的早餐选择。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_006",
+        "query": "推荐一道沙拉",
+        "expected_intent": "recipe_search",
+        "expected_params": {},
+        "ground_truth_doc_ids": ["recipe_004", "recipe_005"],
+        "ground_truth_answer_keywords": ["沙拉", "鸡胸肉", "牛肉"],
+        "ground_truth_answer": "推荐鸡胸肉沙拉或牛肉沙拉，营养丰富，适合健身减脂。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_007",
+        "query": "我想做三文鱼，有什么推荐",
+        "expected_intent": "recipe_search",
+        "expected_params": {"ingredients": ["三文鱼"]},
+        "ground_truth_doc_ids": ["recipe_012", "recipe_019"],
+        "ground_truth_answer_keywords": ["三文鱼", "蔬菜", "香煎"],
+        "ground_truth_answer": "推荐三文鱼配蔬菜或香煎三文鱼，富含优质蛋白和omega-3。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_008",
+        "query": "清炒蔬菜有哪些做法",
+        "expected_intent": "recipe_search",
+        "expected_params": {},
+        "ground_truth_doc_ids": ["recipe_008", "recipe_009"],
+        "ground_truth_answer_keywords": ["清炒", "西兰花", "菠菜"],
+        "ground_truth_answer": "清炒西兰花和清炒菠菜都是简单健康的蔬菜做法。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_009",
+        "query": "蒸蛋羹怎么做才嫩滑",
+        "expected_intent": "recipe_search",
+        "expected_params": {"ingredients": ["鸡蛋"]},
+        "ground_truth_doc_ids": ["recipe_020"],
+        "ground_truth_answer_keywords": ["蒸蛋", "嫩滑", "鸡蛋"],
+        "ground_truth_answer": "蒸蛋羹要嫩滑，关键是蛋液与温水比例1:1.5，小火蒸制。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_010",
+        "query": "有什么适合做午餐的炒饭",
+        "expected_intent": "recipe_search",
+        "expected_params": {},
+        "ground_truth_doc_ids": ["recipe_015"],
+        "ground_truth_answer_keywords": ["炒饭", "蔬菜"],
+        "ground_truth_answer": "蔬菜炒饭是简单快手的午餐选择，营养均衡。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_011",
+        "query": "凉拌黄瓜怎么做好吃",
+        "expected_intent": "recipe_search",
+        "expected_params": {"ingredients": ["黄瓜"]},
+        "ground_truth_doc_ids": ["recipe_018"],
+        "ground_truth_answer_keywords": ["凉拌", "黄瓜", "清爽"],
+        "ground_truth_answer": "凉拌黄瓜是夏天的清爽凉菜，做法简单。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_012",
+        "query": "我有鸡蛋番茄，想减肥，30分钟内能做什么",
+        "expected_intent": "recipe_search",
+        "expected_params": {"ingredients": ["鸡蛋", "番茄"], "time_limit": 30, "health_goal": "减肥"},
+        "ground_truth_doc_ids": ["recipe_001", "recipe_002"],
+        "ground_truth_answer_keywords": ["番茄", "鸡蛋", "减肥", "热量", "分钟"],
+        "ground_truth_answer": "番茄炒蛋热量约280大卡，15分钟完成，适合减肥期间食用。西红柿蛋汤更清淡，仅150大卡。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_013",
+        "query": "我想增肌，有什么高蛋白低脂肪的食谱推荐",
+        "expected_intent": "recipe_search",
+        "expected_params": {"health_goal": "增肌"},
+        "ground_truth_doc_ids": ["recipe_004", "recipe_010", "recipe_016"],
+        "ground_truth_answer_keywords": ["蛋白质", "鸡胸肉", "低脂"],
+        "ground_truth_answer": "推荐鸡胸肉沙拉、糙米饭配鸡胸肉或水煮鸡胸肉，高蛋白低脂肪，适合增肌。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_014",
+        "query": "豆腐怎么做汤好喝",
+        "expected_intent": "recipe_search",
+        "expected_params": {"ingredients": ["豆腐"]},
+        "ground_truth_doc_ids": ["recipe_013"],
+        "ground_truth_answer_keywords": ["豆腐", "汤", "鲜美"],
+        "ground_truth_answer": "豆腐汤鲜美可口，富含植物蛋白，做法简单。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_015",
+        "query": "帮我推荐一些适合健身后吃的菜",
+        "expected_intent": "recipe_search",
+        "expected_params": {"health_goal": "健身"},
+        "ground_truth_doc_ids": ["recipe_001", "recipe_004", "recipe_010", "recipe_016"],
+        "ground_truth_answer_keywords": ["健身", "蛋白质", "能量"],
+        "ground_truth_answer": "健身后推荐番茄炒蛋补充能量，鸡胸肉沙拉或水煮鸡胸肉补充蛋白质。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_016",
+        "query": "紫薯粥怎么做",
+        "expected_intent": "recipe_search",
+        "expected_params": {"ingredients": ["紫薯"]},
+        "ground_truth_doc_ids": ["recipe_017"],
+        "ground_truth_answer_keywords": ["紫薯", "粥", "营养"],
+        "ground_truth_answer": "紫薯粥是营养丰富的早餐，将紫薯切块与大米同煮即可。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_017",
+        "query": "做一个糙米饭配鸡胸肉需要什么材料",
+        "expected_intent": "recipe_search",
+        "expected_params": {"ingredients": ["糙米", "鸡胸肉"]},
+        "ground_truth_doc_ids": ["recipe_010"],
+        "ground_truth_answer_keywords": ["糙米", "鸡胸肉", "材料"],
+        "ground_truth_answer": "需要糙米、鸡胸肉、西兰花等蔬菜，是健康的减脂餐。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_018",
+        "query": "韭菜炒蛋的做法和热量",
+        "expected_intent": "recipe_search",
+        "expected_params": {"ingredients": ["韭菜", "鸡蛋"]},
+        "ground_truth_doc_ids": ["recipe_014"],
+        "ground_truth_answer_keywords": ["韭菜", "鸡蛋", "热量", "卡"],
+        "ground_truth_answer": "韭菜炒蛋是快手家常菜，热量适中，做法简单。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_019",
+        "query": "减肥期间可以喝什么汤",
+        "expected_intent": "recipe_search",
+        "expected_params": {"health_goal": "减肥"},
+        "ground_truth_doc_ids": ["recipe_002", "recipe_013"],
+        "ground_truth_answer_keywords": ["减肥", "汤", "低热量", "清淡"],
+        "ground_truth_answer": "西红柿蛋汤和豆腐汤都是低热量的选择，适合减肥期间饮用。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_020",
+        "query": "藜麦饭怎么做比较好吃",
+        "expected_intent": "recipe_search",
+        "expected_params": {"ingredients": ["藜麦"]},
+        "ground_truth_doc_ids": ["recipe_011"],
+        "ground_truth_answer_keywords": ["藜麦", "牛肉", "营养"],
+        "ground_truth_answer": "藜麦饭配牛肉是高蛋白的健康主食，藜麦口感丰富。",
+        "category": "recipe_search"
+    },
+    {
+        "id": "eval_021",
+        "query": "鸡胸肉的蛋白质含量是多少",
+        "expected_intent": "nutrition_query",
+        "expected_params": {"ingredient": "鸡胸肉"},
+        "ground_truth_doc_ids": ["recipe_004", "recipe_016"],
+        "ground_truth_answer_keywords": ["鸡胸肉", "蛋白质", "克"],
+        "ground_truth_answer": "鸡胸肉每100克约含24克蛋白质，是优质的高蛋白低脂肪食材。",
+        "category": "nutrition_query"
+    },
+    {
+        "id": "eval_022",
+        "query": "番茄炒蛋的热量有多高",
+        "expected_intent": "nutrition_query",
+        "expected_params": {"recipe": "番茄炒蛋"},
+        "ground_truth_doc_ids": ["recipe_001"],
+        "ground_truth_answer_keywords": ["番茄炒蛋", "热量", "280", "卡"],
+        "ground_truth_answer": "番茄炒蛋每份约280大卡，蛋白质18.5克，碳水12.3克，脂肪16.2克。",
+        "category": "nutrition_query"
+    },
+    {
+        "id": "eval_023",
+        "query": "燕麦粥的营养价值如何",
+        "expected_intent": "nutrition_query",
+        "expected_params": {"recipe": "燕麦粥"},
+        "ground_truth_doc_ids": ["recipe_006"],
+        "ground_truth_answer_keywords": ["燕麦", "营养", "膳食纤维"],
+        "ground_truth_answer": "燕麦粥富含膳食纤维，有助于降低胆固醇，是健康的早餐选择。",
+        "category": "nutrition_query"
+    },
+    {
+        "id": "eval_024",
+        "query": "三文鱼有什么营养成分",
+        "expected_intent": "nutrition_query",
+        "expected_params": {"ingredient": "三文鱼"},
+        "ground_truth_doc_ids": ["recipe_012", "recipe_019"],
+        "ground_truth_answer_keywords": ["三文鱼", "omega-3", "蛋白质"],
+        "ground_truth_answer": "三文鱼富含omega-3脂肪酸和优质蛋白质，有益心血管健康。",
+        "category": "nutrition_query"
+    },
+    {
+        "id": "eval_025",
+        "query": "西兰花的维生素含量",
+        "expected_intent": "nutrition_query",
+        "expected_params": {"ingredient": "西兰花"},
+        "ground_truth_doc_ids": ["recipe_008"],
+        "ground_truth_answer_keywords": ["西兰花", "维生素", "营养"],
+        "ground_truth_answer": "西兰花富含维生素C和维生素K，是营养密度极高的蔬菜。",
+        "category": "nutrition_query"
+    },
+    {
+        "id": "eval_026",
+        "query": "牛肉沙拉的热量和蛋白质",
+        "expected_intent": "nutrition_query",
+        "expected_params": {"recipe": "牛肉沙拉"},
+        "ground_truth_doc_ids": ["recipe_005"],
+        "ground_truth_answer_keywords": ["牛肉", "沙拉", "蛋白质", "热量"],
+        "ground_truth_answer": "牛肉沙拉蛋白质含量高，热量适中，适合增肌减脂。",
+        "category": "nutrition_query"
+    },
+    {
+        "id": "eval_027",
+        "query": "菠菜有哪些营养",
+        "expected_intent": "nutrition_query",
+        "expected_params": {"ingredient": "菠菜"},
+        "ground_truth_doc_ids": ["recipe_009"],
+        "ground_truth_answer_keywords": ["菠菜", "铁", "维生素"],
+        "ground_truth_answer": "菠菜富含铁元素和多种维生素，有助于补血。",
+        "category": "nutrition_query"
+    },
+    {
+        "id": "eval_028",
+        "query": "豆腐的蛋白质含量高吗",
+        "expected_intent": "nutrition_query",
+        "expected_params": {"ingredient": "豆腐"},
+        "ground_truth_doc_ids": ["recipe_013"],
+        "ground_truth_answer_keywords": ["豆腐", "蛋白质", "植物"],
+        "ground_truth_answer": "豆腐是优质的植物蛋白来源，每100克含约8克蛋白质。",
+        "category": "nutrition_query"
+    },
+    {
+        "id": "eval_029",
+        "query": "水煮鸡胸肉减肥效果好吗",
+        "expected_intent": "nutrition_query",
+        "expected_params": {"recipe": "水煮鸡胸肉", "health_goal": "减肥"},
+        "ground_truth_doc_ids": ["recipe_016"],
+        "ground_truth_answer_keywords": ["水煮", "鸡胸肉", "减肥", "低脂"],
+        "ground_truth_answer": "水煮鸡胸肉是经典减脂餐，高蛋白低脂肪，热量低。",
+        "category": "nutrition_query"
+    },
+    {
+        "id": "eval_030",
+        "query": "全麦面包的GI值是多少",
+        "expected_intent": "nutrition_query",
+        "expected_params": {"ingredient": "全麦面包"},
+        "ground_truth_doc_ids": ["recipe_007"],
+        "ground_truth_answer_keywords": ["全麦", "面包", "GI"],
+        "ground_truth_answer": "全麦面包属于中低GI食物，比白面包更适合控制血糖。",
+        "category": "nutrition_query"
+    },
+    {
+        "id": "eval_031",
+        "query": "鸡蛋和牛奶能一起吃吗",
+        "expected_intent": "ingredient_check",
+        "expected_params": {"ingredients": ["鸡蛋", "牛奶"]},
+        "ground_truth_doc_ids": ["recipe_001", "recipe_007"],
+        "ground_truth_answer_keywords": ["鸡蛋", "牛奶", "可以", "搭配"],
+        "ground_truth_answer": "鸡蛋和牛奶可以一起食用，都是优质蛋白来源，营养互补。",
+        "category": "ingredient_check"
+    },
+    {
+        "id": "eval_032",
+        "query": "番茄和鸡蛋搭配好吗",
+        "expected_intent": "ingredient_check",
+        "expected_params": {"ingredients": ["番茄", "鸡蛋"]},
+        "ground_truth_doc_ids": ["recipe_001", "recipe_002"],
+        "ground_truth_answer_keywords": ["番茄", "鸡蛋", "搭配", "营养"],
+        "ground_truth_answer": "番茄和鸡蛋是经典搭配，维生素C促进铁的吸收，营养互补。",
+        "category": "ingredient_check"
+    },
+    {
+        "id": "eval_033",
+        "query": "菠菜和豆腐能一起吃吗",
+        "expected_intent": "ingredient_check",
+        "expected_params": {"ingredients": ["菠菜", "豆腐"]},
+        "ground_truth_doc_ids": ["recipe_009", "recipe_013"],
+        "ground_truth_answer_keywords": ["菠菜", "豆腐", "草酸", "钙"],
+        "ground_truth_answer": "菠菜含草酸，可能影响豆腐中钙的吸收，建议焯水后再搭配。",
+        "category": "ingredient_check"
+    },
+    {
+        "id": "eval_034",
+        "query": "鸡胸肉和西兰花是好搭配吗",
+        "expected_intent": "ingredient_check",
+        "expected_params": {"ingredients": ["鸡胸肉", "西兰花"]},
+        "ground_truth_doc_ids": ["recipe_004", "recipe_008", "recipe_010"],
+        "ground_truth_answer_keywords": ["鸡胸肉", "西兰花", "搭配", "健身"],
+        "ground_truth_answer": "鸡胸肉配西兰花是经典健身餐搭配，高蛋白加丰富维生素。",
+        "category": "ingredient_check"
+    },
+    {
+        "id": "eval_035",
+        "query": "牛肉和什么蔬菜搭配比较好",
+        "expected_intent": "ingredient_check",
+        "expected_params": {"ingredients": ["牛肉"]},
+        "ground_truth_doc_ids": ["recipe_005", "recipe_011"],
+        "ground_truth_answer_keywords": ["牛肉", "蔬菜", "搭配"],
+        "ground_truth_answer": "牛肉适合搭配生菜、洋葱等蔬菜，营养均衡。",
+        "category": "ingredient_check"
+    },
+    {
+        "id": "eval_036",
+        "query": "鸡蛋和韭菜能搭配吗",
+        "expected_intent": "ingredient_check",
+        "expected_params": {"ingredients": ["鸡蛋", "韭菜"]},
+        "ground_truth_doc_ids": ["recipe_014"],
+        "ground_truth_answer_keywords": ["鸡蛋", "韭菜", "搭配"],
+        "ground_truth_answer": "鸡蛋和韭菜是很好的搭配，韭菜炒蛋是经典家常菜。",
+        "category": "ingredient_check"
+    },
+    {
+        "id": "eval_037",
+        "query": "黄瓜和什么搭配做凉菜好吃",
+        "expected_intent": "ingredient_check",
+        "expected_params": {"ingredients": ["黄瓜"]},
+        "ground_truth_doc_ids": ["recipe_018"],
+        "ground_truth_answer_keywords": ["黄瓜", "凉菜", "搭配"],
+        "ground_truth_answer": "黄瓜可以搭配蒜末、醋做凉拌黄瓜，清爽开胃。",
+        "category": "ingredient_check"
+    },
+    {
+        "id": "eval_038",
+        "query": "三文鱼和什么食材搭配好",
+        "expected_intent": "ingredient_check",
+        "expected_params": {"ingredients": ["三文鱼"]},
+        "ground_truth_doc_ids": ["recipe_012", "recipe_019"],
+        "ground_truth_answer_keywords": ["三文鱼", "蔬菜", "搭配"],
+        "ground_truth_answer": "三文鱼适合搭配各种蔬菜，如芦笋、西兰花等。",
+        "category": "ingredient_check"
+    },
+    {
+        "id": "eval_039",
+        "query": "糙米和藜麦哪个更适合减肥",
+        "expected_intent": "ingredient_check",
+        "expected_params": {"ingredients": ["糙米", "藜麦"], "health_goal": "减肥"},
+        "ground_truth_doc_ids": ["recipe_010", "recipe_011"],
+        "ground_truth_answer_keywords": ["糙米", "藜麦", "减肥", "GI"],
+        "ground_truth_answer": "两者都适合减肥，藜麦蛋白质含量更高，糙米更容易获取。",
+        "category": "ingredient_check"
+    },
+    {
+        "id": "eval_040",
+        "query": "燕麦和牛奶能一起煮吗",
+        "expected_intent": "ingredient_check",
+        "expected_params": {"ingredients": ["燕麦", "牛奶"]},
+        "ground_truth_doc_ids": ["recipe_006", "recipe_007"],
+        "ground_truth_answer_keywords": ["燕麦", "牛奶", "搭配", "营养"],
+        "ground_truth_answer": "燕麦和牛奶是经典搭配，营养丰富，适合做早餐。",
+        "category": "ingredient_check"
+    },
+    {
+        "id": "eval_041",
+        "query": "你好",
+        "expected_intent": "chitchat",
+        "expected_params": {},
+        "ground_truth_doc_ids": [],
+        "ground_truth_answer_keywords": ["你好", "帮"],
+        "ground_truth_answer": "你好！我是智能饮食助手，可以帮你推荐食谱、查询营养信息。",
+        "category": "chitchat"
+    },
+    {
+        "id": "eval_042",
+        "query": "今天天气不错",
+        "expected_intent": "chitchat",
+        "expected_params": {},
+        "ground_truth_doc_ids": [],
+        "ground_truth_answer_keywords": ["天气"],
+        "ground_truth_answer": "天气不错的话，可以考虑做些清爽的菜品，需要我推荐吗？",
+        "category": "chitchat"
+    },
+    {
+        "id": "eval_043",
+        "query": "谢谢你的推荐",
+        "expected_intent": "chitchat",
+        "expected_params": {},
+        "ground_truth_doc_ids": [],
+        "ground_truth_answer_keywords": ["不客气"],
+        "ground_truth_answer": "不客气！如果还有其他饮食问题随时问我。",
+        "category": "chitchat"
+    },
+    {
+        "id": "eval_044",
+        "query": "你是谁",
+        "expected_intent": "chitchat",
+        "expected_params": {},
+        "ground_truth_doc_ids": [],
+        "ground_truth_answer_keywords": ["饮食", "助手"],
+        "ground_truth_answer": "我是智能饮食助手，可以帮你推荐食谱、分析营养、检查食材搭配。",
+        "category": "chitchat"
+    },
+    {
+        "id": "eval_045",
+        "query": "你能做什么",
+        "expected_intent": "chitchat",
+        "expected_params": {},
+        "ground_truth_doc_ids": [],
+        "ground_truth_answer_keywords": ["食谱", "营养", "推荐"],
+        "ground_truth_answer": "我可以推荐食谱、查询营养信息、检查食材搭配禁忌。",
+        "category": "chitchat"
+    },
+    {
+        "id": "eval_046",
+        "query": "再见",
+        "expected_intent": "chitchat",
+        "expected_params": {},
+        "ground_truth_doc_ids": [],
+        "ground_truth_answer_keywords": ["再见"],
+        "ground_truth_answer": "再见！祝你吃得健康！",
+        "category": "chitchat"
+    },
+    {
+        "id": "eval_047",
+        "query": "哈哈哈",
+        "expected_intent": "chitchat",
+        "expected_params": {},
+        "ground_truth_doc_ids": [],
+        "ground_truth_answer_keywords": [],
+        "ground_truth_answer": "看起来心情不错！需要我推荐点好吃的吗？",
+        "category": "chitchat"
+    },
+    {
+        "id": "eval_048",
+        "query": "今天不知道吃什么",
+        "expected_intent": "recipe_search",
+        "expected_params": {},
+        "ground_truth_doc_ids": ["recipe_001", "recipe_004", "recipe_015"],
+        "ground_truth_answer_keywords": ["推荐", "食谱"],
+        "ground_truth_answer": "不知道吃什么的话，推荐番茄炒蛋（快手）、鸡胸肉沙拉（健康）或蔬菜炒饭（简单）。",
+        "category": "edge_case"
+    },
+    {
+        "id": "eval_049",
+        "query": "随便推荐点吧",
+        "expected_intent": "recipe_search",
+        "expected_params": {},
+        "ground_truth_doc_ids": ["recipe_001", "recipe_006", "recipe_018"],
+        "ground_truth_answer_keywords": ["推荐"],
+        "ground_truth_answer": "给你随机推荐几道：番茄炒蛋、燕麦粥、凉拌黄瓜，涵盖荤素主食。",
+        "category": "edge_case"
+    },
+    {
+        "id": "eval_050",
+        "query": "我什么食材都没有，能做什么",
+        "expected_intent": "recipe_search",
+        "expected_params": {"ingredients": []},
+        "ground_truth_doc_ids": [],
+        "ground_truth_answer_keywords": ["食材", "推荐"],
+        "ground_truth_answer": "建议先准备一些基础食材如鸡蛋、番茄、大米，就可以做出多种菜品。",
+        "category": "edge_case"
+    },
+    {
+        "id": "eval_051",
+        "query": "我家冰箱里有鸡蛋、番茄、青椒、鸡胸肉、西兰花、豆腐，午饭和晚饭各推荐一道菜，要求热量低、蛋白质高",
+        "expected_intent": "recipe_search",
+        "expected_params": {"ingredients": ["鸡蛋", "番茄", "青椒", "鸡胸肉", "西兰花", "豆腐"], "health_goal": "低热量高蛋白"},
+        "ground_truth_doc_ids": ["recipe_001", "recipe_003", "recipe_004", "recipe_008", "recipe_013", "recipe_016"],
+        "ground_truth_answer_keywords": ["午饭", "晚饭", "蛋白质", "热量"],
+        "ground_truth_answer": "午饭推荐鸡胸肉沙拉配清炒西兰花，晚饭推荐番茄炒蛋配豆腐汤，兼顾蛋白质和低热量。",
+        "category": "edge_case"
+    },
+    {
+        "id": "eval_052",
+        "query": "",
+        "expected_intent": "chitchat",
+        "expected_params": {},
+        "ground_truth_doc_ids": [],
+        "ground_truth_answer_keywords": [],
+        "ground_truth_answer": "请问有什么饮食方面的问题可以帮你？",
+        "category": "edge_case"
+    },
+    {
+        "id": "eval_053",
+        "query": "帮我查一下recipe_001的详细信息",
+        "expected_intent": "recipe_search",
+        "expected_params": {},
+        "ground_truth_doc_ids": ["recipe_001"],
+        "ground_truth_answer_keywords": ["番茄炒蛋", "做法"],
+        "ground_truth_answer": "recipe_001是番茄炒蛋，经典家常菜，15分钟，280大卡。",
+        "category": "edge_case"
+    },
+    {
+        "id": "eval_054",
+        "query": "我对海鲜过敏，有什么高蛋白的推荐",
+        "expected_intent": "recipe_search",
+        "expected_params": {"allergy": "海鲜", "health_goal": "高蛋白"},
+        "ground_truth_doc_ids": ["recipe_004", "recipe_005", "recipe_010", "recipe_016"],
+        "ground_truth_answer_keywords": ["蛋白质", "鸡胸肉", "牛肉"],
+        "ground_truth_answer": "推荐鸡胸肉沙拉、牛肉沙拉或水煮鸡胸肉，都是高蛋白且不含海鲜。",
+        "category": "edge_case"
+    },
+    {
+        "id": "eval_055",
+        "query": "一周减肥餐怎么安排比较好",
+        "expected_intent": "recipe_search",
+        "expected_params": {"health_goal": "减肥"},
+        "ground_truth_doc_ids": ["recipe_001", "recipe_002", "recipe_004", "recipe_006", "recipe_008", "recipe_009", "recipe_016"],
+        "ground_truth_answer_keywords": ["减肥", "一周", "搭配", "热量"],
+        "ground_truth_answer": "一周减肥餐建议荤素搭配，早餐燕麦粥，午餐鸡胸肉沙拉，晚餐清炒蔬菜配蛋汤。",
+        "category": "edge_case"
+    }
+]

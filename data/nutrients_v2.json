@@ -1,0 +1,327 @@
+[
+  {
+    "entity_type": "nutrient",
+    "id": "nut_001",
+    "name": "蛋白质",
+    "english_name": "Protein",
+    "category": "宏量营养素",
+    "unit": "克",
+    "daily_value": {
+      "adult_male": 65,
+      "adult_female": 55,
+      "athlete": 100
+    },
+    "relations": {
+      "functions": [
+        "构建和修复肌肉组织",
+        "产生酶和激素",
+        "维持免疫功能",
+        "提供能量（次要功能）"
+      ],
+      "rich_sources": [
+        {"id": "ing_001", "name": "鸡蛋", "content_per_100g": 12.6},
+        {"id": "ing_005", "name": "鸡胸肉", "content_per_100g": 24.6},
+        {"id": "ing_008", "name": "牛肉", "content_per_100g": 26.3},
+        {"id": "ing_018", "name": "三文鱼", "content_per_100g": 20.0},
+        {"id": "ing_019", "name": "豆腐", "content_per_100g": 8.1},
+        {"id": "ing_031", "name": "虾仁", "content_per_100g": 18.6}
+      ],
+      "deficiency_symptoms": [
+        "肌肉流失和无力",
+        "免疫力下降，易感染",
+        "伤口愈合缓慢",
+        "头发和指甲脆弱",
+        "水肿"
+      ],
+      "excess_risks": [
+        "肾脏负担增加",
+        "钙流失",
+        "脱水风险"
+      ]
+    }
+  },
+  {
+    "entity_type": "nutrient",
+    "id": "nut_002",
+    "name": "碳水化合物",
+    "english_name": "Carbohydrates",
+    "category": "宏量营养素",
+    "unit": "克",
+    "daily_value": {
+      "adult_male": 300,
+      "adult_female": 250,
+      "athlete": 400
+    },
+    "relations": {
+      "functions": [
+        "提供主要能量来源",
+        "维持大脑功能",
+        "支持运动表现",
+        "节约蛋白质"
+      ],
+      "rich_sources": [
+        {"id": "ing_024", "name": "米饭", "content_per_100g": 25.9},
+        {"id": "ing_016", "name": "糙米", "content_per_100g": 77.2},
+        {"id": "ing_017", "name": "藜麦", "content_per_100g": 64.2},
+        {"id": "ing_009", "name": "燕麦", "content_per_100g": 66.3},
+        {"id": "ing_012", "name": "全麦面包", "content_per_100g": 45.8},
+        {"id": "ing_026", "name": "紫薯", "content_per_100g": 20.1}
+      ],
+      "deficiency_symptoms": [
+        "疲劳和虚弱",
+        "注意力不集中",
+        "头晕",
+        "低血糖",
+        "情绪波动"
+      ],
+      "excess_risks": [
+        "体重增加",
+        "血糖波动",
+        "增加糖尿病风险",
+        "心血管疾病风险"
+      ]
+    }
+  },
+  {
+    "entity_type": "nutrient",
+    "id": "nut_003",
+    "name": "脂肪",
+    "english_name": "Fat",
+    "category": "宏量营养素",
+    "unit": "克",
+    "daily_value": {
+      "adult_male": 70,
+      "adult_female": 60,
+      "athlete": 80
+    },
+    "relations": {
+      "functions": [
+        "提供浓缩能量",
+        "帮助吸收脂溶性维生素（A、D、E、K）",
+        "构成细胞膜",
+        "产生激素",
+        "保护器官"
+      ],
+      "rich_sources": [
+        {"id": "ing_021", "name": "橄榄油", "content_per_100g": 100.0},
+        {"id": "ing_022", "name": "食用油", "content_per_100g": 100.0},
+        {"id": "ing_018", "name": "三文鱼", "content_per_100g": 13.0},
+        {"id": "ing_001", "name": "鸡蛋", "content_per_100g": 10.6},
+        {"id": "ing_030", "name": "花生酱", "content_per_100g": 50.0}
+      ],
+      "deficiency_symptoms": [
+        "皮肤干燥",
+        "脂溶性维生素缺乏",
+        "激素失衡",
+        "免疫功能下降"
+      ],
+      "excess_risks": [
+        "体重增加",
+        "心血管疾病",
+        "高胆固醇",
+        "脂肪肝"
+      ]
+    }
+  },
+  {
+    "entity_type": "nutrient",
+    "id": "nut_004",
+    "name": "膳食纤维",
+    "english_name": "Dietary Fiber",
+    "category": "碳水化合物",
+    "unit": "克",
+    "daily_value": {
+      "adult_male": 30,
+      "adult_female": 25,
+      "athlete": 35
+    },
+    "relations": {
+      "functions": [
+        "促进肠道蠕动",
+        "预防便秘",
+        "控制血糖",
+        "降低胆固醇",
+        "增加饱腹感"
+      ],
+      "rich_sources": [
+        {"id": "ing_009", "name": "燕麦", "content_per_100g": 10.6},
+        {"id": "ing_016", "name": "糙米", "content_per_100g": 3.5},
+        {"id": "ing_017", "name": "藜麦", "content_per_100g": 7.0},
+        {"id": "ing_013", "name": "西兰花", "content_per_100g": 2.6},
+        {"id": "ing_015", "name": "菠菜", "content_per_100g": 2.2},
+        {"id": "ing_026", "name": "紫薯", "content_per_100g": 3.0}
+      ],
+      "deficiency_symptoms": [
+        "便秘",
+        "血糖波动",
+        "胆固醇升高",
+        "体重管理困难"
+      ],
+      "excess_risks": [
+        "腹胀和胀气",
+        "腹泻",
+        "矿物质吸收受阻"
+      ]
+    }
+  },
+  {
+    "entity_type": "nutrient",
+    "id": "nut_005",
+    "name": "维生素A",
+    "english_name": "Vitamin A",
+    "category": "脂溶性维生素",
+    "unit": "微克",
+    "daily_value": {
+      "adult_male": 900,
+      "adult_female": 700,
+      "athlete": 900
+    },
+    "relations": {
+      "functions": [
+        "维持视力健康",
+        "支持免疫系统",
+        "促进细胞生长",
+        "保护皮肤和黏膜"
+      ],
+      "rich_sources": [
+        {"id": "ing_025", "name": "胡萝卜", "content_per_100g": 835},
+        {"id": "ing_015", "name": "菠菜", "content_per_100g": 469},
+        {"id": "ing_026", "name": "紫薯", "content_per_100g": 200},
+        {"id": "ing_001", "name": "鸡蛋", "content_per_100g": 140},
+        {"id": "ing_002", "name": "番茄", "content_per_100g": 42}
+      ],
+      "deficiency_symptoms": [
+        "夜盲症",
+        "干眼症",
+        "免疫力下降",
+        "皮肤干燥",
+        "生长发育迟缓"
+      ],
+      "excess_risks": [
+        "头痛和头晕",
+        "恶心",
+        "皮肤问题",
+        "肝脏损伤（长期过量）"
+      ]
+    }
+  },
+  {
+    "entity_type": "nutrient",
+    "id": "nut_006",
+    "name": "维生素C",
+    "english_name": "Vitamin C",
+    "category": "水溶性维生素",
+    "unit": "毫克",
+    "daily_value": {
+      "adult_male": 90,
+      "adult_female": 75,
+      "athlete": 120
+    },
+    "relations": {
+      "functions": [
+        "抗氧化",
+        "促进胶原蛋白合成",
+        "增强免疫力",
+        "促进铁吸收",
+        "伤口愈合"
+      ],
+      "rich_sources": [
+        {"id": "ing_004", "name": "青椒", "content_per_100g": 80},
+        {"id": "ing_013", "name": "西兰花", "content_per_100g": 89},
+        {"id": "ing_002", "name": "番茄", "content_per_100g": 14},
+        {"id": "ing_007", "name": "黄瓜", "content_per_100g": 5},
+        {"id": "ing_023", "name": "韭菜", "content_per_100g": 24}
+      ],
+      "deficiency_symptoms": [
+        "坏血病",
+        "牙龈出血",
+        "伤口愈合慢",
+        "免疫力下降",
+        "疲劳"
+      ],
+      "excess_risks": [
+        "腹泻",
+        "恶心",
+        "肾结石风险（极高剂量）"
+      ]
+    }
+  },
+  {
+    "entity_type": "nutrient",
+    "id": "nut_007",
+    "name": "维生素D",
+    "english_name": "Vitamin D",
+    "category": "脂溶性维生素",
+    "unit": "微克",
+    "daily_value": {
+      "adult_male": 15,
+      "adult_female": 15,
+      "athlete": 20
+    },
+    "relations": {
+      "functions": [
+        "促进钙吸收",
+        "维持骨骼健康",
+        "支持免疫系统",
+        "调节情绪"
+      ],
+      "rich_sources": [
+        {"id": "ing_018", "name": "三文鱼", "content_per_100g": 10.9},
+        {"id": "ing_001", "name": "鸡蛋", "content_per_100g": 2.0},
+        {"id": "ing_010", "name": "牛奶", "content_per_100g": 1.3}
+      ],
+      "deficiency_symptoms": [
+        "骨质疏松",
+        "肌肉无力",
+        "免疫力下降",
+        "情绪低落",
+        "儿童佝偻病"
+      ],
+      "excess_risks": [
+        "高钙血症",
+        "恶心和呕吐",
+        "肾脏问题"
+      ]
+    }
+  },
+  {
+    "entity_type": "nutrient",
+    "id": "nut_008",
+    "name": "铁",
+    "english_name": "Iron",
+    "category": "矿物质",
+    "unit": "毫克",
+    "daily_value": {
+      "adult_male": 8,
+      "adult_female": 18,
+      "athlete": 15
+    },
+    "relations": {
+      "functions": [
+        "构成血红蛋白",
+        "运输氧气",
+        "支持能量代谢",
+        "维持免疫功能"
+      ],
+      "rich_sources": [
+        {"id": "ing_008", "name": "牛肉", "content_per_100g": 2.6},
+        {"id": "ing_015", "name": "菠菜", "content_per_100g": 2.7},
+        {"id": "ing_001", "name": "鸡蛋", "content_per_100g": 1.8},
+        {"id": "ing_019", "name": "豆腐", "content_per_100g": 1.5}
+      ],
+      "deficiency_symptoms": [
+        "贫血",
+        "疲劳和虚弱",
+        "头晕",
+        "注意力不集中",
+        "免疫力下降"
+      ],
+      "excess_risks": [
+        "铁过载",
+        "肝脏损伤",
+        "心脏问题",
+        "关节疼痛"
+      ]
+    }
+  }
+]

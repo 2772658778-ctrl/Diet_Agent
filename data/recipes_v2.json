@@ -1,0 +1,659 @@
+[
+  {
+    "entity_type": "recipe",
+    "id": "recipe_001",
+    "name": "番茄炒蛋",
+    "description": "经典家常菜，酸甜可口，营养丰富，快手简单",
+    "cuisine": "中式",
+    "time": 15,
+    "difficulty": "简单",
+    "calories": 280,
+    "tags": ["快手", "酸甜", "家常", "下饭"],
+    "health_goals": ["减肥", "养生"],
+    "nutrition": {
+      "protein": 18.5,
+      "carbs": 12.3,
+      "fat": 16.2,
+      "fiber": 2.1,
+      "vitamins": ["维生素A", "维生素C", "维生素E"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_001", "name": "鸡蛋", "amount": 3, "unit": "个"},
+        {"id": "ing_002", "name": "番茄", "amount": 2, "unit": "个"},
+        {"id": "ing_003", "name": "葱", "amount": 1, "unit": "根"},
+        {"id": "ing_020", "name": "盐", "amount": 3, "unit": "克"}
+      ],
+      "suitable_for_goals": ["减肥", "养生", "快速补充能量"],
+      "suitable_scenarios": ["早餐", "晚餐", "加班后", "健身后"],
+      "similar_recipes": [
+        {"id": "recipe_002", "name": "西红柿蛋汤", "similarity": 0.85}
+      ],
+      "alternative_recipes": [
+        {"id": "recipe_003", "name": "青椒炒蛋", "reason": "同样快手，口味不同"}
+      ]
+    }
+  },
+  {
+    "entity_type": "recipe",
+    "id": "recipe_002",
+    "name": "西红柿蛋汤",
+    "description": "清淡营养的汤品，开胃解腻，适合各个年龄段",
+    "cuisine": "中式",
+    "time": 10,
+    "difficulty": "简单",
+    "calories": 150,
+    "tags": ["清淡", "汤品", "快手", "开胃"],
+    "health_goals": ["养生", "减肥"],
+    "nutrition": {
+      "protein": 12.5,
+      "carbs": 8.3,
+      "fat": 8.2,
+      "fiber": 1.5,
+      "vitamins": ["维生素A", "维生素C"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_001", "name": "鸡蛋", "amount": 2, "unit": "个"},
+        {"id": "ing_002", "name": "番茄", "amount": 2, "unit": "个"},
+        {"id": "ing_020", "name": "盐", "amount": 2, "unit": "克"}
+      ],
+      "suitable_for_goals": ["养生", "减肥", "清淡饮食"],
+      "suitable_scenarios": ["早餐", "晚餐", "病后调理"],
+      "similar_recipes": [
+        {"id": "recipe_001", "name": "番茄炒蛋", "similarity": 0.85}
+      ],
+      "alternative_recipes": []
+    }
+  },
+  {
+    "entity_type": "recipe",
+    "id": "recipe_003",
+    "name": "青椒炒蛋",
+    "description": "清脆爽口的家常菜，营养均衡，色香味俱全",
+    "cuisine": "中式",
+    "time": 12,
+    "difficulty": "简单",
+    "calories": 260,
+    "tags": ["快手", "家常", "下饭", "清脆"],
+    "health_goals": ["养生", "增强免疫"],
+    "nutrition": {
+      "protein": 16.5,
+      "carbs": 10.3,
+      "fat": 15.2,
+      "fiber": 2.8,
+      "vitamins": ["维生素C", "维生素E"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_001", "name": "鸡蛋", "amount": 3, "unit": "个"},
+        {"id": "ing_004", "name": "青椒", "amount": 2, "unit": "个"},
+        {"id": "ing_020", "name": "盐", "amount": 3, "unit": "克"}
+      ],
+      "suitable_for_goals": ["养生", "增强免疫"],
+      "suitable_scenarios": ["午餐", "晚餐"],
+      "similar_recipes": [
+        {"id": "recipe_001", "name": "番茄炒蛋", "similarity": 0.75}
+      ],
+      "alternative_recipes": [
+        {"id": "recipe_001", "name": "番茄炒蛋", "reason": "同样快手，口味不同"}
+      ]
+    }
+  },
+  {
+    "entity_type": "recipe",
+    "id": "recipe_004",
+    "name": "鸡胸肉沙拉",
+    "description": "低脂高蛋白的健身餐，清爽健康，适合减脂增肌",
+    "cuisine": "西式",
+    "time": 20,
+    "difficulty": "简单",
+    "calories": 320,
+    "tags": ["健身", "低脂", "高蛋白", "沙拉"],
+    "health_goals": ["减肥", "增肌", "健身"],
+    "nutrition": {
+      "protein": 35.5,
+      "carbs": 15.3,
+      "fat": 8.2,
+      "fiber": 4.5,
+      "vitamins": ["维生素A", "维生素C", "维生素K"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_005", "name": "鸡胸肉", "amount": 150, "unit": "克"},
+        {"id": "ing_006", "name": "生菜", "amount": 100, "unit": "克"},
+        {"id": "ing_002", "name": "番茄", "amount": 1, "unit": "个"},
+        {"id": "ing_007", "name": "黄瓜", "amount": 1, "unit": "根"},
+        {"id": "ing_021", "name": "橄榄油", "amount": 10, "unit": "毫升"}
+      ],
+      "suitable_for_goals": ["减肥", "增肌", "健身"],
+      "suitable_scenarios": ["午餐", "健身后", "减脂期"],
+      "similar_recipes": [
+        {"id": "recipe_005", "name": "牛肉沙拉", "similarity": 0.80}
+      ],
+      "alternative_recipes": []
+    }
+  },
+  {
+    "entity_type": "recipe",
+    "id": "recipe_005",
+    "name": "牛肉沙拉",
+    "description": "高蛋白低脂的健身餐，牛肉鲜嫩，营养丰富",
+    "cuisine": "西式",
+    "time": 25,
+    "difficulty": "中等",
+    "calories": 380,
+    "tags": ["健身", "高蛋白", "沙拉", "营养"],
+    "health_goals": ["增肌", "健身"],
+    "nutrition": {
+      "protein": 38.5,
+      "carbs": 18.3,
+      "fat": 12.2,
+      "fiber": 4.8,
+      "vitamins": ["维生素B12", "维生素C", "维生素K"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_008", "name": "牛肉", "amount": 150, "unit": "克"},
+        {"id": "ing_006", "name": "生菜", "amount": 100, "unit": "克"},
+        {"id": "ing_002", "name": "番茄", "amount": 1, "unit": "个"},
+        {"id": "ing_007", "name": "黄瓜", "amount": 1, "unit": "根"},
+        {"id": "ing_021", "name": "橄榄油", "amount": 10, "unit": "毫升"}
+      ],
+      "suitable_for_goals": ["增肌", "健身"],
+      "suitable_scenarios": ["午餐", "健身后"],
+      "similar_recipes": [
+        {"id": "recipe_004", "name": "鸡胸肉沙拉", "similarity": 0.80}
+      ],
+      "alternative_recipes": [
+        {"id": "recipe_004", "name": "鸡胸肉沙拉", "reason": "同样高蛋白，价格更低"}
+      ]
+    }
+  },
+  {
+    "entity_type": "recipe",
+    "id": "recipe_006",
+    "name": "燕麦粥",
+    "description": "营养丰富的早餐，富含膳食纤维，饱腹感强",
+    "cuisine": "西式",
+    "time": 10,
+    "difficulty": "简单",
+    "calories": 220,
+    "tags": ["早餐", "快手", "营养", "饱腹"],
+    "health_goals": ["减肥", "养生", "控糖"],
+    "nutrition": {
+      "protein": 8.5,
+      "carbs": 38.3,
+      "fat": 4.2,
+      "fiber": 6.5,
+      "vitamins": ["维生素B1", "维生素E"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_009", "name": "燕麦", "amount": 50, "unit": "克"},
+        {"id": "ing_010", "name": "牛奶", "amount": 200, "unit": "毫升"},
+        {"id": "ing_011", "name": "香蕉", "amount": 1, "unit": "根"}
+      ],
+      "suitable_for_goals": ["减肥", "养生", "控糖"],
+      "suitable_scenarios": ["早餐", "加餐"],
+      "similar_recipes": [
+        {"id": "recipe_007", "name": "全麦面包配牛奶", "similarity": 0.70}
+      ],
+      "alternative_recipes": []
+    }
+  },
+  {
+    "entity_type": "recipe",
+    "id": "recipe_007",
+    "name": "全麦面包配牛奶",
+    "description": "简单快捷的早餐，营养均衡，适合忙碌的早晨",
+    "cuisine": "西式",
+    "time": 5,
+    "difficulty": "简单",
+    "calories": 280,
+    "tags": ["早餐", "快手", "方便"],
+    "health_goals": ["养生", "快速补充能量"],
+    "nutrition": {
+      "protein": 12.5,
+      "carbs": 42.3,
+      "fat": 6.2,
+      "fiber": 4.5,
+      "vitamins": ["维生素B", "维生素D"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_012", "name": "全麦面包", "amount": 2, "unit": "片"},
+        {"id": "ing_010", "name": "牛奶", "amount": 250, "unit": "毫升"}
+      ],
+      "suitable_for_goals": ["养生", "快速补充能量"],
+      "suitable_scenarios": ["早餐", "加班后"],
+      "similar_recipes": [
+        {"id": "recipe_006", "name": "燕麦粥", "similarity": 0.70}
+      ],
+      "alternative_recipes": []
+    }
+  },
+  {
+    "entity_type": "recipe",
+    "id": "recipe_008",
+    "name": "清炒西兰花",
+    "description": "清淡健康的蔬菜料理，富含维生素和矿物质",
+    "cuisine": "中式",
+    "time": 10,
+    "difficulty": "简单",
+    "calories": 120,
+    "tags": ["清淡", "蔬菜", "快手", "低热量"],
+    "health_goals": ["减肥", "养生", "增强免疫"],
+    "nutrition": {
+      "protein": 4.5,
+      "carbs": 12.3,
+      "fat": 5.2,
+      "fiber": 5.5,
+      "vitamins": ["维生素C", "维生素K", "叶酸"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_013", "name": "西兰花", "amount": 200, "unit": "克"},
+        {"id": "ing_014", "name": "大蒜", "amount": 3, "unit": "瓣"},
+        {"id": "ing_020", "name": "盐", "amount": 2, "unit": "克"},
+        {"id": "ing_022", "name": "食用油", "amount": 10, "unit": "毫升"}
+      ],
+      "suitable_for_goals": ["减肥", "养生", "增强免疫"],
+      "suitable_scenarios": ["午餐", "晚餐", "减脂期"],
+      "similar_recipes": [
+        {"id": "recipe_009", "name": "清炒菠菜", "similarity": 0.85}
+      ],
+      "alternative_recipes": []
+    }
+  },
+  {
+    "entity_type": "recipe",
+    "id": "recipe_009",
+    "name": "清炒菠菜",
+    "description": "简单快手的绿叶蔬菜，富含铁质和叶酸",
+    "cuisine": "中式",
+    "time": 8,
+    "difficulty": "简单",
+    "calories": 100,
+    "tags": ["清淡", "蔬菜", "快手", "补铁"],
+    "health_goals": ["养生", "补血", "增强免疫"],
+    "nutrition": {
+      "protein": 3.5,
+      "carbs": 8.3,
+      "fat": 4.2,
+      "fiber": 4.5,
+      "vitamins": ["维生素A", "维生素K", "叶酸"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_015", "name": "菠菜", "amount": 200, "unit": "克"},
+        {"id": "ing_014", "name": "大蒜", "amount": 3, "unit": "瓣"},
+        {"id": "ing_020", "name": "盐", "amount": 2, "unit": "克"},
+        {"id": "ing_022", "name": "食用油", "amount": 10, "unit": "毫升"}
+      ],
+      "suitable_for_goals": ["养生", "补血", "增强免疫"],
+      "suitable_scenarios": ["午餐", "晚餐"],
+      "similar_recipes": [
+        {"id": "recipe_008", "name": "清炒西兰花", "similarity": 0.85}
+      ],
+      "alternative_recipes": [
+        {"id": "recipe_008", "name": "清炒西兰花", "reason": "同样清淡，营养相似"}
+      ]
+    }
+  },
+  {
+    "entity_type": "recipe",
+    "id": "recipe_010",
+    "name": "糙米饭配鸡胸肉",
+    "description": "健身人群的主食选择，低GI高蛋白，饱腹感强",
+    "cuisine": "中式",
+    "time": 30,
+    "difficulty": "简单",
+    "calories": 450,
+    "tags": ["健身", "主食", "高蛋白", "低GI"],
+    "health_goals": ["增肌", "健身", "控糖"],
+    "nutrition": {
+      "protein": 38.5,
+      "carbs": 52.3,
+      "fat": 8.2,
+      "fiber": 5.5,
+      "vitamins": ["维生素B", "维生素E"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_016", "name": "糙米", "amount": 100, "unit": "克"},
+        {"id": "ing_005", "name": "鸡胸肉", "amount": 150, "unit": "克"},
+        {"id": "ing_013", "name": "西兰花", "amount": 100, "unit": "克"}
+      ],
+      "suitable_for_goals": ["增肌", "健身", "控糖"],
+      "suitable_scenarios": ["午餐", "健身后"],
+      "similar_recipes": [
+        {"id": "recipe_011", "name": "藜麦饭配牛肉", "similarity": 0.75}
+      ],
+      "alternative_recipes": []
+    }
+  },
+  {
+    "entity_type": "recipe",
+    "id": "recipe_011",
+    "name": "藜麦饭配牛肉",
+    "description": "超级食物藜麦搭配优质蛋白，营养密度极高",
+    "cuisine": "西式",
+    "time": 35,
+    "difficulty": "中等",
+    "calories": 480,
+    "tags": ["健身", "主食", "高蛋白", "超级食物"],
+    "health_goals": ["增肌", "健身"],
+    "nutrition": {
+      "protein": 42.5,
+      "carbs": 48.3,
+      "fat": 12.2,
+      "fiber": 6.5,
+      "vitamins": ["维生素B12", "维生素E"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_017", "name": "藜麦", "amount": 100, "unit": "克"},
+        {"id": "ing_008", "name": "牛肉", "amount": 150, "unit": "克"},
+        {"id": "ing_013", "name": "西兰花", "amount": 100, "unit": "克"}
+      ],
+      "suitable_for_goals": ["增肌", "健身"],
+      "suitable_scenarios": ["午餐", "健身后"],
+      "similar_recipes": [
+        {"id": "recipe_010", "name": "糙米饭配鸡胸肉", "similarity": 0.75}
+      ],
+      "alternative_recipes": [
+        {"id": "recipe_010", "name": "糙米饭配鸡胸肉", "reason": "价格更实惠"}
+      ]
+    }
+  },
+  {
+    "entity_type": "recipe",
+    "id": "recipe_012",
+    "name": "三文鱼配蔬菜",
+    "description": "富含Omega-3的健康餐，适合心血管健康",
+    "cuisine": "西式",
+    "time": 20,
+    "difficulty": "中等",
+    "calories": 420,
+    "tags": ["健康", "高蛋白", "Omega-3", "营养"],
+    "health_goals": ["养生", "心血管健康"],
+    "nutrition": {
+      "protein": 35.5,
+      "carbs": 15.3,
+      "fat": 22.2,
+      "fiber": 4.5,
+      "vitamins": ["维生素D", "维生素B12"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_018", "name": "三文鱼", "amount": 150, "unit": "克"},
+        {"id": "ing_013", "name": "西兰花", "amount": 100, "unit": "克"},
+        {"id": "ing_007", "name": "黄瓜", "amount": 1, "unit": "根"},
+        {"id": "ing_021", "name": "橄榄油", "amount": 10, "unit": "毫升"}
+      ],
+      "suitable_for_goals": ["养生", "心血管健康"],
+      "suitable_scenarios": ["午餐", "晚餐"],
+      "similar_recipes": [],
+      "alternative_recipes": []
+    }
+  },
+  {
+    "entity_type": "recipe",
+    "id": "recipe_013",
+    "name": "豆腐汤",
+    "description": "清淡营养的汤品，富含植物蛋白，易消化",
+    "cuisine": "中式",
+    "time": 15,
+    "difficulty": "简单",
+    "calories": 180,
+    "tags": ["清淡", "汤品", "植物蛋白", "易消化"],
+    "health_goals": ["养生", "减肥"],
+    "nutrition": {
+      "protein": 15.5,
+      "carbs": 8.3,
+      "fat": 8.2,
+      "fiber": 2.5,
+      "vitamins": ["维生素B", "钙"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_019", "name": "豆腐", "amount": 200, "unit": "克"},
+        {"id": "ing_015", "name": "菠菜", "amount": 50, "unit": "克"},
+        {"id": "ing_003", "name": "葱", "amount": 1, "unit": "根"},
+        {"id": "ing_020", "name": "盐", "amount": 2, "unit": "克"}
+      ],
+      "suitable_for_goals": ["养生", "减肥", "素食"],
+      "suitable_scenarios": ["晚餐", "病后调理"],
+      "similar_recipes": [
+        {"id": "recipe_002", "name": "西红柿蛋汤", "similarity": 0.65}
+      ],
+      "alternative_recipes": []
+    }
+  },
+  {
+    "entity_type": "recipe",
+    "id": "recipe_014",
+    "name": "韭菜炒蛋",
+    "description": "香味浓郁的家常菜，营养丰富，下饭佳品",
+    "cuisine": "中式",
+    "time": 12,
+    "difficulty": "简单",
+    "calories": 290,
+    "tags": ["家常", "下饭", "香味浓郁"],
+    "health_goals": ["养生", "补肾"],
+    "nutrition": {
+      "protein": 17.5,
+      "carbs": 10.3,
+      "fat": 18.2,
+      "fiber": 3.5,
+      "vitamins": ["维生素A", "维生素C"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_001", "name": "鸡蛋", "amount": 3, "unit": "个"},
+        {"id": "ing_023", "name": "韭菜", "amount": 150, "unit": "克"},
+        {"id": "ing_020", "name": "盐", "amount": 3, "unit": "克"},
+        {"id": "ing_022", "name": "食用油", "amount": 15, "unit": "毫升"}
+      ],
+      "suitable_for_goals": ["养生", "补肾"],
+      "suitable_scenarios": ["午餐", "晚餐"],
+      "similar_recipes": [
+        {"id": "recipe_001", "name": "番茄炒蛋", "similarity": 0.70}
+      ],
+      "alternative_recipes": []
+    }
+  },
+  {
+    "entity_type": "recipe",
+    "id": "recipe_015",
+    "name": "蔬菜炒饭",
+    "description": "快手主食，营养均衡，适合用剩饭制作",
+    "cuisine": "中式",
+    "time": 15,
+    "difficulty": "简单",
+    "calories": 380,
+    "tags": ["快手", "主食", "剩饭利用"],
+    "health_goals": ["养生", "快速补充能量"],
+    "nutrition": {
+      "protein": 12.5,
+      "carbs": 58.3,
+      "fat": 12.2,
+      "fiber": 4.5,
+      "vitamins": ["维生素A", "维生素C"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_024", "name": "米饭", "amount": 200, "unit": "克"},
+        {"id": "ing_001", "name": "鸡蛋", "amount": 2, "unit": "个"},
+        {"id": "ing_007", "name": "黄瓜", "amount": 1, "unit": "根"},
+        {"id": "ing_025", "name": "胡萝卜", "amount": 1, "unit": "根"},
+        {"id": "ing_020", "name": "盐", "amount": 3, "unit": "克"},
+        {"id": "ing_022", "name": "食用油", "amount": 15, "unit": "毫升"}
+      ],
+      "suitable_for_goals": ["养生", "快速补充能量"],
+      "suitable_scenarios": ["午餐", "晚餐", "加班后"],
+      "similar_recipes": [],
+      "alternative_recipes": []
+    }
+  },
+  {
+    "entity_type": "recipe",
+    "id": "recipe_016",
+    "name": "水煮鸡胸肉",
+    "description": "最简单的健身餐，纯蛋白质来源，适合严格控制饮食",
+    "cuisine": "中式",
+    "time": 15,
+    "difficulty": "简单",
+    "calories": 240,
+    "tags": ["健身", "高蛋白", "低脂", "简单"],
+    "health_goals": ["减肥", "增肌", "健身"],
+    "nutrition": {
+      "protein": 42.5,
+      "carbs": 2.3,
+      "fat": 4.2,
+      "fiber": 0.5,
+      "vitamins": ["维生素B"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_005", "name": "鸡胸肉", "amount": 200, "unit": "克"},
+        {"id": "ing_014", "name": "大蒜", "amount": 3, "unit": "瓣"},
+        {"id": "ing_003", "name": "葱", "amount": 1, "unit": "根"},
+        {"id": "ing_020", "name": "盐", "amount": 2, "unit": "克"}
+      ],
+      "suitable_for_goals": ["减肥", "增肌", "健身"],
+      "suitable_scenarios": ["午餐", "晚餐", "健身后", "减脂期"],
+      "similar_recipes": [
+        {"id": "recipe_004", "name": "鸡胸肉沙拉", "similarity": 0.70}
+      ],
+      "alternative_recipes": []
+    }
+  },
+  {
+    "entity_type": "recipe",
+    "id": "recipe_017",
+    "name": "紫薯粥",
+    "description": "营养丰富的粗粮粥，富含花青素，低GI主食",
+    "cuisine": "中式",
+    "time": 25,
+    "difficulty": "简单",
+    "calories": 240,
+    "tags": ["粗粮", "低GI", "营养", "抗氧化"],
+    "health_goals": ["养生", "控糖", "抗衰老"],
+    "nutrition": {
+      "protein": 5.5,
+      "carbs": 48.3,
+      "fat": 2.2,
+      "fiber": 6.5,
+      "vitamins": ["维生素A", "花青素"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_026", "name": "紫薯", "amount": 150, "unit": "克"},
+        {"id": "ing_024", "name": "米饭", "amount": 50, "unit": "克"}
+      ],
+      "suitable_for_goals": ["养生", "控糖", "抗衰老"],
+      "suitable_scenarios": ["早餐", "晚餐"],
+      "similar_recipes": [
+        {"id": "recipe_006", "name": "燕麦粥", "similarity": 0.65}
+      ],
+      "alternative_recipes": []
+    }
+  },
+  {
+    "entity_type": "recipe",
+    "id": "recipe_018",
+    "name": "凉拌黄瓜",
+    "description": "清爽开胃的凉菜，低热量高水分，适合夏季",
+    "cuisine": "中式",
+    "time": 5,
+    "difficulty": "简单",
+    "calories": 60,
+    "tags": ["凉菜", "清爽", "低热量", "开胃"],
+    "health_goals": ["减肥", "清热解暑"],
+    "nutrition": {
+      "protein": 1.5,
+      "carbs": 8.3,
+      "fat": 2.2,
+      "fiber": 1.5,
+      "vitamins": ["维生素C"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_007", "name": "黄瓜", "amount": 2, "unit": "根"},
+        {"id": "ing_014", "name": "大蒜", "amount": 3, "unit": "瓣"},
+        {"id": "ing_020", "name": "盐", "amount": 2, "unit": "克"},
+        {"id": "ing_027", "name": "醋", "amount": 10, "unit": "毫升"}
+      ],
+      "suitable_for_goals": ["减肥", "清热解暑"],
+      "suitable_scenarios": ["午餐", "晚餐", "加餐"],
+      "similar_recipes": [],
+      "alternative_recipes": []
+    }
+  },
+  {
+    "entity_type": "recipe",
+    "id": "recipe_019",
+    "name": "香煎三文鱼",
+    "description": "简单快手的西式料理，外焦里嫩，营养丰富",
+    "cuisine": "西式",
+    "time": 15,
+    "difficulty": "中等",
+    "calories": 380,
+    "tags": ["快手", "高蛋白", "Omega-3", "西式"],
+    "health_goals": ["养生", "心血管健康", "增肌"],
+    "nutrition": {
+      "protein": 32.5,
+      "carbs": 5.3,
+      "fat": 24.2,
+      "fiber": 1.5,
+      "vitamins": ["维生素D", "维生素B12"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_018", "name": "三文鱼", "amount": 180, "unit": "克"},
+        {"id": "ing_020", "name": "盐", "amount": 2, "unit": "克"},
+        {"id": "ing_021", "name": "橄榄油", "amount": 10, "unit": "毫升"}
+      ],
+      "suitable_for_goals": ["养生", "心血管健康", "增肌"],
+      "suitable_scenarios": ["午餐", "晚餐"],
+      "similar_recipes": [
+        {"id": "recipe_012", "name": "三文鱼配蔬菜", "similarity": 0.90}
+      ],
+      "alternative_recipes": []
+    }
+  },
+  {
+    "entity_type": "recipe",
+    "id": "recipe_020",
+    "name": "蒸蛋羹",
+    "description": "细腻滑嫩的蒸蛋，易消化吸收，适合老人小孩",
+    "cuisine": "中式",
+    "time": 12,
+    "difficulty": "简单",
+    "calories": 160,
+    "tags": ["清淡", "易消化", "营养", "家常"],
+    "health_goals": ["养生", "病后调理"],
+    "nutrition": {
+      "protein": 14.5,
+      "carbs": 3.3,
+      "fat": 10.2,
+      "fiber": 0.5,
+      "vitamins": ["维生素A", "维生素D"]
+    },
+    "relations": {
+      "contains_ingredients": [
+        {"id": "ing_001", "name": "鸡蛋", "amount": 2, "unit": "个"},
+        {"id": "ing_003", "name": "葱", "amount": 1, "unit": "根"},
+        {"id": "ing_020", "name": "盐", "amount": 2, "unit": "克"}
+      ],
+      "suitable_for_goals": ["养生", "病后调理"],
+      "suitable_scenarios": ["早餐", "晚餐", "病后调理"],
+      "similar_recipes": [
+        {"id": "recipe_001", "name": "番茄炒蛋", "similarity": 0.60}
+      ],
+      "alternative_recipes": []
+    }
+  }
+]

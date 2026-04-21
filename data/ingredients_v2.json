@@ -1,0 +1,1158 @@
+[
+  {
+    "entity_type": "ingredient",
+    "id": "ing_001",
+    "name": "鸡蛋",
+    "aliases": ["蛋", "鸡子", "鸡卵"],
+    "category": "蛋类",
+    "season": ["全年"],
+    "price_range": "低",
+    "storage_days": 30,
+    "nutrition_per_100g": {
+      "calories": 147,
+      "protein": 12.6,
+      "fat": 10.6,
+      "carbs": 1.3,
+      "vitamins": ["维生素A", "维生素D", "维生素B12"],
+      "minerals": ["铁", "锌", "硒"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_002", "name": "番茄", "reason": "酸甜口味互补，营养均衡", "score": 0.95},
+        {"id": "ing_023", "name": "韭菜", "reason": "经典搭配，香味浓郁", "score": 0.90},
+        {"id": "ing_004", "name": "青椒", "reason": "清脆爽口，色彩丰富", "score": 0.85},
+        {"id": "ing_003", "name": "葱", "reason": "提鲜增香", "score": 0.80}
+      ],
+      "conflicts_with": [
+        {"id": "ing_028", "name": "豆浆", "reason": "影响蛋白质吸收", "severity": "中"}
+      ],
+      "suitable_for": ["健身人群", "儿童", "孕妇", "老人"],
+      "not_suitable_for": [
+        {"group": "高胆固醇人群", "reason": "蛋黄胆固醇含量高", "suggestion": "只吃蛋白"}
+      ],
+      "health_effects": [
+        {"effect": "补充优质蛋白质", "strength": "强"},
+        {"effect": "保护视力", "strength": "中"},
+        {"effect": "增强记忆", "strength": "中"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_001", "name": "番茄炒蛋", "frequency": "高"},
+        {"id": "recipe_002", "name": "西红柿蛋汤", "frequency": "高"},
+        {"id": "recipe_014", "name": "韭菜炒蛋", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_002",
+    "name": "番茄",
+    "aliases": ["西红柿", "洋柿子"],
+    "category": "蔬菜",
+    "season": ["夏季", "秋季"],
+    "price_range": "低",
+    "storage_days": 7,
+    "nutrition_per_100g": {
+      "calories": 18,
+      "protein": 0.9,
+      "fat": 0.2,
+      "carbs": 3.9,
+      "vitamins": ["维生素C", "维生素A", "番茄红素"],
+      "minerals": ["钾", "镁"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_001", "name": "鸡蛋", "reason": "酸甜口味互补，营养均衡", "score": 0.95},
+        {"id": "ing_005", "name": "鸡胸肉", "reason": "清爽解腻", "score": 0.80},
+        {"id": "ing_008", "name": "牛肉", "reason": "酸味提鲜", "score": 0.75}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "抗氧化", "strength": "强"},
+        {"effect": "保护心血管", "strength": "中"},
+        {"effect": "美容养颜", "strength": "中"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_001", "name": "番茄炒蛋", "frequency": "高"},
+        {"id": "recipe_002", "name": "西红柿蛋汤", "frequency": "高"},
+        {"id": "recipe_004", "name": "鸡胸肉沙拉", "frequency": "中"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_003",
+    "name": "葱",
+    "aliases": ["大葱", "小葱", "香葱"],
+    "category": "调料",
+    "season": ["全年"],
+    "price_range": "低",
+    "storage_days": 14,
+    "nutrition_per_100g": {
+      "calories": 30,
+      "protein": 1.5,
+      "fat": 0.3,
+      "carbs": 6.5,
+      "vitamins": ["维生素C", "维生素K"],
+      "minerals": ["钙", "铁"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_001", "name": "鸡蛋", "reason": "提鲜增香", "score": 0.80},
+        {"id": "ing_005", "name": "鸡胸肉", "reason": "去腥提味", "score": 0.85},
+        {"id": "ing_008", "name": "牛肉", "reason": "去腥增香", "score": 0.85},
+        {"id": "ing_019", "name": "豆腐", "reason": "提鲜", "score": 0.75}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "杀菌消炎", "strength": "中"},
+        {"effect": "促进消化", "strength": "弱"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_001", "name": "番茄炒蛋", "frequency": "高"},
+        {"id": "recipe_013", "name": "豆腐汤", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_004",
+    "name": "青椒",
+    "aliases": ["柿子椒", "甜椒"],
+    "category": "蔬菜",
+    "season": ["夏季", "秋季"],
+    "price_range": "低",
+    "storage_days": 7,
+    "nutrition_per_100g": {
+      "calories": 22,
+      "protein": 1.0,
+      "fat": 0.2,
+      "carbs": 4.9,
+      "vitamins": ["维生素C", "维生素A"],
+      "minerals": ["钾", "镁"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_001", "name": "鸡蛋", "reason": "清脆爽口，色彩丰富", "score": 0.85},
+        {"id": "ing_008", "name": "牛肉", "reason": "经典搭配", "score": 0.90},
+        {"id": "ing_005", "name": "鸡胸肉", "reason": "清爽健康", "score": 0.80}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "增强免疫力", "strength": "强"},
+        {"effect": "促进新陈代谢", "strength": "中"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_003", "name": "青椒炒蛋", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_005",
+    "name": "鸡胸肉",
+    "aliases": ["鸡脯肉"],
+    "category": "肉类",
+    "season": ["全年"],
+    "price_range": "中",
+    "storage_days": 3,
+    "nutrition_per_100g": {
+      "calories": 133,
+      "protein": 24.6,
+      "fat": 5.0,
+      "carbs": 2.5,
+      "vitamins": ["维生素B6", "维生素B12"],
+      "minerals": ["磷", "硒"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_013", "name": "西兰花", "reason": "健身餐经典搭配", "score": 0.95},
+        {"id": "ing_006", "name": "生菜", "reason": "清爽健康", "score": 0.90},
+        {"id": "ing_002", "name": "番茄", "reason": "清爽解腻", "score": 0.80},
+        {"id": "ing_003", "name": "葱", "reason": "去腥提味", "score": 0.85}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["健身人群", "减肥人群", "所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "增肌", "strength": "强"},
+        {"effect": "减脂", "strength": "强"},
+        {"effect": "补充优质蛋白", "strength": "强"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_004", "name": "鸡胸肉沙拉", "frequency": "高"},
+        {"id": "recipe_010", "name": "糙米饭配鸡胸肉", "frequency": "高"},
+        {"id": "recipe_016", "name": "水煮鸡胸肉", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_006",
+    "name": "生菜",
+    "aliases": ["叶用莴苣"],
+    "category": "蔬菜",
+    "season": ["春季", "秋季"],
+    "price_range": "低",
+    "storage_days": 5,
+    "nutrition_per_100g": {
+      "calories": 15,
+      "protein": 1.4,
+      "fat": 0.2,
+      "carbs": 2.9,
+      "vitamins": ["维生素A", "维生素K", "叶酸"],
+      "minerals": ["钙", "铁"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_005", "name": "鸡胸肉", "reason": "清爽健康", "score": 0.90},
+        {"id": "ing_008", "name": "牛肉", "reason": "解腻", "score": 0.85},
+        {"id": "ing_002", "name": "番茄", "reason": "色彩丰富", "score": 0.80}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["减肥人群", "所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "促进消化", "strength": "中"},
+        {"effect": "补充膳食纤维", "strength": "中"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_004", "name": "鸡胸肉沙拉", "frequency": "高"},
+        {"id": "recipe_005", "name": "牛肉沙拉", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_007",
+    "name": "黄瓜",
+    "aliases": ["青瓜", "胡瓜"],
+    "category": "蔬菜",
+    "season": ["夏季"],
+    "price_range": "低",
+    "storage_days": 7,
+    "nutrition_per_100g": {
+      "calories": 15,
+      "protein": 0.7,
+      "fat": 0.1,
+      "carbs": 3.6,
+      "vitamins": ["维生素C", "维生素K"],
+      "minerals": ["钾", "镁"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_002", "name": "番茄", "reason": "清爽开胃", "score": 0.85},
+        {"id": "ing_014", "name": "大蒜", "reason": "凉拌经典", "score": 0.90},
+        {"id": "ing_005", "name": "鸡胸肉", "reason": "清爽健康", "score": 0.80}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["减肥人群", "所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "清热解暑", "strength": "强"},
+        {"effect": "补充水分", "strength": "强"},
+        {"effect": "美容养颜", "strength": "中"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_004", "name": "鸡胸肉沙拉", "frequency": "高"},
+        {"id": "recipe_018", "name": "凉拌黄瓜", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_008",
+    "name": "牛肉",
+    "aliases": ["牛肉块"],
+    "category": "肉类",
+    "season": ["全年"],
+    "price_range": "高",
+    "storage_days": 3,
+    "nutrition_per_100g": {
+      "calories": 250,
+      "protein": 26.3,
+      "fat": 15.0,
+      "carbs": 0.0,
+      "vitamins": ["维生素B12", "维生素B6"],
+      "minerals": ["铁", "锌", "硒"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_004", "name": "青椒", "reason": "经典搭配", "score": 0.90},
+        {"id": "ing_006", "name": "生菜", "reason": "解腻", "score": 0.85},
+        {"id": "ing_013", "name": "西兰花", "reason": "营养均衡", "score": 0.85},
+        {"id": "ing_003", "name": "葱", "reason": "去腥增香", "score": 0.85}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["健身人群", "贫血人群"],
+      "not_suitable_for": [
+        {"group": "高血脂人群", "reason": "脂肪含量较高", "suggestion": "选择瘦肉部位"}
+      ],
+      "health_effects": [
+        {"effect": "增肌", "strength": "强"},
+        {"effect": "补铁补血", "strength": "强"},
+        {"effect": "增强体力", "strength": "强"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_005", "name": "牛肉沙拉", "frequency": "高"},
+        {"id": "recipe_011", "name": "藜麦饭配牛肉", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_009",
+    "name": "燕麦",
+    "aliases": ["燕麦片", "麦片"],
+    "category": "主食",
+    "season": ["全年"],
+    "price_range": "中",
+    "storage_days": 180,
+    "nutrition_per_100g": {
+      "calories": 367,
+      "protein": 13.7,
+      "fat": 6.7,
+      "carbs": 66.3,
+      "vitamins": ["维生素B1", "维生素E"],
+      "minerals": ["镁", "铁", "锌"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_010", "name": "牛奶", "reason": "经典早餐搭配", "score": 0.95},
+        {"id": "ing_011", "name": "香蕉", "reason": "增加甜味和营养", "score": 0.90},
+        {"id": "ing_029", "name": "蜂蜜", "reason": "增加风味", "score": 0.85}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["减肥人群", "糖尿病人群", "所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "降低胆固醇", "strength": "强"},
+        {"effect": "控制血糖", "strength": "强"},
+        {"effect": "促进消化", "strength": "中"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_006", "name": "燕麦粥", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_010",
+    "name": "牛奶",
+    "aliases": ["鲜奶"],
+    "category": "乳制品",
+    "season": ["全年"],
+    "price_range": "中",
+    "storage_days": 7,
+    "nutrition_per_100g": {
+      "calories": 54,
+      "protein": 3.0,
+      "fat": 3.2,
+      "carbs": 3.4,
+      "vitamins": ["维生素D", "维生素B12"],
+      "minerals": ["钙", "磷"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_009", "name": "燕麦", "reason": "经典早餐搭配", "score": 0.95},
+        {"id": "ing_012", "name": "全麦面包", "reason": "营养早餐", "score": 0.90},
+        {"id": "ing_029", "name": "蜂蜜", "reason": "增加风味", "score": 0.80}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["儿童", "青少年", "所有人群"],
+      "not_suitable_for": [
+        {"group": "乳糖不耐受人群", "reason": "含有乳糖", "suggestion": "选择无乳糖牛奶"}
+      ],
+      "health_effects": [
+        {"effect": "补钙", "strength": "强"},
+        {"effect": "促进睡眠", "strength": "中"},
+        {"effect": "增强骨骼", "strength": "强"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_006", "name": "燕麦粥", "frequency": "高"},
+        {"id": "recipe_007", "name": "全麦面包配牛奶", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_011",
+    "name": "香蕉",
+    "aliases": ["芭蕉"],
+    "category": "水果",
+    "season": ["全年"],
+    "price_range": "低",
+    "storage_days": 5,
+    "nutrition_per_100g": {
+      "calories": 89,
+      "protein": 1.1,
+      "fat": 0.3,
+      "carbs": 22.8,
+      "vitamins": ["维生素B6", "维生素C"],
+      "minerals": ["钾", "镁"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_009", "name": "燕麦", "reason": "增加甜味和营养", "score": 0.90},
+        {"id": "ing_010", "name": "牛奶", "reason": "制作奶昔", "score": 0.85}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["运动人群", "所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "快速补充能量", "strength": "强"},
+        {"effect": "缓解便秘", "strength": "中"},
+        {"effect": "稳定情绪", "strength": "中"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_006", "name": "燕麦粥", "frequency": "中"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_012",
+    "name": "全麦面包",
+    "aliases": ["全麦吐司"],
+    "category": "主食",
+    "season": ["全年"],
+    "price_range": "中",
+    "storage_days": 7,
+    "nutrition_per_100g": {
+      "calories": 246,
+      "protein": 9.2,
+      "fat": 3.4,
+      "carbs": 45.8,
+      "vitamins": ["维生素B", "维生素E"],
+      "minerals": ["铁", "镁"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_010", "name": "牛奶", "reason": "营养早餐", "score": 0.90},
+        {"id": "ing_001", "name": "鸡蛋", "reason": "增加蛋白质", "score": 0.85},
+        {"id": "ing_030", "name": "花生酱", "reason": "增加风味", "score": 0.80}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["减肥人群", "糖尿病人群", "所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "控制血糖", "strength": "中"},
+        {"effect": "促进消化", "strength": "中"},
+        {"effect": "提供持久能量", "strength": "强"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_007", "name": "全麦面包配牛奶", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_013",
+    "name": "西兰花",
+    "aliases": ["绿菜花", "青花菜"],
+    "category": "蔬菜",
+    "season": ["秋季", "冬季"],
+    "price_range": "中",
+    "storage_days": 7,
+    "nutrition_per_100g": {
+      "calories": 34,
+      "protein": 2.8,
+      "fat": 0.4,
+      "carbs": 6.6,
+      "vitamins": ["维生素C", "维生素K", "叶酸"],
+      "minerals": ["钙", "铁", "钾"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_005", "name": "鸡胸肉", "reason": "健身餐经典搭配", "score": 0.95},
+        {"id": "ing_008", "name": "牛肉", "reason": "营养均衡", "score": 0.85},
+        {"id": "ing_014", "name": "大蒜", "reason": "提味", "score": 0.80}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "抗癌", "strength": "强"},
+        {"effect": "增强免疫力", "strength": "强"},
+        {"effect": "保护心血管", "strength": "中"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_008", "name": "清炒西兰花", "frequency": "高"},
+        {"id": "recipe_010", "name": "糙米饭配鸡胸肉", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_014",
+    "name": "大蒜",
+    "aliases": ["蒜", "蒜头"],
+    "category": "调料",
+    "season": ["全年"],
+    "price_range": "低",
+    "storage_days": 60,
+    "nutrition_per_100g": {
+      "calories": 128,
+      "protein": 4.5,
+      "fat": 0.2,
+      "carbs": 27.6,
+      "vitamins": ["维生素C", "维生素B6"],
+      "minerals": ["硒", "锰"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_007", "name": "黄瓜", "reason": "凉拌经典", "score": 0.90},
+        {"id": "ing_013", "name": "西兰花", "reason": "提味", "score": 0.80},
+        {"id": "ing_015", "name": "菠菜", "reason": "增香", "score": 0.80}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "杀菌消炎", "strength": "强"},
+        {"effect": "增强免疫力", "strength": "中"},
+        {"effect": "降血压", "strength": "中"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_008", "name": "清炒西兰花", "frequency": "高"},
+        {"id": "recipe_018", "name": "凉拌黄瓜", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_015",
+    "name": "菠菜",
+    "aliases": ["波斯菜"],
+    "category": "蔬菜",
+    "season": ["春季", "秋季"],
+    "price_range": "低",
+    "storage_days": 3,
+    "nutrition_per_100g": {
+      "calories": 23,
+      "protein": 2.9,
+      "fat": 0.4,
+      "carbs": 3.6,
+      "vitamins": ["维生素A", "维生素K", "叶酸"],
+      "minerals": ["铁", "钙", "镁"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_014", "name": "大蒜", "reason": "增香", "score": 0.80},
+        {"id": "ing_019", "name": "豆腐", "reason": "营养互补", "score": 0.85},
+        {"id": "ing_001", "name": "鸡蛋", "reason": "营养丰富", "score": 0.75}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["贫血人群", "所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "补铁补血", "strength": "强"},
+        {"effect": "保护视力", "strength": "中"},
+        {"effect": "增强免疫力", "strength": "中"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_009", "name": "清炒菠菜", "frequency": "高"},
+        {"id": "recipe_013", "name": "豆腐汤", "frequency": "中"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_016",
+    "name": "糙米",
+    "aliases": ["全谷米", "brown rice"],
+    "category": "主食",
+    "season": ["全年"],
+    "price_range": "中",
+    "storage_days": 180,
+    "nutrition_per_100g": {
+      "calories": 370,
+      "protein": 7.7,
+      "fat": 2.7,
+      "carbs": 77.2,
+      "vitamins": ["维生素B", "维生素E"],
+      "minerals": ["镁", "磷", "锰"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_005", "name": "鸡胸肉", "reason": "健身餐搭配", "score": 0.90},
+        {"id": "ing_013", "name": "西兰花", "reason": "营养均衡", "score": 0.85},
+        {"id": "ing_008", "name": "牛肉", "reason": "高蛋白搭配", "score": 0.85}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["减肥人群", "糖尿病人群", "健身人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "控制血糖", "strength": "强"},
+        {"effect": "促进消化", "strength": "强"},
+        {"effect": "提供持久能量", "strength": "强"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_010", "name": "糙米饭配鸡胸肉", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_017",
+    "name": "藜麦",
+    "aliases": ["quinoa", "超级谷物"],
+    "category": "主食",
+    "season": ["全年"],
+    "price_range": "高",
+    "storage_days": 180,
+    "nutrition_per_100g": {
+      "calories": 368,
+      "protein": 14.1,
+      "fat": 6.1,
+      "carbs": 64.2,
+      "vitamins": ["维生素B", "维生素E"],
+      "minerals": ["镁", "铁", "锌"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_008", "name": "牛肉", "reason": "高蛋白搭配", "score": 0.90},
+        {"id": "ing_013", "name": "西兰花", "reason": "营养密度高", "score": 0.85},
+        {"id": "ing_005", "name": "鸡胸肉", "reason": "健身餐", "score": 0.85}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["健身人群", "素食人群", "所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "提供完全蛋白质", "strength": "强"},
+        {"effect": "控制血糖", "strength": "中"},
+        {"effect": "增强体力", "strength": "强"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_011", "name": "藜麦饭配牛肉", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_018",
+    "name": "三文鱼",
+    "aliases": ["salmon", "鲑鱼"],
+    "category": "肉类",
+    "season": ["全年"],
+    "price_range": "高",
+    "storage_days": 2,
+    "nutrition_per_100g": {
+      "calories": 208,
+      "protein": 20.0,
+      "fat": 13.0,
+      "carbs": 0.0,
+      "vitamins": ["维生素D", "维生素B12"],
+      "minerals": ["硒", "磷"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_013", "name": "西兰花", "reason": "营养均衡", "score": 0.90},
+        {"id": "ing_007", "name": "黄瓜", "reason": "清爽", "score": 0.80},
+        {"id": "ing_021", "name": "橄榄油", "reason": "健康脂肪", "score": 0.85}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["心血管疾病人群", "健身人群", "所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "保护心血管", "strength": "强"},
+        {"effect": "补充Omega-3", "strength": "强"},
+        {"effect": "增强记忆", "strength": "中"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_012", "name": "三文鱼配蔬菜", "frequency": "高"},
+        {"id": "recipe_019", "name": "香煎三文鱼", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_019",
+    "name": "豆腐",
+    "aliases": ["tofu", "大豆腐"],
+    "category": "豆制品",
+    "season": ["全年"],
+    "price_range": "低",
+    "storage_days": 3,
+    "nutrition_per_100g": {
+      "calories": 76,
+      "protein": 8.1,
+      "fat": 4.8,
+      "carbs": 1.9,
+      "vitamins": ["维生素B"],
+      "minerals": ["钙", "铁", "镁"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_015", "name": "菠菜", "reason": "营养互补", "score": 0.85},
+        {"id": "ing_003", "name": "葱", "reason": "提鲜", "score": 0.75},
+        {"id": "ing_014", "name": "大蒜", "reason": "增香", "score": 0.70}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["素食人群", "减肥人群", "所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "补充植物蛋白", "strength": "强"},
+        {"effect": "补钙", "strength": "中"},
+        {"effect": "降低胆固醇", "strength": "中"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_013", "name": "豆腐汤", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_020",
+    "name": "盐",
+    "aliases": ["食盐", "氯化钠"],
+    "category": "调料",
+    "season": ["全年"],
+    "price_range": "低",
+    "storage_days": 365,
+    "nutrition_per_100g": {
+      "calories": 0,
+      "protein": 0.0,
+      "fat": 0.0,
+      "carbs": 0.0,
+      "vitamins": [],
+      "minerals": ["钠", "碘"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_001", "name": "鸡蛋", "reason": "基础调味", "score": 0.95},
+        {"id": "ing_002", "name": "番茄", "reason": "提鲜", "score": 0.90},
+        {"id": "ing_013", "name": "西兰花", "reason": "调味", "score": 0.90}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["所有人群"],
+      "not_suitable_for": [
+        {"group": "高血压人群", "reason": "需要控制钠摄入", "suggestion": "减少用量"}
+      ],
+      "health_effects": [
+        {"effect": "维持电解质平衡", "strength": "强"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_001", "name": "番茄炒蛋", "frequency": "高"},
+        {"id": "recipe_008", "name": "清炒西兰花", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_021",
+    "name": "橄榄油",
+    "aliases": ["olive oil"],
+    "category": "调料",
+    "season": ["全年"],
+    "price_range": "高",
+    "storage_days": 365,
+    "nutrition_per_100g": {
+      "calories": 884,
+      "protein": 0.0,
+      "fat": 100.0,
+      "carbs": 0.0,
+      "vitamins": ["维生素E", "维生素K"],
+      "minerals": []
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_006", "name": "生菜", "reason": "沙拉调味", "score": 0.90},
+        {"id": "ing_018", "name": "三文鱼", "reason": "健康脂肪", "score": 0.85},
+        {"id": "ing_002", "name": "番茄", "reason": "地中海风味", "score": 0.80}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["心血管疾病人群", "所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "保护心血管", "strength": "强"},
+        {"effect": "抗氧化", "strength": "中"},
+        {"effect": "降低胆固醇", "strength": "中"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_004", "name": "鸡胸肉沙拉", "frequency": "高"},
+        {"id": "recipe_012", "name": "三文鱼配蔬菜", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_022",
+    "name": "食用油",
+    "aliases": ["植物油", "烹调油"],
+    "category": "调料",
+    "season": ["全年"],
+    "price_range": "低",
+    "storage_days": 365,
+    "nutrition_per_100g": {
+      "calories": 884,
+      "protein": 0.0,
+      "fat": 100.0,
+      "carbs": 0.0,
+      "vitamins": ["维生素E"],
+      "minerals": []
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_001", "name": "鸡蛋", "reason": "炒菜必备", "score": 0.95},
+        {"id": "ing_013", "name": "西兰花", "reason": "炒菜", "score": 0.90},
+        {"id": "ing_015", "name": "菠菜", "reason": "炒菜", "score": 0.90}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "提供能量", "strength": "强"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_001", "name": "番茄炒蛋", "frequency": "高"},
+        {"id": "recipe_008", "name": "清炒西兰花", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_023",
+    "name": "韭菜",
+    "aliases": ["韭黄"],
+    "category": "蔬菜",
+    "season": ["春季", "秋季"],
+    "price_range": "低",
+    "storage_days": 3,
+    "nutrition_per_100g": {
+      "calories": 26,
+      "protein": 2.4,
+      "fat": 0.5,
+      "carbs": 4.6,
+      "vitamins": ["维生素A", "维生素C"],
+      "minerals": ["钙", "铁"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_001", "name": "鸡蛋", "reason": "经典搭配，香味浓郁", "score": 0.90},
+        {"id": "ing_031", "name": "虾仁", "reason": "鲜香", "score": 0.85}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "补肾壮阳", "strength": "中"},
+        {"effect": "促进消化", "strength": "中"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_014", "name": "韭菜炒蛋", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_024",
+    "name": "米饭",
+    "aliases": ["白米饭", "大米饭"],
+    "category": "主食",
+    "season": ["全年"],
+    "price_range": "低",
+    "storage_days": 1,
+    "nutrition_per_100g": {
+      "calories": 116,
+      "protein": 2.6,
+      "fat": 0.3,
+      "carbs": 25.9,
+      "vitamins": ["维生素B"],
+      "minerals": ["镁", "磷"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_001", "name": "鸡蛋", "reason": "炒饭", "score": 0.90},
+        {"id": "ing_007", "name": "黄瓜", "reason": "炒饭配菜", "score": 0.80},
+        {"id": "ing_025", "name": "胡萝卜", "reason": "炒饭配菜", "score": 0.80}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "快速补充能量", "strength": "强"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_015", "name": "蔬菜炒饭", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_025",
+    "name": "胡萝卜",
+    "aliases": ["红萝卜"],
+    "category": "蔬菜",
+    "season": ["秋季", "冬季"],
+    "price_range": "低",
+    "storage_days": 14,
+    "nutrition_per_100g": {
+      "calories": 41,
+      "protein": 0.9,
+      "fat": 0.2,
+      "carbs": 9.6,
+      "vitamins": ["维生素A", "维生素K"],
+      "minerals": ["钾", "钙"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_024", "name": "米饭", "reason": "炒饭配菜", "score": 0.80},
+        {"id": "ing_008", "name": "牛肉", "reason": "炖菜", "score": 0.85},
+        {"id": "ing_007", "name": "黄瓜", "reason": "色彩搭配", "score": 0.75}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "保护视力", "strength": "强"},
+        {"effect": "增强免疫力", "strength": "中"},
+        {"effect": "美容养颜", "strength": "中"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_015", "name": "蔬菜炒饭", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_026",
+    "name": "紫薯",
+    "aliases": ["紫心红薯"],
+    "category": "主食",
+    "season": ["秋季"],
+    "price_range": "低",
+    "storage_days": 30,
+    "nutrition_per_100g": {
+      "calories": 82,
+      "protein": 1.6,
+      "fat": 0.2,
+      "carbs": 20.1,
+      "vitamins": ["维生素A", "维生素C", "花青素"],
+      "minerals": ["钾", "镁"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_024", "name": "米饭", "reason": "煮粥", "score": 0.85},
+        {"id": "ing_010", "name": "牛奶", "reason": "制作甜品", "score": 0.80}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["减肥人群", "糖尿病人群", "所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "抗氧化", "strength": "强"},
+        {"effect": "控制血糖", "strength": "中"},
+        {"effect": "促进消化", "strength": "中"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_017", "name": "紫薯粥", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_027",
+    "name": "醋",
+    "aliases": ["米醋", "陈醋"],
+    "category": "调料",
+    "season": ["全年"],
+    "price_range": "低",
+    "storage_days": 365,
+    "nutrition_per_100g": {
+      "calories": 18,
+      "protein": 0.4,
+      "fat": 0.0,
+      "carbs": 5.0,
+      "vitamins": [],
+      "minerals": ["钙", "铁"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_007", "name": "黄瓜", "reason": "凉拌", "score": 0.90},
+        {"id": "ing_014", "name": "大蒜", "reason": "调味", "score": 0.80}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["所有人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "促进消化", "strength": "中"},
+        {"effect": "软化血管", "strength": "弱"}
+      ],
+      "commonly_used_in": [
+        {"id": "recipe_018", "name": "凉拌黄瓜", "frequency": "高"}
+      ]
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_028",
+    "name": "豆浆",
+    "aliases": ["豆奶"],
+    "category": "豆制品",
+    "season": ["全年"],
+    "price_range": "低",
+    "storage_days": 1,
+    "nutrition_per_100g": {
+      "calories": 54,
+      "protein": 3.0,
+      "fat": 1.8,
+      "carbs": 4.8,
+      "vitamins": ["维生素B"],
+      "minerals": ["钙", "铁"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_012", "name": "全麦面包", "reason": "早餐搭配", "score": 0.85},
+        {"id": "ing_032", "name": "油条", "reason": "传统搭配", "score": 0.90}
+      ],
+      "conflicts_with": [
+        {"id": "ing_001", "name": "鸡蛋", "reason": "影响蛋白质吸收", "severity": "中"}
+      ],
+      "suitable_for": ["素食人群", "乳糖不耐受人群"],
+      "not_suitable_for": [],
+      "health_effects": [
+        {"effect": "补充植物蛋白", "strength": "强"},
+        {"effect": "降低胆固醇", "strength": "中"}
+      ],
+      "commonly_used_in": []
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_029",
+    "name": "蜂蜜",
+    "aliases": ["蜜糖"],
+    "category": "调料",
+    "season": ["全年"],
+    "price_range": "中",
+    "storage_days": 365,
+    "nutrition_per_100g": {
+      "calories": 304,
+      "protein": 0.3,
+      "fat": 0.0,
+      "carbs": 82.4,
+      "vitamins": ["维生素C"],
+      "minerals": ["钾", "钙"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_010", "name": "牛奶", "reason": "增加风味", "score": 0.80},
+        {"id": "ing_009", "name": "燕麦", "reason": "增加甜味", "score": 0.85}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["所有人群"],
+      "not_suitable_for": [
+        {"group": "糖尿病人群", "reason": "含糖量高", "suggestion": "避免食用"}
+      ],
+      "health_effects": [
+        {"effect": "润肠通便", "strength": "中"},
+        {"effect": "美容养颜", "strength": "弱"}
+      ],
+      "commonly_used_in": []
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_030",
+    "name": "花生酱",
+    "aliases": ["peanut butter"],
+    "category": "调料",
+    "season": ["全年"],
+    "price_range": "中",
+    "storage_days": 180,
+    "nutrition_per_100g": {
+      "calories": 588,
+      "protein": 25.0,
+      "fat": 50.0,
+      "carbs": 20.0,
+      "vitamins": ["维生素E"],
+      "minerals": ["镁", "钾"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_012", "name": "全麦面包", "reason": "增加风味", "score": 0.80},
+        {"id": "ing_011", "name": "香蕉", "reason": "制作奶昔", "score": 0.75}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["健身人群", "儿童"],
+      "not_suitable_for": [
+        {"group": "花生过敏人群", "reason": "过敏原", "suggestion": "避免食用"}
+      ],
+      "health_effects": [
+        {"effect": "补充蛋白质", "strength": "强"},
+        {"effect": "提供能量", "strength": "强"}
+      ],
+      "commonly_used_in": []
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_031",
+    "name": "虾仁",
+    "aliases": ["虾肉"],
+    "category": "肉类",
+    "season": ["全年"],
+    "price_range": "高",
+    "storage_days": 2,
+    "nutrition_per_100g": {
+      "calories": 87,
+      "protein": 18.6,
+      "fat": 0.8,
+      "carbs": 2.8,
+      "vitamins": ["维生素B12"],
+      "minerals": ["硒", "磷", "锌"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_023", "name": "韭菜", "reason": "鲜香", "score": 0.85},
+        {"id": "ing_001", "name": "鸡蛋", "reason": "营养丰富", "score": 0.80},
+        {"id": "ing_007", "name": "黄瓜", "reason": "清爽", "score": 0.75}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["健身人群", "所有人群"],
+      "not_suitable_for": [
+        {"group": "海鲜过敏人群", "reason": "过敏原", "suggestion": "避免食用"}
+      ],
+      "health_effects": [
+        {"effect": "补充优质蛋白", "strength": "强"},
+        {"effect": "增强免疫力", "strength": "中"}
+      ],
+      "commonly_used_in": []
+    }
+  },
+  {
+    "entity_type": "ingredient",
+    "id": "ing_032",
+    "name": "油条",
+    "aliases": ["炸油条"],
+    "category": "主食",
+    "season": ["全年"],
+    "price_range": "低",
+    "storage_days": 1,
+    "nutrition_per_100g": {
+      "calories": 386,
+      "protein": 6.9,
+      "fat": 17.6,
+      "carbs": 51.0,
+      "vitamins": [],
+      "minerals": ["钠"]
+    },
+    "relations": {
+      "pairs_well_with": [
+        {"id": "ing_028", "name": "豆浆", "reason": "传统搭配", "score": 0.90}
+      ],
+      "conflicts_with": [],
+      "suitable_for": ["偶尔食用"],
+      "not_suitable_for": [
+        {"group": "减肥人群", "reason": "高热量高脂肪", "suggestion": "避免食用"}
+      ],
+      "health_effects": [],
+      "commonly_used_in": []
+    }
+  }
+]

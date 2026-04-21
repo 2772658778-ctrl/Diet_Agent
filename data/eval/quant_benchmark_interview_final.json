@@ -1,0 +1,145 @@
+[
+  {
+    "case_id": "quant_iv_001",
+    "query": "冰箱里有鸡胸肉和生菜，推荐一道减脂菜",
+    "expected_intent": "recipe_search",
+    "scenario_type": "recipe_recommendation_grounded",
+    "expected_constraints": {
+      "available_ingredients": ["鸡胸肉", "生菜"],
+      "health_goal": "减脂"
+    },
+    "expected_active_skill": "recipe_recommendation",
+    "expected_planner_next_action": "retrieve",
+    "ground_truth_doc_ids": ["recipe_健身鸡胸肉沙拉", "recipe_蔬菜沙拉"],
+    "ground_truth_answer_keywords": ["鸡胸肉", "生菜", "减脂", "高蛋白"],
+    "ground_truth_answer": "可优先推荐鸡胸肉沙拉等低脂高蛋白方案，兼顾鸡胸肉、生菜和减脂目标。",
+    "notes": "库存 + 健康目标联合约束，代表 grounded recipe recommendation 主线。"
+  },
+  {
+    "case_id": "quant_iv_002",
+    "query": "给我推荐个晚饭",
+    "expected_intent": "recipe_search",
+    "scenario_type": "recipe_recommendation_clarification",
+    "expected_constraints": {
+      "meal_type": "晚饭"
+    },
+    "expected_active_skill": "recipe_recommendation",
+    "expected_planner_next_action": "clarify",
+    "should_clarify": true,
+    "expected_missing_slots": ["available_ingredients", "max_cooking_time", "health_goal", "dietary_restrictions"],
+    "ground_truth_answer_keywords": [],
+    "ground_truth_answer": "",
+    "notes": "弱锚点输入，验证先澄清而不是直接伪推荐。"
+  },
+  {
+    "case_id": "quant_iv_003",
+    "query": "番茄炒蛋怎么做？",
+    "expected_intent": "recipe_search",
+    "scenario_type": "recipe_tutorial_grounded",
+    "expected_constraints": {},
+    "expected_active_skill": "recipe_tutorial",
+    "expected_planner_next_action": "retrieve",
+    "ground_truth_doc_ids": ["tutorial_recipe_001"],
+    "ground_truth_answer_keywords": ["番茄", "鸡蛋", "步骤", "准备食材", "主体烹饪"],
+    "ground_truth_answer": "番茄炒蛋教程应包含准备食材、预处理、主体烹饪和收尾上桌等步骤。",
+    "notes": "教程知识路径，验证 tutorial collection 检索与步骤型回答；该 case 不以食材别名抽取精确匹配作为主要成功条件。"
+  },
+  {
+    "case_id": "quant_iv_004",
+    "query": "帮我制定一周减脂晚餐计划",
+    "expected_intent": "recipe_search",
+    "scenario_type": "meal_planning_outline_fallback",
+    "expected_constraints": {
+      "health_goal": "减脂",
+      "meal_type": "晚餐"
+    },
+    "expected_active_skill": "meal_planning",
+    "expected_planner_next_action": "subgraph_candidate",
+    "expected_response_type": "fallback",
+    "ground_truth_answer_keywords": ["一周", "减脂", "晚餐", "安排", "提纲"],
+    "ground_truth_answer": "",
+    "notes": "当前主线对 meal planning 走 subgraph_candidate -> outline_only fallback，验证计划型 skill 的稳妥降级。"
+  },
+  {
+    "case_id": "quant_iv_005",
+    "query": "最近血脂有点高，晚餐怎么吃更健康？",
+    "expected_intent": "nutrition_query",
+    "scenario_type": "nutrition_conservative_query",
+    "expected_constraints": {
+      "health_goal": "控脂",
+      "meal_type": "晚餐"
+    },
+    "expected_active_skill": "nutrition_analysis_conservative",
+    "expected_planner_next_action": "retrieve",
+    "ground_truth_answer_keywords": ["低脂", "晚餐", "蔬菜", "优质蛋白"],
+    "ground_truth_answer": "血脂偏高时，晚餐应减少高油高脂摄入，增加蔬菜和优质蛋白，控制总热量。",
+    "notes": "营养分析 conservative skill，关注 evidence boundary 与 grounded advice。"
+  },
+  {
+    "case_id": "quant_iv_006",
+    "query": "高蛋白早餐应该搭配什么？",
+    "expected_intent": "nutrition_query",
+    "scenario_type": "nutrition_conservative_query",
+    "expected_constraints": {
+      "health_goal": "高蛋白",
+      "meal_type": "早餐"
+    },
+    "expected_active_skill": "nutrition_analysis_conservative",
+    "expected_planner_next_action": "retrieve",
+    "ground_truth_answer_keywords": ["鸡蛋", "牛奶", "酸奶", "蛋白质"],
+    "ground_truth_answer": "高蛋白早餐可搭配鸡蛋、牛奶、无糖酸奶以及全麦主食等高蛋白食物。",
+    "notes": "营养分析 conservative skill，验证结构化健康建议的相关性。"
+  },
+  {
+    "case_id": "quant_iv_007",
+    "query": "鸡蛋和番茄适合一起做菜吗？",
+    "expected_intent": "ingredient_check",
+    "scenario_type": "ingredient_check_conservative",
+    "expected_constraints": {
+      "available_ingredients": ["鸡蛋", "番茄"]
+    },
+    "expected_active_skill": "ingredient_check_conservative",
+    "expected_planner_next_action": "retrieve",
+    "ground_truth_doc_ids": ["recipe_番茄炒蛋"],
+    "ground_truth_answer_keywords": ["适合", "搭配", "番茄炒蛋"],
+    "ground_truth_answer": "鸡蛋和番茄是经典搭配，适合一起做菜，例如番茄炒蛋。",
+    "notes": "食材搭配 conservative skill，验证 grounded pairing。"
+  },
+  {
+    "case_id": "quant_iv_008",
+    "query": "鱼和柠檬适合一起做清淡料理吗？",
+    "expected_intent": "ingredient_check",
+    "scenario_type": "ingredient_check_conservative",
+    "expected_constraints": {
+      "available_ingredients": ["鱼", "柠檬"],
+      "health_goal": "清淡口味"
+    },
+    "expected_active_skill": "ingredient_check_conservative",
+    "expected_planner_next_action": "retrieve",
+    "ground_truth_answer_keywords": ["鱼", "柠檬", "清淡", "去腥"],
+    "ground_truth_answer": "鱼和柠檬通常适合搭配，柠檬可帮助提鲜去腥，也符合较清淡的烹饪方向。",
+    "notes": "食材搭配 conservative skill，验证口味/方向约束。"
+  },
+  {
+    "case_id": "quant_iv_009",
+    "query": "你会根据我的食材推荐菜吗？",
+    "expected_intent": "chitchat",
+    "scenario_type": "chitchat_capability_intro",
+    "expected_constraints": {},
+    "should_clarify": false,
+    "ground_truth_answer_keywords": ["食材", "推荐", "做菜"],
+    "ground_truth_answer": "可以，你告诉我现有食材、时间或目标后，我可以据此推荐更合适的菜。",
+    "notes": "能力边界说明型 chitchat。"
+  },
+  {
+    "case_id": "quant_iv_010",
+    "query": "谢谢，先这样",
+    "expected_intent": "chitchat",
+    "scenario_type": "polite_close_chitchat",
+    "expected_constraints": {},
+    "should_clarify": false,
+    "ground_truth_answer_keywords": ["不客气", "需要时再来"],
+    "ground_truth_answer": "不客气，有需要时随时来问我。",
+    "notes": "礼貌收尾能力，验证非任务型收尾体验。"
+  }
+]

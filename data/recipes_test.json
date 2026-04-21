@@ -1,0 +1,753 @@
+[
+  {
+    "id": "recipe_001",
+    "name": "番茄炒蛋",
+    "description": "经典家常菜，酸甜可口，营养丰富",
+    "cuisine": "中式",
+    "ingredients": [
+      {"name": "番茄", "amount": 2, "unit": "个"},
+      {"name": "鸡蛋", "amount": 3, "unit": "个"},
+      {"name": "葱", "amount": 1, "unit": "根"},
+      {"name": "盐", "amount": 3, "unit": "克"},
+      {"name": "糖", "amount": 5, "unit": "克"}
+    ],
+    "steps": [
+      "番茄切块，鸡蛋打散",
+      "热锅倒油，炒鸡蛋至凝固盛出",
+      "锅中加油，炒番茄至软烂",
+      "加入鸡蛋，调味翻炒均匀"
+    ],
+    "time": 15,
+    "difficulty": "简单",
+    "calories": 280,
+    "nutrition": {
+      "protein": 18.5,
+      "carbs": 12.3,
+      "fat": 16.2,
+      "fiber": 2.1
+    },
+    "tags": ["快手", "酸甜", "家常", "下饭"],
+    "health_goals": ["养生", "增肌"]
+  },
+  {
+    "id": "recipe_002",
+    "name": "糖醋里脊",
+    "description": "酸甜可口的经典川菜，外酥里嫩",
+    "cuisine": "川菜",
+    "ingredients": [
+      {"name": "猪里脊肉", "amount": 300, "unit": "克"},
+      {"name": "番茄酱", "amount": 50, "unit": "克"},
+      {"name": "白醋", "amount": 30, "unit": "毫升"},
+      {"name": "糖", "amount": 40, "unit": "克"},
+      {"name": "淀粉", "amount": 50, "unit": "克"}
+    ],
+    "steps": [
+      "里脊肉切条，腌制入味",
+      "裹淀粉炸至金黄",
+      "调制糖醋汁",
+      "倒入糖醋汁翻炒均匀"
+    ],
+    "time": 35,
+    "difficulty": "中等",
+    "calories": 520,
+    "nutrition": {
+      "protein": 28.5,
+      "carbs": 45.2,
+      "fat": 22.8,
+      "fiber": 1.5
+    },
+    "tags": ["酸甜", "川菜", "下饭", "宴客"],
+    "health_goals": ["增肌"]
+  },
+  {
+    "id": "recipe_003",
+    "name": "健身鸡胸肉沙拉",
+    "description": "低脂高蛋白，适合减肥健身人群",
+    "cuisine": "西式",
+    "ingredients": [
+      {"name": "鸡胸肉", "amount": 150, "unit": "克"},
+      {"name": "生菜", "amount": 100, "unit": "克"},
+      {"name": "圣女果", "amount": 80, "unit": "克"},
+      {"name": "黄瓜", "amount": 50, "unit": "克"},
+      {"name": "橄榄油", "amount": 10, "unit": "毫升"}
+    ],
+    "steps": [
+      "鸡胸肉煎熟切片",
+      "蔬菜洗净切块",
+      "混合所有食材",
+      "淋上橄榄油和柠檬汁"
+    ],
+    "time": 20,
+    "difficulty": "简单",
+    "calories": 280,
+    "nutrition": {
+      "protein": 32.5,
+      "carbs": 8.5,
+      "fat": 12.3,
+      "fiber": 3.8
+    },
+    "tags": ["健康", "低脂", "高蛋白", "快手"],
+    "health_goals": ["减肥", "增肌"]
+  },
+  {
+    "id": "recipe_004",
+    "name": "麻婆豆腐",
+    "description": "麻辣鲜香的经典川菜",
+    "cuisine": "川菜",
+    "ingredients": [
+      {"name": "豆腐", "amount": 400, "unit": "克"},
+      {"name": "猪肉末", "amount": 100, "unit": "克"},
+      {"name": "豆瓣酱", "amount": 30, "unit": "克"},
+      {"name": "花椒", "amount": 5, "unit": "克"},
+      {"name": "葱姜蒜", "amount": 20, "unit": "克"}
+    ],
+    "steps": [
+      "豆腐切块焯水",
+      "炒香肉末和豆瓣酱",
+      "加入豆腐和调料",
+      "煮至入味，撒花椒粉"
+    ],
+    "time": 25,
+    "difficulty": "中等",
+    "calories": 320,
+    "nutrition": {
+      "protein": 22.5,
+      "carbs": 15.2,
+      "fat": 18.5,
+      "fiber": 2.8
+    },
+    "tags": ["麻辣", "川菜", "下饭", "家常"],
+    "health_goals": ["养生"]
+  },
+  {
+    "id": "recipe_005",
+    "name": "清蒸鲈鱼",
+    "description": "清淡鲜美，保留鱼肉原味",
+    "cuisine": "粤菜",
+    "ingredients": [
+      {"name": "鲈鱼", "amount": 500, "unit": "克"},
+      {"name": "姜", "amount": 20, "unit": "克"},
+      {"name": "葱", "amount": 2, "unit": "根"},
+      {"name": "蒸鱼豉油", "amount": 30, "unit": "毫升"},
+      {"name": "料酒", "amount": 15, "unit": "毫升"}
+    ],
+    "steps": [
+      "鲈鱼处理干净，划刀",
+      "放姜片和料酒腌制",
+      "大火蒸8分钟",
+      "淋热油和蒸鱼豉油"
+    ],
+    "time": 20,
+    "difficulty": "简单",
+    "calories": 180,
+    "nutrition": {
+      "protein": 28.5,
+      "carbs": 2.5,
+      "fat": 6.8,
+      "fiber": 0.5
+    },
+    "tags": ["清淡", "粤菜", "高蛋白", "快手"],
+    "health_goals": ["减肥", "养生"]
+  }
+,
+  {
+    "id": "recipe_006",
+    "name": "宫保鸡丁",
+    "description": "酸辣香脆，经典川菜代表",
+    "cuisine": "川菜",
+    "ingredients": [
+      {"name": "鸡胸肉", "amount": 250, "unit": "克"},
+      {"name": "花生米", "amount": 80, "unit": "克"},
+      {"name": "干辣椒", "amount": 10, "unit": "克"},
+      {"name": "花椒", "amount": 5, "unit": "克"},
+      {"name": "葱姜蒜", "amount": 30, "unit": "克"}
+    ],
+    "steps": [
+      "鸡肉切丁腌制",
+      "炒香花椒和干辣椒",
+      "炒鸡丁至变色",
+      "加入调料和花生米翻炒"
+    ],
+    "time": 30,
+    "difficulty": "中等",
+    "calories": 420,
+    "nutrition": {
+      "protein": 35.2,
+      "carbs": 18.5,
+      "fat": 24.8,
+      "fiber": 3.2
+    },
+    "tags": ["麻辣", "川菜", "下饭", "宴客"],
+    "health_goals": ["增肌"]
+  },
+  {
+    "id": "recipe_007",
+    "name": "西红柿鸡蛋面",
+    "description": "简单快手的营养主食",
+    "cuisine": "中式",
+    "ingredients": [
+      {"name": "挂面", "amount": 150, "unit": "克"},
+      {"name": "番茄", "amount": 2, "unit": "个"},
+      {"name": "鸡蛋", "amount": 2, "unit": "个"},
+      {"name": "葱", "amount": 1, "unit": "根"},
+      {"name": "盐", "amount": 3, "unit": "克"}
+    ],
+    "steps": [
+      "番茄切块，鸡蛋打散",
+      "炒鸡蛋盛出",
+      "炒番茄加水煮开",
+      "下面条煮熟，加入鸡蛋"
+    ],
+    "time": 15,
+    "difficulty": "简单",
+    "calories": 380,
+    "nutrition": {
+      "protein": 18.5,
+      "carbs": 52.3,
+      "fat": 12.2,
+      "fiber": 3.5
+    },
+    "tags": ["快手", "酸甜", "主食", "家常"],
+    "health_goals": ["养生"]
+  },
+  {
+    "id": "recipe_008",
+    "name": "红烧肉",
+    "description": "肥而不腻的经典家常菜",
+    "cuisine": "中式",
+    "ingredients": [
+      {"name": "五花肉", "amount": 500, "unit": "克"},
+      {"name": "冰糖", "amount": 30, "unit": "克"},
+      {"name": "酱油", "amount": 40, "unit": "毫升"},
+      {"name": "料酒", "amount": 30, "unit": "毫升"},
+      {"name": "八角", "amount": 3, "unit": "个"}
+    ],
+    "steps": [
+      "五花肉切块焯水",
+      "炒糖色",
+      "加入肉块翻炒上色",
+      "加水和调料小火炖1小时"
+    ],
+    "time": 90,
+    "difficulty": "中等",
+    "calories": 680,
+    "nutrition": {
+      "protein": 25.5,
+      "carbs": 15.2,
+      "fat": 58.5,
+      "fiber": 0.5
+    },
+    "tags": ["甜", "家常", "下饭", "宴客"],
+    "health_goals": []
+  },
+  {
+    "id": "recipe_009",
+    "name": "凉拌黄瓜",
+    "description": "清爽开胃的凉菜",
+    "cuisine": "中式",
+    "ingredients": [
+      {"name": "黄瓜", "amount": 2, "unit": "根"},
+      {"name": "蒜", "amount": 3, "unit": "瓣"},
+      {"name": "醋", "amount": 20, "unit": "毫升"},
+      {"name": "香油", "amount": 10, "unit": "毫升"},
+      {"name": "盐", "amount": 3, "unit": "克"}
+    ],
+    "steps": [
+      "黄瓜拍碎切段",
+      "蒜切末",
+      "混合所有调料",
+      "拌匀腌制10分钟"
+    ],
+    "time": 10,
+    "difficulty": "简单",
+    "calories": 80,
+    "nutrition": {
+      "protein": 2.5,
+      "carbs": 8.5,
+      "fat": 4.2,
+      "fiber": 2.8
+    },
+    "tags": ["清淡", "凉菜", "快手", "开胃"],
+    "health_goals": ["减肥", "养生"]
+  },
+  {
+    "id": "recipe_010",
+    "name": "酸辣土豆丝",
+    "description": "酸辣爽脆的经典小炒",
+    "cuisine": "中式",
+    "ingredients": [
+      {"name": "土豆", "amount": 2, "unit": "个"},
+      {"name": "青椒", "amount": 1, "unit": "个"},
+      {"name": "干辣椒", "amount": 5, "unit": "克"},
+      {"name": "醋", "amount": 20, "unit": "毫升"},
+      {"name": "盐", "amount": 3, "unit": "克"}
+    ],
+    "steps": [
+      "土豆切丝泡水",
+      "青椒切丝",
+      "热锅爆香干辣椒",
+      "炒土豆丝和青椒，加醋调味"
+    ],
+    "time": 15,
+    "difficulty": "简单",
+    "calories": 150,
+    "nutrition": {
+      "protein": 3.5,
+      "carbs": 28.5,
+      "fat": 3.2,
+      "fiber": 4.5
+    },
+    "tags": ["酸辣", "快手", "家常", "下饭"],
+    "health_goals": ["减肥", "养生"]
+  },
+  {
+    "id": "recipe_011",
+    "name": "蒜蓉西兰花",
+    "description": "简单健康的蔬菜料理",
+    "cuisine": "中式",
+    "ingredients": [
+      {"name": "西兰花", "amount": 300, "unit": "克"},
+      {"name": "蒜", "amount": 5, "unit": "瓣"},
+      {"name": "盐", "amount": 3, "unit": "克"},
+      {"name": "蚝油", "amount": 10, "unit": "毫升"},
+      {"name": "油", "amount": 15, "unit": "毫升"}
+    ],
+    "steps": [
+      "西兰花切小朵焯水",
+      "蒜切末",
+      "热锅爆香蒜末",
+      "加入西兰花翻炒，调味"
+    ],
+    "time": 10,
+    "difficulty": "简单",
+    "calories": 120,
+    "nutrition": {
+      "protein": 5.5,
+      "carbs": 12.5,
+      "fat": 6.2,
+      "fiber": 5.8
+    },
+    "tags": ["清淡", "快手", "健康", "素菜"],
+    "health_goals": ["减肥", "养生"]
+  },
+  {
+    "id": "recipe_012",
+    "name": "鱼香肉丝",
+    "description": "酸甜微辣的经典川菜",
+    "cuisine": "川菜",
+    "ingredients": [
+      {"name": "猪里脊肉", "amount": 200, "unit": "克"},
+      {"name": "木耳", "amount": 50, "unit": "克"},
+      {"name": "胡萝卜", "amount": 80, "unit": "克"},
+      {"name": "泡椒", "amount": 20, "unit": "克"},
+      {"name": "葱姜蒜", "amount": 30, "unit": "克"}
+    ],
+    "steps": [
+      "肉丝腌制，配菜切丝",
+      "炒肉丝至变色盛出",
+      "炒香泡椒和配菜",
+      "加入肉丝和鱼香汁翻炒"
+    ],
+    "time": 25,
+    "difficulty": "中等",
+    "calories": 320,
+    "nutrition": {
+      "protein": 24.5,
+      "carbs": 18.5,
+      "fat": 16.8,
+      "fiber": 3.2
+    },
+    "tags": ["酸辣", "川菜", "下饭", "家常"],
+    "health_goals": ["增肌"]
+  },
+  {
+    "id": "recipe_013",
+    "name": "皮蛋瘦肉粥",
+    "description": "营养丰富的养生粥品",
+    "cuisine": "粤菜",
+    "ingredients": [
+      {"name": "大米", "amount": 100, "unit": "克"},
+      {"name": "瘦肉", "amount": 100, "unit": "克"},
+      {"name": "皮蛋", "amount": 2, "unit": "个"},
+      {"name": "姜", "amount": 10, "unit": "克"},
+      {"name": "葱", "amount": 1, "unit": "根"}
+    ],
+    "steps": [
+      "大米浸泡，瘦肉腌制",
+      "煮粥至浓稠",
+      "加入肉丝和皮蛋",
+      "煮熟调味，撒葱花"
+    ],
+    "time": 45,
+    "difficulty": "简单",
+    "calories": 280,
+    "nutrition": {
+      "protein": 18.5,
+      "carbs": 38.5,
+      "fat": 6.8,
+      "fiber": 1.5
+    },
+    "tags": ["清淡", "粤菜", "养生", "主食"],
+    "health_goals": ["养生"]
+  },
+  {
+    "id": "recipe_014",
+    "name": "水煮鱼",
+    "description": "麻辣鲜香的川菜经典",
+    "cuisine": "川菜",
+    "ingredients": [
+      {"name": "草鱼", "amount": 500, "unit": "克"},
+      {"name": "豆芽", "amount": 200, "unit": "克"},
+      {"name": "干辣椒", "amount": 30, "unit": "克"},
+      {"name": "花椒", "amount": 10, "unit": "克"},
+      {"name": "豆瓣酱", "amount": 40, "unit": "克"}
+    ],
+    "steps": [
+      "鱼片腌制，豆芽焯水垫底",
+      "炒香豆瓣酱",
+      "加水煮开，下鱼片",
+      "淋热油激发香味"
+    ],
+    "time": 40,
+    "difficulty": "困难",
+    "calories": 380,
+    "nutrition": {
+      "protein": 35.5,
+      "carbs": 12.5,
+      "fat": 22.8,
+      "fiber": 3.5
+    },
+    "tags": ["麻辣", "川菜", "宴客", "高蛋白"],
+    "health_goals": ["增肌"]
+  },
+  {
+    "id": "recipe_015",
+    "name": "青椒炒肉",
+    "description": "简单下饭的家常小炒",
+    "cuisine": "中式",
+    "ingredients": [
+      {"name": "猪肉", "amount": 200, "unit": "克"},
+      {"name": "青椒", "amount": 3, "unit": "个"},
+      {"name": "蒜", "amount": 3, "unit": "瓣"},
+      {"name": "酱油", "amount": 15, "unit": "毫升"},
+      {"name": "盐", "amount": 3, "unit": "克"}
+    ],
+    "steps": [
+      "肉切片腌制",
+      "青椒切块",
+      "炒肉片至变色",
+      "加入青椒翻炒调味"
+    ],
+    "time": 15,
+    "difficulty": "简单",
+    "calories": 280,
+    "nutrition": {
+      "protein": 22.5,
+      "carbs": 8.5,
+      "fat": 18.2,
+      "fiber": 2.8
+    },
+    "tags": ["快手", "家常", "下饭", "微辣"],
+    "health_goals": ["增肌"]
+  },
+  {
+    "id": "recipe_016",
+    "name": "蔬菜沙拉",
+    "description": "低卡健康的轻食选择",
+    "cuisine": "西式",
+    "ingredients": [
+      {"name": "生菜", "amount": 100, "unit": "克"},
+      {"name": "紫甘蓝", "amount": 50, "unit": "克"},
+      {"name": "圣女果", "amount": 80, "unit": "克"},
+      {"name": "玉米粒", "amount": 50, "unit": "克"},
+      {"name": "沙拉酱", "amount": 20, "unit": "克"}
+    ],
+    "steps": [
+      "所有蔬菜洗净",
+      "切成适口大小",
+      "混合均匀",
+      "淋上沙拉酱"
+    ],
+    "time": 10,
+    "difficulty": "简单",
+    "calories": 150,
+    "nutrition": {
+      "protein": 3.5,
+      "carbs": 18.5,
+      "fat": 7.2,
+      "fiber": 4.8
+    },
+    "tags": ["清淡", "快手", "健康", "素菜"],
+    "health_goals": ["减肥", "养生"]
+  },
+  {
+    "id": "recipe_017",
+    "name": "红烧茄子",
+    "description": "软糯入味的素菜经典",
+    "cuisine": "中式",
+    "ingredients": [
+      {"name": "茄子", "amount": 2, "unit": "根"},
+      {"name": "蒜", "amount": 5, "unit": "瓣"},
+      {"name": "酱油", "amount": 20, "unit": "毫升"},
+      {"name": "糖", "amount": 10, "unit": "克"},
+      {"name": "葱", "amount": 1, "unit": "根"}
+    ],
+    "steps": [
+      "茄子切块",
+      "炸至金黄",
+      "炒香蒜末",
+      "加入茄子和调料烧制"
+    ],
+    "time": 20,
+    "difficulty": "简单",
+    "calories": 220,
+    "nutrition": {
+      "protein": 3.5,
+      "carbs": 28.5,
+      "fat": 10.2,
+      "fiber": 5.5
+    },
+    "tags": ["甜", "家常", "下饭", "素菜"],
+    "health_goals": ["养生"]
+  },
+  {
+    "id": "recipe_018",
+    "name": "香煎三文鱼",
+    "description": "高蛋白低脂的健康选择",
+    "cuisine": "西式",
+    "ingredients": [
+      {"name": "三文鱼", "amount": 200, "unit": "克"},
+      {"name": "柠檬", "amount": 1, "unit": "个"},
+      {"name": "黑胡椒", "amount": 2, "unit": "克"},
+      {"name": "盐", "amount": 3, "unit": "克"},
+      {"name": "橄榄油", "amount": 15, "unit": "毫升"}
+    ],
+    "steps": [
+      "三文鱼腌制",
+      "热锅加橄榄油",
+      "煎至两面金黄",
+      "挤柠檬汁"
+    ],
+    "time": 15,
+    "difficulty": "简单",
+    "calories": 320,
+    "nutrition": {
+      "protein": 28.5,
+      "carbs": 2.5,
+      "fat": 22.8,
+      "fiber": 0.5
+    },
+    "tags": ["清淡", "快手", "高蛋白", "健康"],
+    "health_goals": ["减肥", "增肌"]
+  },
+  {
+    "id": "recipe_019",
+    "name": "酸菜鱼",
+    "description": "酸辣开胃的川菜名菜",
+    "cuisine": "川菜",
+    "ingredients": [
+      {"name": "草鱼", "amount": 500, "unit": "克"},
+      {"name": "酸菜", "amount": 200, "unit": "克"},
+      {"name": "泡椒", "amount": 30, "unit": "克"},
+      {"name": "姜蒜", "amount": 30, "unit": "克"},
+      {"name": "料酒", "amount": 20, "unit": "毫升"}
+    ],
+    "steps": [
+      "鱼片腌制",
+      "炒香酸菜和泡椒",
+      "加水煮开",
+      "下鱼片煮熟"
+    ],
+    "time": 35,
+    "difficulty": "中等",
+    "calories": 280,
+    "nutrition": {
+      "protein": 32.5,
+      "carbs": 8.5,
+      "fat": 12.8,
+      "fiber": 2.5
+    },
+    "tags": ["酸辣", "川菜", "开胃", "高蛋白"],
+    "health_goals": ["增肌", "养生"]
+  },
+  {
+    "id": "recipe_020",
+    "name": "炒时蔬",
+    "description": "清淡营养的素菜组合",
+    "cuisine": "中式",
+    "ingredients": [
+      {"name": "西兰花", "amount": 100, "unit": "克"},
+      {"name": "胡萝卜", "amount": 80, "unit": "克"},
+      {"name": "木耳", "amount": 50, "unit": "克"},
+      {"name": "蒜", "amount": 3, "unit": "瓣"},
+      {"name": "盐", "amount": 3, "unit": "克"}
+    ],
+    "steps": [
+      "所有蔬菜焯水",
+      "蒜切末",
+      "热锅爆香蒜末",
+      "加入蔬菜翻炒调味"
+    ],
+    "time": 12,
+    "difficulty": "简单",
+    "calories": 100,
+    "nutrition": {
+      "protein": 4.5,
+      "carbs": 15.5,
+      "fat": 3.2,
+      "fiber": 6.8
+    },
+    "tags": ["清淡", "快手", "健康", "素菜"],
+    "health_goals": ["减肥", "养生"]
+  },
+  {
+    "id": "recipe_021",
+    "name": "牛肉炒饭",
+    "description": "营养丰富的快手主食",
+    "cuisine": "中式",
+    "ingredients": [
+      {"name": "米饭", "amount": 200, "unit": "克"},
+      {"name": "牛肉", "amount": 100, "unit": "克"},
+      {"name": "鸡蛋", "amount": 1, "unit": "个"},
+      {"name": "胡萝卜", "amount": 50, "unit": "克"},
+      {"name": "葱", "amount": 1, "unit": "根"}
+    ],
+    "steps": [
+      "牛肉切丁腌制",
+      "炒鸡蛋盛出",
+      "炒牛肉和配菜",
+      "加入米饭和鸡蛋翻炒"
+    ],
+    "time": 18,
+    "difficulty": "简单",
+    "calories": 480,
+    "nutrition": {
+      "protein": 25.5,
+      "carbs": 52.5,
+      "fat": 18.2,
+      "fiber": 2.5
+    },
+    "tags": ["快手", "主食", "家常", "高蛋白"],
+    "health_goals": ["增肌"]
+  },
+  {
+    "id": "recipe_022",
+    "name": "冬瓜排骨汤",
+    "description": "清淡滋补的养生汤品",
+    "cuisine": "中式",
+    "ingredients": [
+      {"name": "排骨", "amount": 300, "unit": "克"},
+      {"name": "冬瓜", "amount": 400, "unit": "克"},
+      {"name": "姜", "amount": 15, "unit": "克"},
+      {"name": "葱", "amount": 1, "unit": "根"},
+      {"name": "盐", "amount": 5, "unit": "克"}
+    ],
+    "steps": [
+      "排骨焯水",
+      "加水和姜片炖煮",
+      "加入冬瓜块",
+      "煮至软烂调味"
+    ],
+    "time": 60,
+    "difficulty": "简单",
+    "calories": 220,
+    "nutrition": {
+      "protein": 18.5,
+      "carbs": 8.5,
+      "fat": 12.8,
+      "fiber": 2.5
+    },
+    "tags": ["清淡", "汤品", "养生", "滋补"],
+    "health_goals": ["养生"]
+  },
+  {
+    "id": "recipe_023",
+    "name": "香辣虾",
+    "description": "麻辣鲜香的下酒菜",
+    "cuisine": "川菜",
+    "ingredients": [
+      {"name": "大虾", "amount": 400, "unit": "克"},
+      {"name": "干辣椒", "amount": 20, "unit": "克"},
+      {"name": "花椒", "amount": 8, "unit": "克"},
+      {"name": "姜蒜", "amount": 30, "unit": "克"},
+      {"name": "料酒", "amount": 20, "unit": "毫升"}
+    ],
+    "steps": [
+      "虾处理干净",
+      "炒香花椒和干辣椒",
+      "加入虾翻炒",
+      "加调料炒至入味"
+    ],
+    "time": 25,
+    "difficulty": "中等",
+    "calories": 280,
+    "nutrition": {
+      "protein": 32.5,
+      "carbs": 5.5,
+      "fat": 12.8,
+      "fiber": 1.5
+    },
+    "tags": ["麻辣", "川菜", "高蛋白", "宴客"],
+    "health_goals": ["增肌"]
+  },
+  {
+    "id": "recipe_024",
+    "name": "蒸蛋羹",
+    "description": "细腻滑嫩的营养蒸菜",
+    "cuisine": "中式",
+    "ingredients": [
+      {"name": "鸡蛋", "amount": 3, "unit": "个"},
+      {"name": "温水", "amount": 200, "unit": "毫升"},
+      {"name": "盐", "amount": 2, "unit": "克"},
+      {"name": "香油", "amount": 5, "unit": "毫升"},
+      {"name": "葱", "amount": 1, "unit": "根"}
+    ],
+    "steps": [
+      "鸡蛋打散",
+      "加温水和盐搅匀",
+      "过滤气泡",
+      "蒸10分钟，淋香油"
+    ],
+    "time": 15,
+    "difficulty": "简单",
+    "calories": 180,
+    "nutrition": {
+      "protein": 15.5,
+      "carbs": 2.5,
+      "fat": 12.8,
+      "fiber": 0.5
+    },
+    "tags": ["清淡", "快手", "养生", "高蛋白"],
+    "health_goals": ["养生", "增肌"]
+  },
+  {
+    "id": "recipe_025",
+    "name": "干锅花菜",
+    "description": "香辣干香的川菜小炒",
+    "cuisine": "川菜",
+    "ingredients": [
+      {"name": "花菜", "amount": 400, "unit": "克"},
+      {"name": "五花肉", "amount": 100, "unit": "克"},
+      {"name": "干辣椒", "amount": 15, "unit": "克"},
+      {"name": "蒜", "amount": 5, "unit": "瓣"},
+      {"name": "豆瓣酱", "amount": 20, "unit": "克"}
+    ],
+    "steps": [
+      "花菜撕小朵焯水",
+      "炒五花肉出油",
+      "加豆瓣酱和干辣椒",
+      "加入花菜翻炒至干香"
+    ],
+    "time": 20,
+    "difficulty": "简单",
+    "calories": 280,
+    "nutrition": {
+      "protein": 12.5,
+      "carbs": 18.5,
+      "fat": 18.2,
+      "fiber": 4.5
+    },
+    "tags": ["麻辣", "川菜", "下饭", "家常"],
+    "health_goals": []
+  }
+]

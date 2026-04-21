@@ -1,0 +1,89 @@
+[
+  {
+    "id": "recipe_new_001",
+    "name": "香煎三文鱼",
+    "description": "营养丰富的高蛋白菜品，适合健身人群",
+    "cuisine": "西餐",
+    "time": 15,
+    "difficulty": "简单",
+    "calories": 280,
+    "ingredients": [
+      {"name": "三文鱼", "amount": 200, "unit": "克"},
+      {"name": "柠檬", "amount": 1, "unit": "个"},
+      {"name": "橄榄油", "amount": 10, "unit": "毫升"}
+    ],
+    "steps": [
+      "三文鱼洗净擦干",
+      "热锅加橄榄油",
+      "煎至两面金黄",
+      "挤柠檬汁调味"
+    ],
+    "nutrition": {
+      "protein": 35.0,
+      "carbs": 2.0,
+      "fat": 18.0,
+      "fiber": 0.5
+    },
+    "tags": ["快手", "高蛋白", "健康", "西餐"],
+    "health_goals": ["增肌", "养生"]
+  },
+  {
+    "id": "recipe_new_002",
+    "name": "藜麦沙拉",
+    "description": "低卡高纤维的减脂餐，饱腹感强",
+    "cuisine": "西餐",
+    "time": 20,
+    "difficulty": "简单",
+    "calories": 180,
+    "ingredients": [
+      {"name": "藜麦", "amount": 100, "unit": "克"},
+      {"name": "西兰花", "amount": 100, "unit": "克"},
+      {"name": "圣女果", "amount": 50, "unit": "克"},
+      {"name": "橄榄油", "amount": 10, "unit": "毫升"}
+    ],
+    "steps": [
+      "藜麦煮熟放凉",
+      "西兰花焯水",
+      "圣女果切半",
+      "混合拌匀，加橄榄油调味"
+    ],
+    "nutrition": {
+      "protein": 8.0,
+      "carbs": 28.0,
+      "fat": 6.0,
+      "fiber": 5.0
+    },
+    "tags": ["减脂", "健康", "素食", "沙拉"],
+    "health_goals": ["减肥", "养生"]
+  },
+  {
+    "id": "recipe_new_003",
+    "name": "鸡胸肉炒时蔬",
+    "description": "低脂高蛋白的健身餐，营养均衡",
+    "cuisine": "中餐",
+    "time": 18,
+    "difficulty": "简单",
+    "calories": 220,
+    "ingredients": [
+      {"name": "鸡胸肉", "amount": 150, "unit": "克"},
+      {"name": "西兰花", "amount": 100, "unit": "克"},
+      {"name": "胡萝卜", "amount": 50, "unit": "克"},
+      {"name": "蒜", "amount": 3, "unit": "瓣"}
+    ],
+    "steps": [
+      "鸡胸肉切块腌制",
+      "蔬菜切块焯水",
+      "热锅炒鸡胸肉",
+      "加入蔬菜翻炒",
+      "调味出锅"
+    ],
+    "nutrition": {
+      "protein": 32.0,
+      "carbs": 12.0,
+      "fat": 5.0,
+      "fiber": 4.0
+    },
+    "tags": ["快手", "高蛋白", "低脂", "健身餐"],
+    "health_goals": ["增肌", "减肥"]
+  }
+]

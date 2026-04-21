@@ -1,0 +1,47 @@
+# Core dependencies
+langchain>=0.1.0
+langchain-community>=0.0.13
+langchain-openai>=0.0.2
+chromadb==0.4.22
+pydantic>=2.5.3
+pydantic-settings>=2.1.0
+
+# LLM and Embedding
+dashscope>=1.14.1
+
+# LangGraph (V4)
+langgraph>=0.2.0
+
+# Phase 1 RAG 升级
+langchain-experimental>=0.0.47    # SemanticChunker
+
+# V3 Enhancements
+psycopg2-binary>=2.9.9
+sentence-transformers>=2.2.2
+tiktoken>=0.5.2
+
+# Testing
+pytest>=7.4.3
+pytest-asyncio>=0.21.1
+hypothesis>=6.92.1
+
+# Phase 2 评测体系（自研 LLM-as-Judge，ragas 可选）
+# ragas>=0.1.0
+
+# Phase 4 可观测性 + Streaming
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+sse-starlette>=1.8.0           # SSE 流式响应
+httpx>=0.25.0                  # FastAPI TestClient 依赖
+
+# Phase 4 Langfuse（可选，默认禁用）
+langfuse>=2.0.0
+
+# Phase 5 Docker 部署（配置校验测试依赖）
+pyyaml>=6.0
+
+# Utilities
+python-dotenv>=1.0.0
+reportlab>=4.0.0
+yt-dlp>=2025.1.26
+openai-whisper>=20240930

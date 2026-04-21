@@ -1,0 +1,150 @@
+[
+  {
+    "case_id": "quant_001",
+    "query": "番茄炒蛋怎么做？",
+    "expected_intent": "recipe_search",
+    "scenario_type": "grounded_recipe_search",
+    "expected_constraints": {
+      "available_ingredients": ["番茄", "鸡蛋"]
+    },
+    "expected_active_skill": "recipe_recommendation",
+    "expected_planner_next_action": "retrieve",
+    "should_clarify": false,
+    "ground_truth_doc_ids": ["recipe_番茄炒蛋"],
+    "ground_truth_answer_keywords": ["番茄", "鸡蛋", "15分钟", "简单"],
+    "ground_truth_answer": "番茄炒蛋是经典家常菜，用番茄和鸡蛋翻炒，约15分钟即可完成，做法简单。",
+    "notes": "标准食谱检索样本。"
+  },
+  {
+    "case_id": "quant_002",
+    "query": "冰箱里有鸡胸肉和生菜，推荐一道减脂菜",
+    "expected_intent": "recipe_search",
+    "scenario_type": "inventory_health_recipe_search",
+    "expected_constraints": {
+      "available_ingredients": ["鸡胸肉", "生菜"],
+      "health_goal": "减脂"
+    },
+    "expected_active_skill": "recipe_recommendation",
+    "expected_planner_next_action": "retrieve",
+    "should_clarify": false,
+    "ground_truth_doc_ids": ["recipe_健身鸡胸肉沙拉", "recipe_蔬菜沙拉"],
+    "ground_truth_answer_keywords": ["鸡胸肉", "生菜", "低脂", "高蛋白"],
+    "ground_truth_answer": "可以推荐鸡胸肉沙拉或其他低脂高蛋白菜品，优先满足减脂和高蛋白需求。",
+    "notes": "库存+健康目标联合约束。"
+  },
+  {
+    "case_id": "quant_003",
+    "query": "有没有20分钟内能做完的鱼类料理？",
+    "expected_intent": "recipe_search",
+    "scenario_type": "time_constrained_recipe_search",
+    "expected_constraints": {
+      "max_cooking_time": 20
+    },
+    "expected_active_skill": "recipe_recommendation",
+    "expected_planner_next_action": "retrieve",
+    "should_clarify": false,
+    "ground_truth_doc_ids": ["recipe_清蒸鲈鱼", "recipe_香煎三文鱼"],
+    "ground_truth_answer_keywords": ["鱼", "20分钟", "清淡"],
+    "ground_truth_answer": "可以推荐20分钟内完成的鱼类料理，例如清蒸鲈鱼这类清淡快手菜。",
+    "notes": "强时间约束。"
+  },
+  {
+    "case_id": "quant_004",
+    "query": "给我推荐个晚饭",
+    "expected_intent": "recipe_search",
+    "scenario_type": "clarification_required",
+    "expected_constraints": {
+      "meal_type": "晚饭"
+    },
+    "expected_active_skill": "recipe_recommendation",
+    "expected_planner_next_action": "clarify",
+    "should_clarify": true,
+    "expected_missing_slots": ["available_ingredients", "max_cooking_time", "health_goal", "dietary_restrictions"],
+    "ground_truth_answer_keywords": [],
+    "ground_truth_answer": "",
+    "notes": "信息不足，应先澄清。"
+  },
+  {
+    "case_id": "quant_005",
+    "query": "我想自己做饭，但不知道做什么",
+    "expected_intent": "recipe_search",
+    "scenario_type": "clarification_required",
+    "expected_constraints": {},
+    "expected_active_skill": "recipe_recommendation",
+    "expected_planner_next_action": "clarify",
+    "should_clarify": true,
+    "expected_missing_slots": ["available_ingredients", "max_cooking_time", "health_goal", "dietary_restrictions"],
+    "ground_truth_answer_keywords": [],
+    "ground_truth_answer": "",
+    "notes": "典型澄清入口。"
+  },
+  {
+    "case_id": "quant_006",
+    "query": "减脂期间晚餐应该怎么吃？",
+    "expected_intent": "nutrition_query",
+    "scenario_type": "nutrition_goal_query",
+    "expected_constraints": {
+      "health_goal": "减脂",
+      "meal_type": "晚餐"
+    },
+    "should_clarify": false,
+    "ground_truth_answer_keywords": ["高蛋白", "低油", "低热量", "晚餐"],
+    "ground_truth_answer": "减脂晚餐应以高蛋白、低油、低热量为主，避免过多精制碳水和油炸食物。",
+    "notes": "营养建议问答。"
+  },
+  {
+    "case_id": "quant_007",
+    "query": "高蛋白早餐应该搭配什么？",
+    "expected_intent": "nutrition_query",
+    "scenario_type": "nutrition_goal_query",
+    "expected_constraints": {
+      "health_goal": "高蛋白",
+      "meal_type": "早餐"
+    },
+    "should_clarify": false,
+    "ground_truth_answer_keywords": ["鸡蛋", "牛奶", "酸奶", "蛋白质"],
+    "ground_truth_answer": "高蛋白早餐可以搭配鸡蛋、无糖酸奶、牛奶、全麦主食或鸡胸肉等高蛋白食物。",
+    "notes": "非食谱型营养建议。"
+  },
+  {
+    "case_id": "quant_008",
+    "query": "鸡蛋和番茄适合一起做菜吗？",
+    "expected_intent": "ingredient_check",
+    "scenario_type": "ingredient_pairing_query",
+    "expected_constraints": {
+      "available_ingredients": ["鸡蛋", "番茄"]
+    },
+    "should_clarify": false,
+    "ground_truth_doc_ids": ["recipe_番茄炒蛋"],
+    "ground_truth_answer_keywords": ["适合", "搭配", "番茄炒蛋"],
+    "ground_truth_answer": "鸡蛋和番茄是经典搭配，适合一起做菜，例如番茄炒蛋。",
+    "notes": "食材搭配判断。"
+  },
+  {
+    "case_id": "quant_009",
+    "query": "你好，你能帮我做什么？",
+    "expected_intent": "chitchat",
+    "scenario_type": "chitchat",
+    "expected_constraints": {},
+    "should_clarify": false,
+    "ground_truth_answer_keywords": ["推荐食谱", "营养", "食材搭配"],
+    "ground_truth_answer": "我可以帮你推荐食谱、回答营养问题、分析食材搭配，并根据你的需求给出饮食建议。",
+    "notes": "能力介绍类闲聊。"
+  },
+  {
+    "case_id": "quant_010",
+    "query": "推荐一道清淡的鱼类料理",
+    "expected_intent": "recipe_search",
+    "scenario_type": "preference_recipe_search",
+    "expected_constraints": {
+      "health_goal": "清淡口味"
+    },
+    "expected_active_skill": "recipe_recommendation",
+    "expected_planner_next_action": "retrieve",
+    "should_clarify": false,
+    "ground_truth_doc_ids": ["recipe_清蒸鲈鱼"],
+    "ground_truth_answer_keywords": ["鱼", "清淡", "蒸"],
+    "ground_truth_answer": "可以推荐清淡的鱼类料理，例如清蒸鲈鱼这类少油、口味清爽的做法。",
+    "notes": "偏好导向食谱搜索。"
+  }
+]
