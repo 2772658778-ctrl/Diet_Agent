@@ -46,6 +46,7 @@ pip-wheel-metadata/
 /tests/
 /*.md
 !/README.md
+!/README1.md
 /data/*.md
 /compare_*.py
 /demo_*.py
@@ -82,6 +83,7 @@ scripts/*
 !scripts/_quant_benchmark.py
 !scripts/build_bilibili_tutorial_summary.py
 !scripts/build_recipe_tutorials.py
+!scripts/render_bilibili_tutorial_pdf.py
 !scripts/init_database.py
 !scripts/init_postgres.sql
 scripts/*stdout*.txt

@@ -60,6 +60,8 @@ class Settings(BaseSettings):
     bilibili_cookies_from_browser: str = Field(default="", description="Bilibili 抓取时传给 yt-dlp 的浏览器 cookies 来源，例如 chrome")
     bilibili_cookies_file: str = Field(default="", description="Bilibili 抓取时传给 yt-dlp 的 cookies.txt 文件路径")
     bilibili_whisper_model: str = Field(default="base", description="Bilibili 视频无字幕时使用的 Whisper 模型")
+    bilibili_prefer_windsurf_skill_result: bool = Field(default=True, description="是否优先导入 Windsurf skill 产出的 result.json")
+    bilibili_pdf_python_executable: str = Field(default="", description="用于渲染 Bilibili 教程 PDF 的 Python 解释器路径，例如 myagent 环境中的 python.exe")
     
     # Agent 配置
     max_iterations: int = Field(default=5, description="Agent 最大迭代次数")

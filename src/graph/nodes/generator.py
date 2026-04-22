@@ -13,11 +13,21 @@
 
 import re
 from pathlib import Path
+from typing import Any
 
 from diet_agent.runtime import get_skill_runtime_policy
 
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 
+from ...tutorials.pipeline import build_tutorial_chunk_corpus, export_tutorial_to_pdf, save_tutorial_to_json
+from ...tutorials.storage import default_bilibili_artifact_root, resolve_bilibili_tutorial_storage
+from ...tutorials.windsurf_skill_bridge import (
+    WindsurfSkillBridgeError,
+    expected_windsurf_result_json_path,
+    load_bilibili_tutorial_from_windsurf_result,
+    render_bilibili_tutorial_pdf_in_python,
+)
+from ...vectorstore.tutorial_store import batch_add_tutorial_chunks, get_tutorial_collection_count
 from ..state import DietAgentState, normalize_stable_user_preferences
 from ..llm import get_graph_llm
 from ...config import get_settings
@@ -26,6 +36,12 @@ from ...utils.logger import get_logger
 
 logger = get_logger(__name__)
 settings = get_settings()
+
+
+def build_bilibili_tutorial_from_url(*args: Any, **kwargs: Any):
+    from ...tutorials.bilibili_summary import build_bilibili_tutorial_from_url as _impl
+
+    return _impl(*args, **kwargs)
 
 GENERATOR_SYSTEM_PROMPT = """你是一个专业的智能饮食助手，帮助用户找到合适的食谱、分析营养成分、检查食材搭配。
 
@@ -1415,6 +1431,27 @@ def _sanitize_artifact_filename(value: str) -> str:
     return sanitized or "artifact"
 
 
+def _render_bilibili_tutorial_pdf(
+    tutorial_payload: dict,
+    *,
+    json_path: Path,
+    pdf_path: Path,
+    project_root: Path,
+) -> Path:
+    python_executable = str(settings.bilibili_pdf_python_executable or "").strip()
+    if python_executable:
+        try:
+            return render_bilibili_tutorial_pdf_in_python(
+                json_path,
+                python_executable=python_executable,
+                project_root=project_root,
+                pdf_output=pdf_path,
+            )
+        except WindsurfSkillBridgeError as exc:
+            logger.warning(f"configured bilibili pdf python failed, falling back to current runtime: {exc}")
+    return export_tutorial_to_pdf(tutorial_payload, pdf_path)
+
+
 def _build_video_summary_response(
     tutorial_payload: dict,
     artifacts: dict,
@@ -1433,8 +1470,14 @@ def _build_video_summary_response(
         lines.append(f"- UP 主：{tutorial_payload['uploader']}")
     if tutorial_payload.get("source_url"):
         lines.append(f"- 视频链接：{tutorial_payload['source_url']}")
+    if artifacts.get("summary_source"):
+        lines.append(f"- 总结来源：{artifacts['summary_source']}")
     lines.append(f"- 字幕来源：{artifacts.get('transcript_mode') or '-'}")
     lines.append(f"- 教程 JSON：`{json_path}`")
+    if artifacts.get("result_json_path"):
+        lines.append(f"- 运行时 result.json：`{artifacts['result_json_path']}`")
+    if artifacts.get("source_result_json_path") and artifacts.get("source_result_json_path") != artifacts.get("result_json_path"):
+        lines.append(f"- 技能原始 JSON：`{artifacts['source_result_json_path']}`")
     lines.append(f"- 教程 PDF：`{pdf_path}`")
     if artifacts.get("artifact_dir"):
         lines.append(f"- 原始产物目录：`{artifacts['artifact_dir']}`")
@@ -1475,38 +1518,76 @@ def _run_bilibili_video_summary_workflow(state: DietAgentState, user_query: str)
         )
 
     try:
-        from ...tutorials import (
-            build_bilibili_tutorial_from_url,
-            build_tutorial_chunk_corpus,
-            default_bilibili_artifact_root,
-            export_tutorial_to_pdf,
-            resolve_bilibili_tutorial_storage,
-            save_tutorial_to_json,
-        )
-        from ...tutorials.bilibili_summary import BilibiliSummaryError
-        from ...vectorstore.tutorial_store import batch_add_tutorial_chunks, get_tutorial_collection_count
-
         project_root = Path(__file__).resolve().parents[3]
         artifact_root = default_bilibili_artifact_root(project_root)
         artifact_root.mkdir(parents=True, exist_ok=True)
 
-        tutorial_payload, artifacts = build_bilibili_tutorial_from_url(
-            video_url,
-            artifact_dir=artifact_root,
-            cookies_from_browser=settings.bilibili_cookies_from_browser,
-            cookies_file=settings.bilibili_cookies_file,
-            whisper_model=settings.bilibili_whisper_model,
-        )
+        tutorial_payload: dict = {}
+        artifacts: dict = {}
+        storage = None
 
-        storage = resolve_bilibili_tutorial_storage(
-            project_root=project_root,
-            artifact_root=artifact_root,
-            video_id=str(tutorial_payload.get("source_id") or artifacts.get("video_id") or ""),
-            tutorial_id=str(tutorial_payload.get("tutorial_id") or ""),
-            tutorial_title=str(tutorial_payload.get("title") or ""),
-        )
+        if settings.bilibili_prefer_windsurf_skill_result:
+            try:
+                tutorial_payload, artifacts, storage = load_bilibili_tutorial_from_windsurf_result(
+                    video_url=video_url,
+                    project_root=project_root,
+                    artifact_root=artifact_root,
+                )
+            except WindsurfSkillBridgeError as exc:
+                expected_result_path = expected_windsurf_result_json_path(
+                    video_url,
+                    project_root=project_root,
+                    artifact_root=artifact_root,
+                )
+                logger.info(
+                    f"windsurf skill result not available for bilibili summary, fallback to native pipeline: {exc}; expected={expected_result_path}"
+                )
+                artifacts = {
+                    "summary_source": "native_pipeline",
+                    "expected_windsurf_result_json_path": str(expected_result_path),
+                }
+
+        if storage is None:
+            tutorial_payload, native_artifacts = build_bilibili_tutorial_from_url(
+                video_url,
+                artifact_dir=artifact_root,
+                cookies_from_browser=settings.bilibili_cookies_from_browser,
+                cookies_file=settings.bilibili_cookies_file,
+                whisper_model=settings.bilibili_whisper_model,
+            )
+            artifacts = {
+                **artifacts,
+                **native_artifacts,
+                "summary_source": artifacts.get("summary_source") or "native_pipeline",
+            }
+            storage = resolve_bilibili_tutorial_storage(
+                project_root=project_root,
+                artifact_root=artifact_root,
+                video_id=str(tutorial_payload.get("source_id") or native_artifacts.get("video_id") or ""),
+                tutorial_id=str(tutorial_payload.get("tutorial_id") or ""),
+                tutorial_title=str(tutorial_payload.get("title") or ""),
+            )
+        else:
+            artifacts = {
+                **artifacts,
+                "summary_source": artifacts.get("summary_source") or "windsurf_skill_result",
+            }
+
         json_path = save_tutorial_to_json(tutorial_payload, storage.tutorial_json_path)
-        pdf_path = export_tutorial_to_pdf(tutorial_payload, storage.pdf_path)
+        runtime_result_json_path = save_tutorial_to_json(tutorial_payload, storage.artifact_dir / "result.json")
+        source_result_json_path = str(artifacts.get("result_json_path") or "").strip()
+        artifacts = {
+            **artifacts,
+            "artifact_dir": str(storage.artifact_dir),
+            "source_result_json_path": source_result_json_path,
+            "result_json_path": str(runtime_result_json_path),
+        }
+        pdf_path = _render_bilibili_tutorial_pdf(
+            tutorial_payload,
+            json_path=json_path,
+            pdf_path=storage.pdf_path,
+            project_root=project_root,
+        )
 
         chunk_corpus = build_tutorial_chunk_corpus([tutorial_payload])
         before_count = get_tutorial_collection_count(settings.bilibili_summary_collection_name)
