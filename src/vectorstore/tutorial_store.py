@@ -368,6 +368,7 @@ def search_tutorial_documents(
     vectorstore: Any | None = None,
     vectorstores: dict[str, Any] | None = None,
     chunk_fetch_k: int | None = None,
+    direct_topic_match_required: bool = True,
 ) -> list[dict[str, Any]]:
     normalized_query = str(query or "").strip()
     if not normalized_query:
@@ -461,9 +462,11 @@ def search_tutorial_documents(
         reverse=True,
     )
     direct_match_docs = [doc for doc in sorted_docs if doc.get("direct_topic_match")]
-    if not direct_match_docs:
+    if direct_topic_match_required and not direct_match_docs:
         return []
-    return direct_match_docs[:top_k]
+    if direct_topic_match_required:
+        return direct_match_docs[:top_k]
+    return sorted_docs[:top_k]
 
 
 def _add_texts_with_retry(

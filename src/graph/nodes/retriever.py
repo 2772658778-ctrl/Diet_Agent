@@ -262,6 +262,357 @@ def _inject_runtime_retrieval_profile(retrieval_context: dict, active_skill: str
     return retrieval_profile
 
 
+def _normalize_string_list(value) -> list[str]:
+    if value is None:
+        return []
+    if isinstance(value, str):
+        normalized_value = value.strip()
+        return [normalized_value] if normalized_value else []
+    if not isinstance(value, (list, tuple, set)):
+        return []
+
+    normalized_items: list[str] = []
+    seen_items: set[str] = set()
+    for item in value:
+        normalized_item = str(item or "").strip()
+        if not normalized_item or normalized_item in seen_items:
+            continue
+        seen_items.add(normalized_item)
+        normalized_items.append(normalized_item)
+    return normalized_items
+
+
+def _safe_int(value, default: int = 0) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _resolve_primary_source(retrieval_profile: dict) -> str:
+    explicit_source = str(retrieval_profile.get("primary_source") or "").strip().lower()
+    if explicit_source in {"recipe", "tutorial"}:
+        return explicit_source
+    if str(retrieval_profile.get("profile") or "").strip() == "tutorial_search":
+        return "tutorial"
+    return "recipe"
+
+
+def _resolve_secondary_sources(retrieval_profile: dict, primary_source: str | None = None) -> list[str]:
+    resolved_primary_source = str(primary_source or _resolve_primary_source(retrieval_profile)).strip().lower()
+    normalized_sources: list[str] = []
+    for raw_source in _normalize_string_list(retrieval_profile.get("secondary_sources")):
+        normalized_source = raw_source.lower()
+        if normalized_source not in {"recipe", "tutorial"}:
+            continue
+        if normalized_source == resolved_primary_source or normalized_source in normalized_sources:
+            continue
+        normalized_sources.append(normalized_source)
+    return normalized_sources
+
+
+def _should_try_secondary_sources(primary_results: list[dict], primary_stats: dict, retrieval_profile: dict) -> bool:
+    if not bool(retrieval_profile.get("allow_cross_source_fallback")):
+        return False
+    if not _resolve_secondary_sources(retrieval_profile):
+        return False
+    if primary_stats.get("fallback_triggered"):
+        return True
+
+    minimum_primary_doc_count = _safe_int(retrieval_profile.get("secondary_trigger_min_doc_count"), 0)
+    if minimum_primary_doc_count <= 0:
+        return not bool(primary_results)
+    return len(primary_results) < minimum_primary_doc_count
+
+
+def _resolve_secondary_max_docs(retrieval_profile: dict, default_count: int) -> int:
+    configured_max_docs = _safe_int(retrieval_profile.get("secondary_max_docs"), 0)
+    if configured_max_docs > 0:
+        return configured_max_docs
+    resolved_default = _safe_int(default_count, 0)
+    if resolved_default > 0:
+        return max(1, min(3, resolved_default))
+    return 2
+
+
+def _resolve_doc_entity_key(doc: dict) -> str:
+    for field_name in ("name", "recipe_name", "tutorial_title", "id"):
+        normalized_value = re.sub(r"\s+", "", str(doc.get(field_name) or "").strip()).lower()
+        if normalized_value:
+            return normalized_value
+    return ""
+
+
+def _annotate_retrieved_doc(doc: dict, *, source_name: str, source_role: str, retrieval_strategy: str) -> dict:
+    normalized_source_name = str(source_name or "").strip().lower()
+    doc_copy = dict(doc)
+    matched_sources = _normalize_string_list(doc_copy.get("matched_sources"))
+    if normalized_source_name and normalized_source_name not in matched_sources:
+        matched_sources.append(normalized_source_name)
+    if matched_sources:
+        doc_copy["matched_sources"] = matched_sources
+    if normalized_source_name and not str(doc_copy.get("knowledge_source") or "").strip():
+        doc_copy["knowledge_source"] = normalized_source_name
+    doc_copy["source_role"] = source_role
+    if retrieval_strategy and not str(doc_copy.get("retrieval_strategy") or "").strip():
+        doc_copy["retrieval_strategy"] = retrieval_strategy
+    return doc_copy
+
+
+def _merge_retrieved_docs(primary_doc: dict, supplemental_doc: dict) -> dict:
+    merged_doc = dict(primary_doc)
+    merged_doc["matched_sources"] = _normalize_string_list(
+        _normalize_string_list(primary_doc.get("matched_sources"))
+        + _normalize_string_list(supplemental_doc.get("matched_sources"))
+    )
+
+    primary_text = str(merged_doc.get("text") or "").strip()
+    supplemental_text = str(supplemental_doc.get("text") or "").strip()
+    if not primary_text and supplemental_text:
+        merged_doc["text"] = supplemental_text
+    elif supplemental_text and supplemental_text not in primary_text:
+        merged_doc["text"] = f"{primary_text}\n{supplemental_text}".strip()
+
+    primary_steps = [str(step).strip() for step in primary_doc.get("steps") or [] if str(step).strip()]
+    supplemental_steps = [str(step).strip() for step in supplemental_doc.get("steps") or [] if str(step).strip()]
+    combined_steps: list[str] = []
+    seen_steps: set[str] = set()
+    for step in primary_steps + supplemental_steps:
+        if step in seen_steps:
+            continue
+        seen_steps.add(step)
+        combined_steps.append(step)
+    if combined_steps:
+        merged_doc["steps"] = combined_steps[:8]
+
+    for field_name in (
+        "description",
+        "difficulty",
+        "time",
+        "calories",
+        "cuisine",
+        "tags",
+        "health_goals",
+        "scenarios",
+        "recipe_name",
+        "tutorial_title",
+        "collection_name",
+        "source_type",
+    ):
+        if merged_doc.get(field_name) not in (None, "", [], ()): 
+            continue
+        supplemental_value = supplemental_doc.get(field_name)
+        if supplemental_value not in (None, "", [], ()): 
+            merged_doc[field_name] = supplemental_value
+
+    if not merged_doc.get("description") and supplemental_doc.get("description"):
+        merged_doc["description"] = supplemental_doc.get("description")
+    if not merged_doc.get("score_breakdown") and supplemental_doc.get("score_breakdown"):
+        merged_doc["score_breakdown"] = supplemental_doc.get("score_breakdown")
+    if not merged_doc.get("final_score") and supplemental_doc.get("final_score"):
+        merged_doc["final_score"] = supplemental_doc.get("final_score")
+
+    merged_doc["matched_collection_names"] = _normalize_string_list(
+        _normalize_string_list(primary_doc.get("matched_collection_names"))
+        + _normalize_string_list(supplemental_doc.get("matched_collection_names"))
+    )
+    if str(merged_doc.get("source_role") or "").strip() == "primary" and str(supplemental_doc.get("source_role") or "").strip() == "secondary":
+        merged_doc["source_role"] = "primary_with_secondary_support"
+    return merged_doc
+
+
+def _combine_cross_source_results(
+    primary_results: list[dict],
+    secondary_results: list[dict],
+    *,
+    primary_source: str,
+    primary_strategy: str,
+    secondary_source: str,
+    secondary_strategy: str,
+    secondary_max_docs: int,
+) -> tuple[list[dict], int, int]:
+    combined_results: list[dict] = []
+    key_to_index: dict[str, int] = {}
+
+    for doc in primary_results:
+        annotated_doc = _annotate_retrieved_doc(
+            doc,
+            source_name=primary_source,
+            source_role="primary",
+            retrieval_strategy=primary_strategy,
+        )
+        combined_results.append(annotated_doc)
+        entity_key = _resolve_doc_entity_key(annotated_doc)
+        if entity_key and entity_key not in key_to_index:
+            key_to_index[entity_key] = len(combined_results) - 1
+
+    added_secondary_count = 0
+    merged_overlap_count = 0
+    for doc in secondary_results[:secondary_max_docs]:
+        annotated_doc = _annotate_retrieved_doc(
+            doc,
+            source_name=secondary_source,
+            source_role="secondary",
+            retrieval_strategy=secondary_strategy,
+        )
+        entity_key = _resolve_doc_entity_key(annotated_doc)
+        if entity_key and entity_key in key_to_index:
+            combined_results[key_to_index[entity_key]] = _merge_retrieved_docs(
+                combined_results[key_to_index[entity_key]],
+                annotated_doc,
+            )
+            merged_overlap_count += 1
+            continue
+        combined_results.append(annotated_doc)
+        if entity_key:
+            key_to_index[entity_key] = len(combined_results) - 1
+        added_secondary_count += 1
+
+    return combined_results, added_secondary_count, merged_overlap_count
+
+
+def _unpack_retrieval_payload(results) -> tuple[list[dict], dict]:
+    if isinstance(results, tuple):
+        payload_results = list(results[0] or [])
+        payload_stats = dict(results[1] or {}) if len(results) > 1 else {}
+        return payload_results, payload_stats
+    return list(results or []), {}
+
+
+def _build_secondary_recipe_context(retrieval_context: dict) -> dict:
+    secondary_context = dict(retrieval_context)
+    secondary_context["retrieval_profile"] = {
+        "profile": "recipe_cross_source_fallback",
+        "hard_filter_policy": "",
+    }
+    secondary_context.pop("hard_filter_policy", None)
+    secondary_context.pop("rerank_bias", None)
+    return secondary_context
+
+
+def _maybe_apply_cross_source_fallback(
+    primary_results: list[dict],
+    primary_stats: dict,
+    primary_strategy: str,
+    retrieval_profile: dict,
+    retrieval_query: str,
+    retrieval_context: dict,
+    settings,
+    user_id: str,
+) -> tuple[list[dict], dict, str]:
+    primary_source = _resolve_primary_source(retrieval_profile)
+    secondary_sources = _resolve_secondary_sources(retrieval_profile, primary_source)
+    combined_results = [
+        _annotate_retrieved_doc(
+            doc,
+            source_name=primary_source,
+            source_role="primary",
+            retrieval_strategy=primary_strategy,
+        )
+        for doc in primary_results
+    ]
+    combined_stats = dict(primary_stats or {})
+    combined_stats["primary_source"] = primary_source
+    combined_stats["secondary_sources"] = secondary_sources
+    combined_stats["secondary_usage"] = str(retrieval_profile.get("secondary_usage") or "").strip()
+    combined_stats["cross_source_fallback_attempted"] = False
+    combined_stats["cross_source_fallback_used"] = False
+    combined_stats["primary_returned_doc_count"] = len(primary_results)
+    combined_stats["secondary_returned_doc_count"] = 0
+    combined_stats["cross_source_added_doc_count"] = 0
+    combined_stats["cross_source_merged_overlap_count"] = 0
+
+    if not _should_try_secondary_sources(primary_results, combined_stats, retrieval_profile):
+        combined_stats["fallback_triggered"] = not bool(combined_results)
+        combined_stats["returned_doc_count"] = len(combined_results)
+        return combined_results, combined_stats, primary_strategy
+
+    combined_stats["cross_source_fallback_attempted"] = True
+    secondary_reports: list[dict] = []
+    tutorial_collection_names = _normalize_string_list(combined_stats.get("tutorial_collection_names"))
+    matched_tutorial_collection_names = _normalize_string_list(combined_stats.get("matched_tutorial_collection_names"))
+    evidence_direct_hit_count = _safe_int(combined_stats.get("evidence_direct_hit_count"), 0)
+    tutorial_low_evidence = bool(combined_stats.get("tutorial_low_evidence", False))
+    retrieval_strategies = [primary_strategy]
+    secondary_max_docs = _resolve_secondary_max_docs(retrieval_profile, settings.graph_retriever_top_k)
+
+    for secondary_source in secondary_sources:
+        if secondary_source == "tutorial":
+            secondary_results, secondary_stats, secondary_strategy = _retrieve_tutorial_docs(
+                retrieval_query,
+                settings,
+                retrieval_profile,
+                retrieval_context,
+                direct_topic_match_required=False,
+            )
+        elif secondary_source == "recipe":
+            secondary_payload, secondary_strategy = _fallback_standard(
+                retrieval_query,
+                user_id,
+                _build_secondary_recipe_context(retrieval_context),
+                settings,
+            )
+            secondary_results, secondary_stats = _unpack_retrieval_payload(secondary_payload)
+        else:
+            continue
+
+        secondary_results = list(secondary_results or [])
+        secondary_stats = dict(secondary_stats or {})
+        secondary_reports.append(
+            {
+                "source": secondary_source,
+                "strategy": secondary_strategy,
+                "returned_doc_count": len(secondary_results),
+                "fallback_triggered": bool(secondary_stats.get("fallback_triggered", False)),
+            }
+        )
+
+        if secondary_source == "tutorial":
+            tutorial_collection_names = _normalize_string_list(
+                tutorial_collection_names + _normalize_string_list(secondary_stats.get("tutorial_collection_names"))
+            )
+            matched_tutorial_collection_names = _normalize_string_list(
+                matched_tutorial_collection_names + _normalize_string_list(secondary_stats.get("matched_tutorial_collection_names"))
+            )
+            evidence_direct_hit_count += _safe_int(secondary_stats.get("evidence_direct_hit_count"), 0)
+            tutorial_low_evidence = tutorial_low_evidence or bool(secondary_stats.get("tutorial_low_evidence", False))
+
+        if not secondary_results:
+            continue
+
+        combined_results, added_secondary_count, merged_overlap_count = _combine_cross_source_results(
+            combined_results,
+            secondary_results,
+            primary_source=primary_source,
+            primary_strategy=primary_strategy,
+            secondary_source=secondary_source,
+            secondary_strategy=secondary_strategy,
+            secondary_max_docs=secondary_max_docs,
+        )
+        combined_stats["cross_source_fallback_used"] = True
+        combined_stats["secondary_returned_doc_count"] += len(secondary_results)
+        combined_stats["cross_source_added_doc_count"] += added_secondary_count
+        combined_stats["cross_source_merged_overlap_count"] += merged_overlap_count
+        retrieval_strategies.append(secondary_strategy)
+
+    combined_stats["secondary_retrievals"] = secondary_reports
+    if tutorial_collection_names:
+        combined_stats["tutorial_collection_names"] = tutorial_collection_names
+    if matched_tutorial_collection_names:
+        combined_stats["matched_tutorial_collection_names"] = matched_tutorial_collection_names
+    if evidence_direct_hit_count:
+        combined_stats["evidence_direct_hit_count"] = evidence_direct_hit_count
+    if primary_source == "tutorial" or any(report.get("source") == "tutorial" for report in secondary_reports):
+        combined_stats["tutorial_low_evidence"] = tutorial_low_evidence
+    combined_stats["fallback_triggered"] = not bool(combined_results)
+    combined_stats["returned_doc_count"] = len(combined_results)
+    combined_strategy = "+".join(
+        strategy_name
+        for strategy_name in dict.fromkeys(str(item).strip() for item in retrieval_strategies if str(item).strip())
+    )
+    return combined_results, combined_stats, combined_strategy or primary_strategy
+
+
 def _is_tutorial_retrieval_profile(retrieval_profile: dict) -> bool:
     return str(retrieval_profile.get("profile") or "").strip() == "tutorial_search"
 
@@ -271,6 +622,8 @@ def _retrieve_tutorial_docs(
     settings,
     retrieval_profile: dict,
     retrieval_context: dict | None = None,
+    *,
+    direct_topic_match_required: bool = True,
 ) -> tuple[list[dict], dict, str]:
     from ...vectorstore.tutorial_store import search_tutorial_documents
 
@@ -291,6 +644,7 @@ def _retrieve_tutorial_docs(
         query=retrieval_query,
         top_k=settings.graph_retriever_top_k,
         collection_names=normalized_collection_names,
+        direct_topic_match_required=direct_topic_match_required,
     )
     matched_collection_names = list(
         dict.fromkeys(
@@ -309,7 +663,7 @@ def _retrieve_tutorial_docs(
         "hard_filter_reasons": {},
         "fallback_triggered": not bool(results),
         "tutorial_low_evidence": not bool(results),
-        "tutorial_direct_topic_match_required": True,
+        "tutorial_direct_topic_match_required": direct_topic_match_required,
         "tutorial_topic_anchor": str(retrieval_context.get("tutorial_topic_anchor") or "").strip(),
         "retrieval_profile": dict(retrieval_profile),
         "hard_filter_policy": str(retrieval_profile.get("hard_filter_policy") or ""),
@@ -515,6 +869,7 @@ def retriever_node(state: DietAgentState) -> dict:
 
     self_rag_judgements: dict = {}
     skip_graph_eval = bool(state.get("skip_graph_eval", False))
+    user_id = state.get("user_id", "")
 
     # ── Self-RAG: 检索必要性判断 ─────────────────────────────────────────────
     if _is_tutorial_retrieval_profile(retrieval_profile):
@@ -523,6 +878,16 @@ def retriever_node(state: DietAgentState) -> dict:
             settings,
             retrieval_profile,
             retrieval_context,
+        )
+        tutorial_results, tutorial_stats, retrieval_strategy = _maybe_apply_cross_source_fallback(
+            tutorial_results,
+            tutorial_stats,
+            retrieval_strategy,
+            retrieval_profile,
+            retrieval_query,
+            retrieval_context,
+            settings,
+            user_id,
         )
         tutorial_stats["query_features"] = query_features
         tutorial_stats["entity_constraint_density"] = query_features.get("entity_constraint_density", 0.0)
@@ -578,7 +943,6 @@ def retriever_node(state: DietAgentState) -> dict:
     # ── 执行检索 ─────────────────────────────────────────────────────────────
     query_complexity = ""
     retrieval_strategy = "standard"
-    user_id = state.get("user_id", "")
 
     try:
         if settings.rag_strategy == "adaptive" and not skip_graph_eval:
@@ -648,6 +1012,16 @@ def retriever_node(state: DietAgentState) -> dict:
             results, retrieval_stats = results
 
         retrieval_stats = dict(retrieval_stats or {})
+        results, retrieval_stats, retrieval_strategy = _maybe_apply_cross_source_fallback(
+            list(results or []),
+            retrieval_stats,
+            retrieval_strategy,
+            retrieval_profile,
+            retrieval_query,
+            retrieval_context,
+            settings,
+            user_id,
+        )
         retrieval_stats["query_features"] = query_features
         retrieval_stats["entity_constraint_density"] = query_features.get("entity_constraint_density", 0.0)
         retrieval_stats["semantic_abstraction_score"] = query_features.get("semantic_abstraction_score", 0.0)

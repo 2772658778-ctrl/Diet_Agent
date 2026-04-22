@@ -32,6 +32,12 @@ _FIRST_PASS_RUNTIME_SKILLS: dict[str, dict[str, Any]] = {
             "profile": "recipe_search_primary",
             "hard_filter_policy": "recipe_constraints",
             "rerank_bias": ["inventory_match", "goal_fit"],
+            "primary_source": "recipe",
+            "secondary_sources": ["tutorial"],
+            "allow_cross_source_fallback": True,
+            "secondary_usage": "evidence_enrichment",
+            "secondary_trigger_min_doc_count": 1,
+            "secondary_max_docs": 2,
         },
         "evidence_policy": {"mode": "grounded_recipe_first"},
         "response_contract": {"style": "recommendation_markdown", "max_recipe_count": 3},
@@ -71,6 +77,12 @@ _FIRST_PASS_RUNTIME_SKILLS: dict[str, dict[str, Any]] = {
             "profile": "recipe_search_followup",
             "hard_filter_policy": "recipe_constraints",
             "rerank_bias": ["inventory_match", "goal_fit", "feedback_preference"],
+            "primary_source": "recipe",
+            "secondary_sources": ["tutorial"],
+            "allow_cross_source_fallback": True,
+            "secondary_usage": "evidence_enrichment",
+            "secondary_trigger_min_doc_count": 1,
+            "secondary_max_docs": 2,
         },
         "evidence_policy": {"mode": "grounded_recipe_followup"},
         "response_contract": {
@@ -94,6 +106,12 @@ _FIRST_PASS_RUNTIME_SKILLS: dict[str, dict[str, Any]] = {
         "retrieval_profile": {
             "profile": "nutrition_grounded",
             "hard_filter_policy": "nutrition_evidence",
+            "primary_source": "recipe",
+            "secondary_sources": ["tutorial"],
+            "allow_cross_source_fallback": True,
+            "secondary_usage": "evidence_enrichment",
+            "secondary_trigger_min_doc_count": 1,
+            "secondary_max_docs": 2,
         },
         "evidence_policy": {
             "mode": "grounded_first",
@@ -137,6 +155,12 @@ _FIRST_PASS_RUNTIME_SKILLS: dict[str, dict[str, Any]] = {
         "retrieval_profile": {
             "profile": "tutorial_search",
             "hard_filter_policy": "tutorial_evidence",
+            "primary_source": "tutorial",
+            "secondary_sources": ["recipe"],
+            "allow_cross_source_fallback": True,
+            "secondary_usage": "fallback_then_merge",
+            "secondary_trigger_min_doc_count": 1,
+            "secondary_max_docs": 2,
         },
         "evidence_policy": {
             "mode": "grounded_tutorial_first",
@@ -189,6 +213,12 @@ _FIRST_PASS_RUNTIME_SKILLS: dict[str, dict[str, Any]] = {
         "retrieval_profile": {
             "profile": "nutrition_grounded",
             "hard_filter_policy": "nutrition_evidence",
+            "primary_source": "recipe",
+            "secondary_sources": ["tutorial"],
+            "allow_cross_source_fallback": True,
+            "secondary_usage": "evidence_enrichment",
+            "secondary_trigger_min_doc_count": 1,
+            "secondary_max_docs": 2,
         },
         "evidence_policy": {
             "mode": "grounded_first",
@@ -216,6 +246,12 @@ _FIRST_PASS_RUNTIME_SKILLS: dict[str, dict[str, Any]] = {
         "retrieval_profile": {
             "profile": "ingredient_pairing_grounded",
             "hard_filter_policy": "pairing_evidence",
+            "primary_source": "recipe",
+            "secondary_sources": ["tutorial"],
+            "allow_cross_source_fallback": True,
+            "secondary_usage": "evidence_enrichment",
+            "secondary_trigger_min_doc_count": 1,
+            "secondary_max_docs": 2,
         },
         "evidence_policy": {
             "mode": "grounded_first",
